@@ -39,9 +39,75 @@ body {
     color: navy;
 }
 
+nav{
+    width: 90vw;
+    margin: auto;
+    border: 2px solid #000000;
+    color: #F4F4F4;
+}
+
 .container {
     width: 94vw;
     margin: auto;
     border: 2px solid #000000;
+}
 
+.cont_sobre {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#sec_sobre div{
+    background-color: #e6d7ff;
+    width: 30%;
+    height: 70%;
+    color: #252525;
+    border-radius: 2%;
+    border: 1px solid  #252525;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sobre_nos_right{
+    flex-direction: row !important;
+    background-color: #e6d7ff;
+    width: 50% !important;
+    height: 70%;
+    color: #252525;
+    border-radius: 2%;
+    border: 1px solid  #252525;
+}
+
+.sobre_nos_left button{
+    background-color: #5a5959;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  cursor: pointer;
+  color: #F4F4F4;
+  font-size: 16px;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: 1s;
+}
+
+.sobre_nos_left button:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 15px 20px;
+  transition: 1s;
+}
+
+.row_1{
+    display: flex;
+    flex-direction: row;
+    height: 40%;
+    width: 100%;
+}
+.row_1 div{
+    border: #000000 1px solid;
+    /* width: 33%; */
 }

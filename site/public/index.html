@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/main.js"></script>
     <title>HSO | Home</title>
 </head>
 
@@ -27,7 +26,8 @@
     <section class="container cont_sobre" id="sec_sobre">
         <div class="sobre_nos_left">
             <h2>Referência no mercado de Monitoramento</h2>
-            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum laudantium, maxime sint rem quibusdam</span>
+            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum laudantium,
+                maxime sint rem quibusdam</span>
             <button>Ver produtos</button>
         </div>
         <div class="sobre_nos_right">
@@ -46,38 +46,39 @@
 
     <div class="hexagon" id="hexagon"></div>
     <section class="container carrossel">
-        <div class="slider">
-            <div class="slides">
-                <input type="radio" name="radio-btn" id="radio1">
-                <input type="radio" name="radio-btn" id="radio2">
-                <input type="radio" name="radio-btn" id="radio3">
+            <div class="slide">
 
-                <div class="slide first">
-                    <h2>Visão</h2>
-                    <p>Nossa visão é otima, menos a minha eu preciso de óculos</p>
-                </div>
-                <div class="slide second">
-                    <h2>Valores</h2>
-                    <p>Nossos valores são altos $$$$</p>
-                </div>
-                <div class="slide tird">
+                <div data-js="slide_item" class="slide_item slide_item-visible">
+                    <img src="./assets/imgs/slide1.jpg" alt="">
                     <h2>Missão</h2>
-                    <p>Uma missão quase impossivel que é passar de semestre</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum laudantium, maxime sint rem quibusdam</p>
                 </div>
 
-                <div class="navigation-auto">
-                    <div class="auto-btn1"></div>
-                    <div class="auto-btn1"></div>
-                    <div class="auto-btn1"></div>
+                <div data-js="slide_item" class="slide_item">
+                    <img src="./assets/imgs/slide2.png" alt="">
+                    <h2>Visão</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum laudantium, maxime sint rem quibusdam</p>
                 </div>
+
+                <div data-js="slide_item" class="slide_item">
+                    <img src="./assets/imgs/slide3.jpg" alt="">
+                    <h2>Valores</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum laudantium, maxime sint rem quibusdam</p>
+                </div>
+
+                <div class="slide_actions">
+                    <button data-js="slide_button-prev" aria-label="Slide anterior">
+                      <
+                    </button>
+              
+                    <button data-js="slide_button-next" aria-label="Próximo slide">
+                      >
+                    </button>
+
             </div>
-            <div class="manual-navigation">
-                <label for="radio1" class="manual-btn"></label>
-                <label for="radio2" class="manual-btn"></label>
-                <label for="radio3" class="manual-btn"></label>
-            </div>
-        </div>
     </section>
 </body>
 
 </html>
+
+<script src="./js/main.js"></script>

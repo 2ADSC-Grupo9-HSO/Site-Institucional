@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/main.js"></script>
     <title>HSO | Home</title>
 </head>
 
@@ -31,16 +32,19 @@
         </div>
         <div class="sobre_nos_right">
             <div class="row_1">
-                <div></div>
-                <div></div>
-                <div></div>
+                <div id="foto1" onclick="turn_around(1)"></div>
+                <div id="foto2" onclick="turn_around(2)"></div>
+                <div id="foto3" onclick="turn_around(3)"></div>
             </div>
             <div class="row_2">
-
+                <div id="foto4" onclick="turn_around(4)"></div>
+                <div id="foto5" onclick="turn_around(5)"></div>
+                <div id="foto6" onclick="turn_around(6)"></div>
             </div>
         </div>
     </section>
 
+    <div class="hexagon" id="hexagon"></div>
     <section class="container carrossel">
         <div class="slider">
             <div class="slides">

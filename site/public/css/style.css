@@ -80,7 +80,34 @@ background-repeat: no-repeat;
   align-items: flex-start;
   /* border: solid 1px blue; */
 }
-@media screen and (max-width: 900px) {
+ @media screen and (max-width: 800px) {
+  .conteudo{
+    height: 35%;
+    width: 80%;
+    transition: 0.5s;
+  }
+  .imagemFundo{
+    background-size: max(150vw, 5px);
+    transition: 0.5s;
+  }
+  .navbar{
+    height: 5vh;
+    transition: 0.5s;
+  }
+  .menu{
+    width: 35%;
+  }
+  .links{
+    font-size: max(2vw, 1px);
+  }
+  .conteudo_medio  {
+    font-size: max(2.5vw, 5px);
+    
+  }
+  
+}
+
+/* @media screen and (max-width: 900px) {
   .conteudo{
     height: 70%;
     transition: 0.5s;
@@ -120,6 +147,17 @@ background-repeat: no-repeat;
       transition: 0.5s;
     }
   }
+   @media screen and (max-width: 600px) {
+    .conteudo{
+      height: 47.5%;
+      transition: 0.5s;
+    }
+    .navbar{
+      height: 4vh;
+      transition: 0.5s;
+    }
+  } */
+
 .conteudo_superior{
   width: 80%;
   font-weight:800;
@@ -132,7 +170,6 @@ background-repeat: no-repeat;
   .conteudo_medio{
  height: 15%;
  width: 100%;
- font-size: max(1.2vh, 7px);
  font-size: max(1.5vw, 7px);
  font-weight: 600;
   }

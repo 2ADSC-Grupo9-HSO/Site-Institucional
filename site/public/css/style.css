@@ -16,6 +16,7 @@ body {
     flex-direction: column;
     /* border-bottom: 3px solid rgb(94, 94, 94); */
     background-color: rgba(0, 0, 0, 0.781);
+    z-index: 	999;
 }
 .nav{
   /* border: 3px solid rgb(22, 209, 5); */
@@ -364,6 +365,7 @@ background-repeat: no-repeat;
   width: 27%;
   margin: 1%;
   height: 100%;
+  color: #252525;
 }
 
 .flip-card-inner {

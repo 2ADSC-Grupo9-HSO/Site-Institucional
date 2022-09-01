@@ -5,6 +5,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Poppins';
+    background-color: #767272;
 }
 .navbar{
     width: 100%;
@@ -304,7 +305,7 @@ background-repeat: no-repeat;
 
 .sobre_nos_left {
   flex-direction: row;
-  background-color: #e6d7ff;
+  background-color: #c8fdf2;
   width: 30%;
   height: 70%;
   color: #252525;
@@ -315,11 +316,13 @@ background-repeat: no-repeat;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0 4px 8px 0 #f3f2f2ab;
+
 }
 
 .sobre_nos_right {
   flex-direction: row;
-  background-color: #e6d7ff;
+  background-color: #c8fdf2;
   width: 50%;
   height: 70%;
   color: #252525;
@@ -331,6 +334,8 @@ background-repeat: no-repeat;
   justify-content: space-around;
   align-items: center;
   padding: 1%;
+  box-shadow: 0 4px 8px 0 #f3f2f2ab;
+
 }
 
 .sobre_nos_left button {
@@ -344,10 +349,25 @@ background-repeat: no-repeat;
   text-align: center;
   text-decoration: none;
   transition: 1s;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  max-width: 63%;
+  overflow: hidden;
+}
+
+.sobre_nos_left button:hover .arrow{
+  transform:scale(1.25);
+  width: 20%;
+  transition: 1s;
 }
 
 .sobre_nos_left button:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 0 15px 20px;
+  transition: 1s;
+}
+.arrow{
+  width: 15%;
   transition: 1s;
 }
 
@@ -394,7 +414,7 @@ background-repeat: no-repeat;
 .flip-card-back {
   background-color: #bbb;
   color: black;
-  border: #000000 1px solid;
+  border: #000000 2px solid;
   border-radius: 10%;
   cursor: pointer;
   transition: 2s all;
@@ -402,7 +422,9 @@ background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: transparent;
+  font-weight: 600;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -414,4 +436,9 @@ background-repeat: no-repeat;
   width: 100%;
   height: 100%;
   border-radius: 10%;
+}
+
+.titulo_card{
+  font-size: 1.4rem;
+  font-weight: 500;
 }

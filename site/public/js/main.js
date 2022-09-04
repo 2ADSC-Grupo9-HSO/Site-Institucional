@@ -28,3 +28,10 @@ botaoAnterior.addEventListener('click', () => {
 
     manipuladorDeClasses(slideCorreto);
 })
+
+// Parte do samuel ........................................................
+function abrir_menu(){
+
+
+    
+}

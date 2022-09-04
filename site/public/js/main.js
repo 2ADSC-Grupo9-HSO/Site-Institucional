@@ -30,8 +30,25 @@ botaoAnterior.addEventListener('click', () => {
 })
 
 // Parte do samuel ........................................................
+var desbloqueado = true;
 function abrir_menu(){
 
-
     
+
+    if(desbloqueado == true){
+    opcoes_menu.style.display="flex";
+    opcoes_menu.style.position="fixed";
+    opcoes_menu.style.position="fixed";
+    id_navbar.style.backgroundColor=" white"
+    id_navbar.style.borderBottom = "solid 2px #858585"
+    desbloqueado = false;
+
+    }else if(desbloqueado == false){
+        id_navbar.style.backgroundColor="rgba(0, 0, 0, 0.781)"
+       id_navbar.style.borderBottom = "none"
+        opcoes_menu.style.display="none";
+        desbloqueado = true;
+    }
+
 }
+

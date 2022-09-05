@@ -181,36 +181,6 @@ body {
   transition: 1s;
 }
 
-/* @media screen and (max-width: 900px) {
-  .conteudo{
-    height: 70%;
-    transition: 0.5s;
-  }
-  .navbar{
-    height: 8vh;
-    transition: 0.5s;
-  }
-}
-@media screen and (max-width: 800px) {
-  .conteudo{
-    height: 60%;
-    transition: 0.5s;
-  }
-  .navbar{
-    height: 7vh;
-    transition: 0.5s;
-  }
-}
-  @media screen and (max-width: 700px) {
-    .conteudo{
-      height: 50%;
-      transition: 0.5s;
-    }
-    .navbar{
-      height: 5vh;
-      transition: 0.5s;
-    }
-  } */
 
 @media screen and (min-width: 600px) and (max-width: 990px) {
   .imagemFundo {
@@ -370,7 +340,7 @@ body {
     justify-content: space-between;
   }
 
-  .one {
+  .menu_one {
     width: 100%;
     height: 25%;
     /* background-color: #aa0b0b7c; */
@@ -378,7 +348,7 @@ body {
     justify-content: space-between;
   }
 
-  .two {
+  .menu_two {
     width: 100%;
     height: 25%;
     /* background-color: #aa0b0b7c; */
@@ -386,7 +356,7 @@ body {
     justify-content: space-between;
   }
 
-  .tree {
+  .menu_tree {
     width: 100%;
     height: 25%;
     /* background-color: #aa0b0b7c; */
@@ -394,30 +364,37 @@ body {
     justify-content: space-between;
   }
 
-  .for {
+  .menu_for {
     width: 100%;
-    height: 15%;
+    height: 13%;
     /* background-color: #830f0f7c; */
     display: flex;
     justify-content: space-between;
   }
 
   .espacos {
-    width: 32%;
+    width: 34%;
     height: 100%;
-    background-color: #978c8ccc;
-    border-left: solid 1px rgb(255, 255, 255);
-    border-right: solid 1px rgb(255, 255, 255);
+    border-radius: 10px;
+    /* background-color: #978c8ccc; */
+    border-left: solid 0.5px rgb(255, 255, 255);
+    border-right: solid 0.5px rgb(255, 255, 255);
+    border-bottom: solid 0.1px rgb(255, 255, 255);
   }
+  /* .espacos.left{
+    border-left: solid 1px rgb(255, 255, 255);
+  } */
+  
 
   .mini_espacos {
-
+border-radius: 5px;
     width: 24%;
     height: 100%;
     background-color: #c4b8b87c;
     border-left: solid 1px rgb(255, 255, 255);
     border-right: solid 1px rgb(255, 255, 255);
   }
+  
 
 
   /* .opcoes_menu{

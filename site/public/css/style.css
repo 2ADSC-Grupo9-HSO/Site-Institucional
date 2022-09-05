@@ -588,7 +588,7 @@ body {
 
 .sobre_nos_left {
   flex-direction: row;
-  background-color: #c8fdf2;
+  background-color: #00BFFF;
   width: 30%;
   height: 70%;
   color: #252525;
@@ -605,7 +605,7 @@ body {
 
 .sobre_nos_right {
   flex-direction: row;
-  background-color: #c8fdf2;
+  background-color: #00BFFF;
   width: 50%;
   height: 70%;
   color: #252525;
@@ -641,7 +641,6 @@ body {
 
 .sobre_nos_left button:hover .arrow {
   transform: scale(1.25);
-  width: 20%;
   transition: 1s;
 }
 

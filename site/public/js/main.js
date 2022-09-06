@@ -15,45 +15,56 @@ const manipuladorDeClasses = slideCorreto => {
 
 botaoProximo.addEventListener('click', () => {
     const slideCorreto = slideAtual === ultimoSlide
-    ? slideAtual = 0
-    : ++slideAtual
+        ? slideAtual = 0
+        : ++slideAtual
 
     manipuladorDeClasses(slideCorreto);
 })
 
 botaoAnterior.addEventListener('click', () => {
     const slideCorreto = slideAtual === 0
-    ? slideAtual = ultimoSlide
-    : --slideAtual
+        ? slideAtual = ultimoSlide
+        : --slideAtual
 
     manipuladorDeClasses(slideCorreto);
 })
 
 // Parte do samuel ........................................................
-var desbloqueado = true;
-function abrir_menu(){
+let desbloqueado = true;
 
-    
+function abrir_menu() {
 
-    if(desbloqueado == true){
-    opcoes_menu.style.display="flex";
-    opcoes_menu.style.position="fixed";
-    opcoes_menu.style.position="fixed";
-    id_navbar.style.backgroundColor=" white"
-    id_navbar.style.borderBottom = "solid 2px #858585"
-    desbloqueado = false;
+    if (desbloqueado) {
+        opcoes_menu.style.display = "flex";
+        opcoes_menu.style.position = "fixed";
+        opcoes_menu.style.position = "fixed";
+        id_navbar.style.backgroundColor = " white"
+        id_navbar.style.borderBottom = "solid 2px #858585"
+        desbloqueado = false;
 
-    }else if(desbloqueado == false){
-        id_navbar.style.backgroundColor="rgba(0, 0, 0, 0.781)"
-       id_navbar.style.borderBottom = "none"
-        opcoes_menu.style.display="none";
+    } else if (!desbloqueado) {
+        id_navbar.style.backgroundColor = "#000000C7"
+        id_navbar.style.borderBottom = "none"
+        opcoes_menu.style.display = "none";
         desbloqueado = true;
     }
 
 }
 
-function change_screen(n){
-    switch(n){
+window.addEventListener('resize', resizeHandler);
+
+resizeHandler();
+
+function resizeHandler(){
+    const tela = window.innerWidth;
+    if(tela > 600){
+        desbloqueado = false;
+        abrir_menu();
+    }
+}
+
+function change_screen(n) {
+    switch (n) {
         case 1:
             window.location = "#sec_sobre"
             break;

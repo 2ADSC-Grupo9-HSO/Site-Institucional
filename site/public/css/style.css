@@ -267,7 +267,7 @@ body {
     height: 92vh;
     width: 98%;
     border-radius: 0px 0px 15px 15px;
-    background-color: #00BFFF;
+    background-color: #B0E0E6;
     border: 1vw solid #000000;
     display: flex;
     align-items: center;
@@ -294,7 +294,6 @@ body {
   .espacos {
     width: 34%;
     height: 25%;
-    border-radius: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -304,6 +303,7 @@ body {
   }
 
   .espacos.last{
+    border-top: 2px solid #000000;
     width: 80%;
     display: flex;
     justify-content: space-between;

@@ -12,15 +12,15 @@
 
 <body>
 
-    
+
 
     <div id="id_navbar" class="navbar">
 
         <div class="nav">
-            <img  src="../public/assets/imgs/logo.png">
-            <img onclick ="abrir_menu()" class="imagem_menu" src="../public/assets/imgs/icone5.svg">
+            <img src="../public/assets/imgs/logo.png">
+            <img onclick="abrir_menu()" class="imagem_menu" src="../public/assets/imgs/icone5.svg">
             <ul class="menu">
-                <li class="links um"><a href="/site/public/index.html" class="links">Home</a></li>
+                <li class="links um"><a href="#sec_inicio" class="links">Home</a></li>
                 <li class="links dois"><a href="" class="links">Login</a></li>
                 <li class="links tres"><a href="" class="links">Cadastro</a></li>
             </ul>
@@ -28,35 +28,20 @@
 
     </div>
 
-    <div id="opcoes_menu" class="container_opcoes_menu"> 
-        <div class="opcoes_menu">
-            <div class="menu_one">
-                <div class="espacos left"></div>
-                <div class="espacos"></div>
-                <div class="espacos"></div>
-                
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    Login
+                </p>
             </div>
-            <div class="menu_two">
-                <div class="espacos left"></div>
-                <div class="espacos"></div>
-                <div class="espacos"></div>
+            <div class="espacos">
+                Cadastro
             </div>
-            <div class="menu_tree">
-                <div class="espacos left"></div>
-                <div class="espacos"></div>
-                <div class="espacos"></div>
-            </div>
-            <div class="menu_for"> 
-                <div class="mini_espacos"></div>
-                <div class="mini_espacos"></div>
-                <div class="mini_espacos"></div>
-                <div class="mini_espacos"></div>
-                
-            </div>
-
+            <div class="espacos"></div>
         </div>
     </div>
-    <section class="imagemFundo">
+    <section class="imagemFundo" id="sec_inicio">
 
         <div class="container informaçao">
 
@@ -72,8 +57,8 @@
                 </div>
                 <div class="conteudo_inferior">
 
-                    <button class="b1" onclick="nada"> Saiba Mais </button>
-                    <button class="b2" onclick="nada"> Sobre Nós </button>
+                    <!-- <button class="b1" onclick="nada"> Saiba Mais </button> -->
+                    <button class="b2" onclick="change_screen(1)"> Sobre Nós </button>
 
                 </div>
             </div>
@@ -90,7 +75,8 @@
             <span>Através de um serviço de monitarento juntamente com disponibilizaçao em tempo real, nos
                 tornamos uma empresa que visa sempre a entrega e compremetimento com nossos clientes
             </span>
-            <button>Veja mais<img src="./assets/icons/down-arrow.png" class="arrow">
+            <button class="b2" onclick="change_screen(2)">Veja mais<img src="./assets/icons/down-arrow.png"
+                    class="arrow">
             </button>
         </div>
         <div class="sobre_nos_right">
@@ -182,9 +168,9 @@
                 <div>
                     <img src="./assets/icons/missao.png" alt="">
                     <h2>Missão</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum
-                        laudantium,
-                        maxime sint rem quibusdam</p>
+                    <p>
+                        Otimização de atendimentos, menos paralizações de softwares no meio do expediente.
+                    </p>
                 </div>
             </div>
 
@@ -192,9 +178,9 @@
                 <div>
                     <img src="assets/icons/visao.png" alt="">
                     <h2>Visão</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum
-                        laudantium,
-                        maxime sint rem quibusdam</p>
+                    <p>
+                        Melhorar a experiência dos paciêntes nos consultorios.
+                    </p>
                 </div>
             </div>
 
@@ -202,9 +188,9 @@
                 <div>
                     <img src="assets/icons/valor.png" alt="">
                     <h2>Valores</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident pariatur fugit illum
-                        laudantium,
-                        maxime sint rem quibusdam</p>
+                    <span>Exceléncia</span><br>
+                    <span>Agilidade</span><br>
+                    <span>Compromisso</span><br>
                 </div>
             </div>
 
@@ -219,34 +205,41 @@
             </div>
     </section>
 
-    <section class="container">
+    <section class="faixa" id="sec_empresa">
         <div class="conteudo-inicio">
             <div class="cont-texto">
-                <p>A HSO é uma empresa de monitoramento...</p>
+                <h1>Sobre nós</h1>
+                <p>
+                    Somos uma empresa de tecnologia com ênfase em monitoramento de máquinas.<br />
+                    Nosso principal objetivo é diminuir o tempo entre atendimentos hospitalares, causados por problemas
+                    computacionais.
+                </p>
             </div>
             <div class="cont-img">
                 <img src="assets/icons/grafico-de-barras.png" alt="gráfico">
             </div>
         </div>
-        <div class="conteudo-infos">
-            <div class="coluna-conteudo">
-                <div class="cont-hospital">
-                    <p>Foco em hospital</p>
-                    <img src="assets/icons/hospital.png" alt="">
+        <div class="container">
+            <div class="conteudo-infos">
+                <div class="coluna-conteudo">
+                    <div class="cont-hospital">
+                        <p>Foco em hospitais</p>
+                        <img src="assets/icons/hospital.png" alt="">
+                    </div>
+                    <div class="cont-aplicacao">
+                        <p>Aplicação de fácil acesso</p>
+                        <img src="assets/icons/aplicacao-de-software.png" alt="">
+                    </div>
                 </div>
-                <div class="cont-aplicacao">
-                    <p>Aplicação de fácil acesso</p>
-                    <img src="assets/icons/aplicacao-de-software.png" alt="">
-                </div>
-            </div>
-            <div class="coluna-conteudo">
-                <div class="cont-tecnico">
-                    <p>Facilita o trabalho do técnico</p>
-                    <img src="assets/icons/suporte-tecnico.png" alt="">
-                </div>
-                <div class="cont-check">
-                    <p>Menos demora na hora de atender pacientes</p>
-                    <img src="assets/icons/check.png" alt="">
+                <div class="coluna-conteudo">
+                    <div class="cont-tecnico">
+                        <p>Facilita o trabalho do técnico</p>
+                        <img src="assets/icons/suporte-tecnico.png" alt="">
+                    </div>
+                    <div class="cont-check">
+                        <p>Menos demora na hora de atender pacientes</p>
+                        <img src="assets/icons/check.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>

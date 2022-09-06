@@ -52,3 +52,12 @@ function abrir_menu(){
 
 }
 
+function change_screen(n){
+    switch(n){
+        case 1:
+            window.location = "#sec_sobre"
+            break;
+        case 2:
+            window.location = "#sec_empresa"
+    }
+}

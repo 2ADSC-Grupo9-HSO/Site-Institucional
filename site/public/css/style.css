@@ -743,3 +743,72 @@ body {
   background-color: #00BFFF;
   border-radius: 10px;
 }
+
+/*tela de cadastro 1 */
+.pai_cadastro1{
+ width: 100%;
+ height: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center; 
+
+
+}
+
+
+
+.cadastro1{
+  width: 500px;
+  height: 500px;
+  border: 2px solid black;
+  background-color: #000000C7;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #FFFFFF;
+  border-radius: 25px;
+
+}
+
+.cadastro1 input{
+width: 200px;
+height: 30px;
+margin: 3px;
+padding: 3px;
+box-shadow: 0 0 0 0;
+outline: 0;
+
+}
+
+
+.cadastro1 button{
+  width: max(12vw, 145px);
+  height: max(7vh, 5px);
+  border-radius: 25px;
+  font-size: max(1.2vw, 15px);
+  font-weight: 600;
+  cursor: pointer;
+  border: solid 2px #00BFFF;
+  background-color: #000000;
+  color: #00BFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+
+}
+
+.cadastro1 button:hover{
+  background-color: #222222;
+  transition: 1s;
+
+}
+
+.cadastro1 p{
+  font-size: 10px;
+  color: #FFFFFF;
+  margin-top: -4px;
+  
+}

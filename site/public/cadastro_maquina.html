@@ -74,16 +74,16 @@
         
                 <div class="pai_cadastro1">
             <div class="cadastro1">
-                <h1>Cadastre sua máquina</h1> 
+                <h1>Cadastre sua máquina:</h1> 
                
                 
                 <input type="text" placeholder="Host Name" id="input_hostName">
-                <input type="text" placeholder="Marca da máquina" id="input_marca">
-                <input type="text" placeholder="Sistema operacional" id="input_so">
-                <input type="number" placeholder="cnpj da filial" id="input_cnpjFilial">
-                <input type="text" required placeholder="Ala hospitalar" id="input_ala" >
+                <input type="text" placeholder="Marca" id="input_marca">
+                <input type="text" placeholder="Sistema Operacional" id="input_so">
+                <input type="number" placeholder="CNPJ Filial" id="input_cnpjFilial">
+                <input type="text" required placeholder="Ala Hospitalar" id="input_ala" >
                 <input type="text" placeholder="Andar" id="input_andar">
-                <input type="password" placeholder="********" input_senhaMaquina>
+                <input type="password" placeholder="Senha" input_senhaMaquina>
                 <p>Cadastre uma senha com 8 caracteres</p>
                 <button onclick="cadastrarMaquina()">Cadastrar</button>
                 
@@ -145,7 +145,7 @@
             if (resposta.ok) {
                 cardErro.style.display = "block";
 
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de login...";
 
                 setTimeout(() => {
                     window.location = "login.html";

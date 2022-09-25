@@ -79,15 +79,15 @@
 
         <div class="pai_cadastro1">
             <div class="cadastro1">
-                <h1>Cadastre sua filial</h1>
+                <h1>Cadastre sua filial:</h1>
 
 
                 <input type="text" placeholder="Rede Hospitalar" id="input_rede">
-                <input type="number" required placeholder="cep" id="input_cep">
-                <input type="number" placeholder="número" id="input_numero">
-                <input type="tel" placeholder="telefone" id="input_telefone">
-                <input type="number" placeholder="cnpj" id="input_cnpj">
-                <input type="password" placeholder="********" id="input_senha">
+                <input type="number" required placeholder="CEP" id="input_cep">
+                <input type="number" placeholder="Número Endereço" id="input_numero">
+                <input type="tel" placeholder="Telefone" id="input_telefone">
+                <input type="number" placeholder="CNPJ" id="input_cnpj">
+                <input type="password" placeholder="Senha" id="input_senha">
                 <p>Cadastre uma senha com 8 caracteres</p>
 
                 <button onclick="cadastrarFilial()">Cadastrar</button>
@@ -153,7 +153,7 @@
             if (resposta.ok) {
                 cardErro.style.display = "block";
 
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de login...";
 
                 setTimeout(() => {
                     window.location = "login_filial.html";

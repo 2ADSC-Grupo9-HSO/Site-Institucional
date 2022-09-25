@@ -75,15 +75,15 @@
         
                 <div class="pai_cadastro1">
             <div class="cadastro1">
-                <h1>Olá! Cadastre-se</h1> 
+                <h1>Olá! Cadastre-se:</h1> 
                
         
                 <input type="text" placeholder="Rede Hospitalar" id="input_rede">
                <input type="text" required placeholder="Nome" id="input_nomeUsuario">
                <input type="number" placeholder="CPF" id="input_cpf">
                <input type="text" placeholder="Função" id="input_funcao">
-               <input type="email" placeholder="Email" id="input_email">
-               <input type="password" placeholder="********" id="input_senhaUsuario">
+               <input type="email" placeholder="E-mail" id="input_email">
+               <input type="password" placeholder="Senha" id="input_senhaUsuario">
                <p>Cadastre uma senha com 8 caracteres</p>
 
                <button onclick="cadastrarUsuario()">Cadastrar</button>
@@ -147,7 +147,7 @@
             if (resposta.ok) {
                 cardErro.style.display = "block";
 
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de login...";
 
                 setTimeout(() => {
                     window.location = "login.html";

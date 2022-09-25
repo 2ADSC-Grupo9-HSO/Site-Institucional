@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSO | Cadastro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="icon" href="teste1.ico" />
+
+    <div class="navbar">
+        <div class="nav">
+            <img src="assets/imgs/logo.png">
+            <ul class="menu">
+                <li class="links"><a href="/site/public/index.html" class="links">Home</a></li>
+                <li class="links"><a href="login_filial.html" class="links">Login</a></li>
+                <li class="links"><a href="cadastro_filial.html" class="links">Cadastro</a></li>
+            </ul>
+        </div>
+        <div class="led"></div>
+
+
+    </div>
+</head>
+<body > 
+    
+    <div id="id_navbar" class="navbar">
+
+        <div class="nav">
+            <img src="../public/assets/imgs/logo.png">
+            <img onclick="abrir_menu()" class="imagem_menu" src="../public/assets/imgs/icone5.svg">
+            <ul class="menu">
+                <li class="links um"><a href="index.html" class="links">Home</a></li>
+                <li class="links dois"><a href="#" class="links">Login</a></li>
+                <li class="links tres"><a href="#" class="links">Cadastro</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    <a href="#">Login</a>
+                </p>
+            </div>
+            <div class="espacos">
+                <p>
+                    <a href="#">Cadastro</a>
+                </p>
+            </div>
+            <div class="espacos last">
+                <a href="https://facebook.com/">
+                    <img src="assets/icons/facebook.png" alt="">
+                </a>
+                <a href="https://instagram.com/">
+                    <img src="assets/icons/instagram.png" alt="">
+                </a>
+                <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
+                    <img src="assets/icons/github.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <section class="imagemFundo2" id="sec_inicio">
+
+        
+                <div class="pai_cadastro1">
+            <div class="cadastro1">
+                <h1>Olá! Cadastre-se</h1> 
+               
+        
+                <input type="text" placeholder="Rede Hospitalar" id="input_rede">
+               <input type="text" required placeholder="Nome" id="input_nomeUsuario">
+               <input type="number" placeholder="CPF" id="input_cpf">
+               <input type="text" placeholder="Função" id="input_funcao">
+               <input type="email" placeholder="Email" id="input_email">
+               <input type="password" placeholder="********" id="input_senhaUsuario">
+               <p>Cadastre uma senha com 8 caracteres</p>
+
+               <button onclick="cadastrarUsuario()">Cadastrar</button>
+                
+                
+               
+            </div>
+
+        </div>
+        
+
+
+    </section>
+
+</body>
+</html>
+<script>
+    function cadastrarUsuario() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var redeVar = input_rede.value;
+        var nomeUsuarioVar = input_usuario.value;
+        var cpfVar = input_cpf.value;
+        var funcaoVar = input_funcao.value;
+        var emailVar = input_email.value;
+        var senhaUsuarioVar = input_senhaUsuario.value;
+
+        if (redeVar == "" || nomeUsuarioVar == "" || cpfVar == "" || funcaoVar == "" || emailVar =="" || senhaUsuarioVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+            // finalizarAguardar();
+            // return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/tbUsuario/cadastrarUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                redeServer: redeVar,
+                nomeUsuarioServer: nomeUsuarioVar,
+                cpfServer: cpfVar,
+                funcaoServer: cpfVar,
+                emailServer: emailVar,
+                senhaUsuarioServer: senhaUsuarioVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+                
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

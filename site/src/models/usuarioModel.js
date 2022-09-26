@@ -3,30 +3,30 @@ var database = require("../database/config")
 function listar() {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-        SELECT * FROM usuario;
+        SELECT * FROM tbFilialHospital;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function entrar(email, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+function entrar(cnpj, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", cnpj, senha)
     var instrucao = `
-        SELECT * FROM usuario WHERE email = '${email}' AND senha = '${senha}';
+        SELECT * FROM tbFilialHospital WHERE cnpjFilial = '${cnpj}' AND senhaFilial = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrarFilial(rede, cep, numero, telefone, cnpj, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarFilial():", rede, cep, numero, telefone, cnpj, senha);
+function cadastrarFilial(rede, cep, numero, complemento, telefone, cnpj, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarFilial():", rede, cep, numero, complemento, telefone, cnpj, senha);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO tbFilialHospital (fkRede, cepFilial, numeroEndFilial, cnpjFilial, senhaFilial) 
-        VALUES (SELECT idUsuario, '${rede}' from tbRedeHospitalar order by idRede desc limit 1, '${cep}', '${numero}', '${telefone}', '${cnpj}', '${senha}');
+        INSERT INTO tbFilialHospital (fkRede, cepFilial, numeroEndFilial, complementoEnd, cnpjFilial, senhaFilial) 
+        VALUES (SELECT idUsuario, '${rede}' from tbRedeHospitalar order by idRede desc limit 1, '${cep}', '${numero}', '${complemento}' '${telefone}', '${cnpj}', '${senha}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -38,8 +38,8 @@ function cadastrarMaquina(cnpjFilial, hostName, marca, so, ala, andar, senhaMaqu
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO tbFilialHospital (fkFilial, hostName, marcaMaquina, alaMaquina, andarMaquina, sistemaOperacional, senhaMaquina) 
-        VALUES (SELECT idFilial, '${cnpjFilial}' from tbFilialHospital order by idRede desc limit 1, '${hostName}', '${marca}', '${so}', '${ala}', '${andar}', '${senhaMaquina});
+        INSERT INTO tbInfoMaquina (fkFilial, hostName, marcaMaquina, alaMaquina, andarMaquina, sistemaOperacional, senhaMaquina) 
+        VALUES (SELECT idFilial, '${cnpjFilial}' from tbInfoMaquina order by idRede desc limit 1, '${hostName}', '${marca}', '${so}', '${ala}', '${andar}', '${senhaMaquina});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

@@ -7,18 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSO | Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cadastro.css">
 
-    
-    <link rel="icon"  href="teste1.ico" />
+    <link rel="icon" href="../public/assets/icons/icone_head.ico" />
 
     <div class="navbar">
         <div class="nav">
             <img src="assets/imgs/logo.png">
             <ul class="menu">
-                <li class="links"><a href="/site/public/index.html" class="links">Home</a></li>
+                <li class="links"><a href="index.html" class="links">Home</a></li>
                 <li class="links"><a href="login_filial.html" class="links">Login</a></li>
-                <li class="links"><a href="Cadastro.html" class="links">Cadastro</a></li>
+                <li class="links"><a href="cadastro_filial.html" class="links">Cadastro</a></li>
             </ul>
         </div>
         <div class="led"></div>
@@ -29,19 +27,19 @@
 
 <body>
 
-    <div id="id_navbar" class="navbar">
+ <!--    <div id="id_navbar" class="navbar">
 
         <div class="nav">
             <img src="../public/assets/imgs/logo.png">
             <img onclick="abrir_menu()" class="imagem_menu" src="../public/assets/imgs/icone5.svg">
             <ul class="menu">
-                <li class="links um"><a href="index.html" class="links">Home</a></li>
-                <li class="links dois"><a href="#" class="links">Login</a></li>
-                <li class="links tres"><a href="#" class="links">Cadastro</a></li>
+                <li class="links um"><a href="/site/public/index.html" class="links">Home</a></li>
+                <li class="links dois"><a href="login_filial.html" class="links">Login</a></li>
+                <li class="links tres"><a href="cadastro_filial.html" class="links">Cadastro</a></li>
             </ul>
         </div>
 
-    </div>
+    </div> -->
 
     <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
@@ -53,12 +51,12 @@
         <div class="menu_one">
             <div class="espacos">
                 <p>
-                    <a href="#">Login</a>
+                    <a href="login_filial.html">Login</a>
                 </p>
             </div>
             <div class="espacos">
                 <p>
-                    <a href="#">Cadastro</a>
+                    <a href="cadastro_filial.html">Cadastro</a>
                 </p>
             </div>
             <div class="espacos last">
@@ -83,10 +81,11 @@
 
 
                 <input type="text" placeholder="Rede Hospitalar" id="input_rede">
-                <input type="number" required placeholder="CEP" id="input_cep">
+                <input type="text" placeholder="CEP" id="input_cep">
                 <input type="number" placeholder="Número Endereço" id="input_numero">
-                <input type="tel" placeholder="Telefone" id="input_telefone">
-                <input type="number" placeholder="CNPJ" id="input_cnpj">
+                <input type="text" placeholder="Complemento" id="input_complemento">
+                <input type="text" placeholder="Telefone" id="input_telefone">
+                <input type="text" placeholder="CNPJ" id="input_cnpj">
                 <input type="password" placeholder="Senha" id="input_senha">
                 <p>Cadastre uma senha com 8 caracteres</p>
 
@@ -114,12 +113,13 @@
         var redeVar = input_rede.value;
         var cepVar = input_cep.value;
         var numeroVar = input_numero.value;
+        var complementoVar = input_complemento.value;
         var telefoneVar = input_telefone.value;
         var cnpjVar = input_cnpj.value;
         var senhaVar = input_senha.value;
 
 
-        if (redeVar == "" || cepVar == "" || numeroVar == "" || telefoneVar == "" || cnpjVar == "" || senhaVar == "") {
+        if (redeVar == "" || cepVar == "" || numeroVar == "" || complementoVar == "" || telefoneVar == "" || cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -142,6 +142,7 @@
                 redeServer: redeVar,
                 cepServer: cepVar,
                 numeroServer: numeroVar,
+                complementoServer: complementoVar,
                 telefoneServer: telefoneVar,
                 cnpjServer: cnpjVar,
                 senhaServer: senhaVar

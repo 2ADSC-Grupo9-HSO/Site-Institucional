@@ -65,6 +65,7 @@ function cadastrarFilial(req, res) {
     var rede = req.body.redeServer;
     var cep = req.body.cepServer;
     var numero = req.body.numeroServer;
+    var complemento = req.body.complementoServer;
     var telefone = req.body.telefoneServer;
     var cnpj = req.body.cnpjServer;
     var senha = req.body.senhaServer;
@@ -76,6 +77,8 @@ function cadastrarFilial(req, res) {
         res.status(400).send("Seu cep está undefined!");
     } else if (numero == undefined) {
         res.status(400).send("Seu número está undefined!");
+    } else if (complemento == undefined) {
+        res.status(400).send("Seu número está undefined!");
     } else if (telefone == undefined) {
         res.status(400).send("Seu telefone está undefined!");
     } else if (cnpj == undefined) {
@@ -85,7 +88,7 @@ function cadastrarFilial(req, res) {
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarFilial(rede, cep, numero, telefone, cnpj, senha)
+        usuarioModel.cadastrarFilial(rede, cep, numero, complemento, telefone, cnpj, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);

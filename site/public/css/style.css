@@ -840,7 +840,7 @@ outline: 0;
 .imagemFundo2 {
   height: 100vh;
   width: 100vw;
-  background-image: url("../assets/imgs/slide3.jpg");
+  background-image: url("../assets/imgs/42.png");
   background-size: cover;
   background-position-x: center;
   background-size: max(100vw, 1300px);
@@ -866,21 +866,23 @@ outline: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
-  
+  background-image: url("../assets/imgs/42.png");
+  background-size: cover;
   justify-content: space-between;
   padding: 0;
   margin: 0;
 
 }
 .imagem{
-  float: right;
+  float: left;
   width: 50vw;
   height: 100vh;
-  background-image: url("../assets/imgs/slide3.jpg");
-  background-size: cover;
   background-position-x: center;
-  background-size: max(50vw, 1000px);
-  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+
   
 }
 

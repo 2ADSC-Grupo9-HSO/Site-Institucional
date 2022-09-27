@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSO | Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cadastro.css">
     <link rel="icon" href="teste1.ico" />
 
     <div class="navbar">
@@ -25,7 +24,7 @@
 </head>
 <body > 
     
-    <div id="id_navbar" class="navbar">
+    <!-- <div id="id_navbar" class="navbar">
 
         <div class="nav">
             <img src="../public/assets/imgs/logo.png">
@@ -37,7 +36,7 @@
             </ul>
         </div>
 
-    </div>
+    </div> -->
 
     <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
@@ -107,7 +106,7 @@
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var redeVar = input_rede.value;
-        var nomeUsuarioVar = input_usuario.value;
+        var nomeUsuarioVar = input_nomeUsuario.value;
         var cpfVar = input_cpf.value;
         var funcaoVar = input_funcao.value;
         var emailVar = input_email.value;
@@ -125,7 +124,7 @@
         }
 
         // Enviando o valor da nova input
-        fetch("/tbUsuario/cadastrarUsuario", {
+        fetch("/usuarios/cadastrarUsuario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -150,7 +149,7 @@
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de login...";
 
                 setTimeout(() => {
-                    window.location = "login.html";
+                    window.location = "login_filial.html";
                 }, "2000")
                 
                 // limparFormulario();

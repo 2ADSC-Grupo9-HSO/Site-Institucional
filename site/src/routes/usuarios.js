@@ -24,8 +24,12 @@ router.post("/cadastrarUsuario", function (req, res) {
     usuarioController.cadastrarUsuario(req, res);
 })
 
-router.post("/autenticar", function (req, res) {
-    usuarioController.entrar(req, res);
+router.post("/autenticarUsuario", function (req, res) {
+    usuarioController.entrarUsuario(req, res);
+});
+
+router.post("/autenticarFilial", function (req, res) {
+    usuarioController.entrarFilial(req, res);
 });
 
 module.exports = router;

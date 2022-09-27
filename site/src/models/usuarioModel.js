@@ -9,10 +9,22 @@ function listar() {
     return database.executar(instrucao);
 }
 
-function entrar(cnpj, senha) {
+function entrarFilial(cnpj, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", cnpj, senha)
-    var instrucao = `
-        SELECT * FROM tbFilialHospital WHERE cnpjFilial = '${cnpj}' AND senhaFilial = '${senha}';
+    var instrucao = `select idRede, nomeRede, idFilial
+    from tbFilialHospital
+    join tbRedeHospitalar
+    on idRede = fkRede
+    WHERE cnpjFilial = '${cnpj}' AND senhaFilial = '${senha}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function entrarUsuario(cpf, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", cpf, senha)
+    var instrucao = `select fkFilial, nomeUsuario from tbUsuario
+    WHERE cpf = '${cpf}' AND senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -26,7 +38,7 @@ function cadastrarFilial(rede, cep, numero, complemento, telefone, cnpj, senha) 
     //  e na ordem de inserção dos dados.
     var instrucao = `
         INSERT INTO tbFilialHospital (fkRede, cepFilial, numeroEndFilial, complementoEnd, cnpjFilial, senhaFilial) 
-        VALUES (SELECT idUsuario, '${rede}' from tbRedeHospitalar order by idRede desc limit 1, '${cep}', '${numero}', '${complemento}' '${telefone}', '${cnpj}', '${senha}');
+        VALUES ('${rede}', '${cep}', '${numero}', '${complemento}' '${telefone}', '${cnpj}', '${senha}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -39,7 +51,7 @@ function cadastrarMaquina(cnpjFilial, hostName, marca, so, ala, andar, senhaMaqu
     //  e na ordem de inserção dos dados.
     var instrucao = `
         INSERT INTO tbInfoMaquina (fkFilial, hostName, marcaMaquina, alaMaquina, andarMaquina, sistemaOperacional, senhaMaquina) 
-        VALUES (SELECT idFilial, '${cnpjFilial}' from tbInfoMaquina order by idRede desc limit 1, '${hostName}', '${marca}', '${so}', '${ala}', '${andar}', '${senhaMaquina});
+        VALUES ('${cnpjFilial}', '${hostName}', '${marca}', '${so}', '${ala}', '${andar}', '${senhaMaquina}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -52,14 +64,15 @@ function cadastrarUsuario(rede, nomeUsuario, cpf, funcao, email, senhaUsuario) {
     //  e na ordem de inserção dos dados.
     var instrucao = `
         INSERT INTO tbUsuario (fkFilial, nomeUsuario, cpf, email, senha, cargo) 
-        VALUES (SELECT idRede, '${rede}' from tbRedeHospitalar order by idRede desc limit 1, '${nomeUsuario}', '${cpf}', '${email}', '${senhaUsuario}', '${funcao}');
+        VALUES ('${rede}', '${nomeUsuario}', '${cpf}', '${email}', '${senhaUsuario}', '${funcao}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 module.exports = {
-    entrar,
+    entrarFilial,
+    entrarUsuario,
     cadastrarFilial,
     cadastrarMaquina,
     cadastrarUsuario,

@@ -8,38 +8,49 @@
     <title>HSO | Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="icon" href="../public/assets/icons/icone_head.ico" />
-
-    <div class="navbar">
-        <div class="nav">
-            <img src="assets/imgs/logo.png">
-            <ul class="menu">
-                <li class="links"><a href="index.html" class="links">Home</a></li>
-                <li class="links"><a href="login_filial.html" class="links">Login</a></li>
-                <li class="links"><a href="cadastro_filial.html" class="links">Cadastro</a></li>
-            </ul>
-        </div>
-        <div class="led"></div>
-
-
-    </div>
+    <link rel="icon" href="../assets/icons/icone_head.ico" />
 </head>
 
 <body>
-
- <!--    <div id="id_navbar" class="navbar">
+    <div id="id_navbar" class="navbar">
 
         <div class="nav">
-            <img src="../public/assets/imgs/logo.png">
-            <img onclick="abrir_menu()" class="imagem_menu" src="../public/assets/imgs/icone5.svg">
+            <img src="assets/imgs/logo.png">
+            <img onclick="abrir_menu()" class="imagem_menu" src="../assets/imgs/icone5.svg">
             <ul class="menu">
-                <li class="links um"><a href="/site/public/index.html" class="links">Home</a></li>
+                <li class="links um"><a href="index.html" class="links">Home</a></li>
                 <li class="links dois"><a href="login_filial.html" class="links">Login</a></li>
                 <li class="links tres"><a href="cadastro_filial.html" class="links">Cadastro</a></li>
             </ul>
         </div>
 
-    </div> -->
+    </div>
+
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    <a href="login_filial.html">Login</a>
+                </p>
+            </div>
+            <div class="espacos">
+                <p>
+                    <a href="cadastro_filial.html">Cadastro</a>
+                </p>
+            </div>
+            <div class="espacos last">
+                <a href="https://facebook.com/">
+                    <img src="assets/icons/facebook.png" alt="">
+                </a>
+                <a href="https://instagram.com/">
+                    <img src="assets/icons/instagram.png" alt="">
+                </a>
+                <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
+                    <img src="assets/icons/github.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
 
     <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
@@ -80,7 +91,7 @@
                 <h1>Cadastre sua filial:</h1>
 
 
-                <input type="text" placeholder="Rede Hospitalar" id="input_rede">
+                
                 <input type="text" placeholder="CEP" id="input_cep">
                 <input type="number" placeholder="Número Endereço" id="input_numero">
                 <input type="text" placeholder="Complemento" id="input_complemento">
@@ -105,6 +116,49 @@
 
 </html>
 <script>
+    let desbloqueado = true;
+
+function abrir_menu() {
+
+    if (desbloqueado) {
+        opcoes_menu.style.display = "flex";
+        opcoes_menu.style.position = "fixed";
+        opcoes_menu.style.position = "fixed";
+        id_navbar.style.backgroundColor = " white"
+        id_navbar.style.borderBottom = "solid 2px #858585"
+        desbloqueado = false;
+
+    } else if (!desbloqueado) {
+        id_navbar.style.backgroundColor = "#000000C7"
+        id_navbar.style.borderBottom = "none"
+        opcoes_menu.style.display = "none";
+        desbloqueado = true;
+    }
+
+}
+
+window.addEventListener('resize', resizeHandler);
+
+resizeHandler();
+
+function resizeHandler(){
+    const tela = window.innerWidth;
+    if(tela > 600){
+        desbloqueado = false;
+        abrir_menu();
+    }
+}
+
+function change_screen(n) {
+    switch (n) {
+        case 1:
+            window.location = "#sec_sobre"
+            break;
+        case 2:
+            window.location = "#sec_empresa"
+    }
+}
+
     function cadastrarFilial() {
         // aguardar();
 

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>HSO | Login</title>
-    <link rel="icon" href="teste1.ico" />
+    <link rel="icon" href="assets/icons/icone_head.ico" />
+
 
 </head>
 
@@ -16,7 +17,7 @@
 
         <div class="nav">
             <img src="assets/imgs/logo.png">
-            <img onclick="abrir_menu()" class="imagem_menu" src="../public/assets/imgs/icone5.svg">
+            <img onclick="abrir_menu()" class="imagem_menu" src="../assets/imgs/icone5.svg">
             <ul class="menu">
                 <li class="links um"><a href="index.html" class="links">Home</a></li>
                 <li class="links dois"><a href="login_filial.html" class="links">Login</a></li>
@@ -26,15 +27,41 @@
 
     </div>
 
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    <a href="login_filial.html">Login</a>
+                </p>
+            </div>
+            <div class="espacos">
+                <p>
+                    <a href="cadastro_filial.html">Cadastro</a>
+                </p>
+            </div>
+            <div class="espacos last">
+                <a href="https://facebook.com/">
+                    <img src="assets/icons/facebook.png" alt="">
+                </a>
+                <a href="https://instagram.com/">
+                    <img src="assets/icons/instagram.png" alt="">
+                </a>
+                <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
+                    <img src="assets/icons/github.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="cont">
 
-        <div class="imagem">
+        <div class="imagem" id="div_imagem">
             <h1>Olá!</h1>
         </div>
 
-        <div class="formulario">
+        <div class="formulario" id="div_form">
             <div class="form">
                 <h1>Bem-vindo!</h1>
 
@@ -52,6 +79,54 @@
 
 </html>
 <script>
+    let desbloqueado = true;
+
+
+
+    function abrir_menu() {
+
+        if (desbloqueado) {
+            opcoes_menu.style.display = "flex";
+            opcoes_menu.style.position = "fixed";
+            opcoes_menu.style.position = "fixed";
+            id_navbar.style.backgroundColor = " white";
+            id_navbar.style.borderBottom = "solid 2px #858585";
+            desbloqueado = false;
+            
+
+        } else if (!desbloqueado) {
+            id_navbar.style.backgroundColor = "#000000C7"
+            id_navbar.style.borderBottom = "none"
+            opcoes_menu.style.display = "none"
+            
+            desbloqueado = true;
+        }
+
+    }
+
+    window.addEventListener('resize', resizeHandler);
+
+    resizeHandler();
+
+    function resizeHandler() {
+        const tela = window.innerWidth;
+        if (tela > 600) {
+            desbloqueado = false;
+            
+            abrir_menu();
+        }
+    }
+
+    function change_screen(n) {
+        switch (n) {
+            case 1:
+                window.location = "#sec_sobre"
+                break;
+            case 2:
+                window.location = "#sec_empresa"
+        }
+    }
+
 
 
     function entrar() {

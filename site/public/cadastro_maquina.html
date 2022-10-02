@@ -7,11 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSO | Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="teste1.ico" />
+    <link rel="icon" href="assets/icons/icone_head.ico" />
+</head>
 
+<body>
     <div class="navbar">
         <div class="nav">
             <img src="assets/imgs/logo.png">
+            <img onclick="abrir_menu()" class="imagem_menu" src="assets/imgs/icone5.svg">
             <ul class="menu">
                 <li class="links"><a href="/site/public/index.html" class="links">Home</a></li>
                 <li class="links"><a href="login_filial.html" class="links">Login</a></li>
@@ -22,27 +25,39 @@
 
 
     </div>
-</head>
 
-<body>
-
-    <!--  <div id="id_navbar" class="navbar">
-
-        <div class="nav">
-            <img src="../public/assets/imgs/logo.png">
-            <img onclick="abrir_menu()" class="imagem_menu" src="../public/assets/imgs/icone5.svg">
-            <ul class="menu">
-                <li class="links um"><a href="index.html" class="links">Home</a></li>
-                <li class="links dois"><a href="#" class="links">Login</a></li>
-                <li class="links tres"><a href="Cadastro_filial.html" class="links">Cadastro</a></li>
-            </ul>
-        </div> -->
-
-    <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    <a href="login_filial.html">Login</a>
+                </p>
+            </div>
+            <div class="espacos">
+                <p>
+                    <a href="cadastro_filial.html">Cadastro</a>
+                </p>
+            </div>
+            <div class="espacos last">
+                <a href="https://facebook.com/">
+                    <img src="assets/icons/facebook.png" alt="">
+                </a>
+                <a href="https://instagram.com/">
+                    <img src="assets/icons/instagram.png" alt="">
+                </a>
+                <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
+                    <img src="assets/icons/github.png" alt="">
+                </a>
             </div>
         </div>
+    </div>
+
+
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
 
     <div id="opcoes_menu" class="container_opcoes_menu">
         <div class="menu_one">
@@ -80,11 +95,9 @@
                 <input type="text" placeholder="Host Name" id="input_hostName">
                 <input type="text" placeholder="Marca" id="input_marca">
                 <input type="text" placeholder="Sistema Operacional" id="input_so">
-                <input type="number" placeholder="CNPJ Filial" id="input_cnpjFilial">
                 <input type="text" required placeholder="Ala Hospitalar" id="input_ala">
                 <input type="text" placeholder="Andar" id="input_andar">
-                <input type="password" placeholder="Senha" id="input_senhaMaquina">
-                <p>Cadastre uma senha com 8 caracteres</p>
+
                 <button onclick="cadastrarMaquina()">Cadastrar</button>
 
             </div>
@@ -97,6 +110,49 @@
 
 </html>
 <script>
+    let desbloqueado = true;
+
+function abrir_menu() {
+
+    if (desbloqueado) {
+        opcoes_menu.style.display = "flex";
+        opcoes_menu.style.position = "fixed";
+        opcoes_menu.style.position = "fixed";
+        id_navbar.style.backgroundColor = " white"
+        id_navbar.style.borderBottom = "solid 2px #858585"
+        desbloqueado = false;
+
+    } else if (!desbloqueado) {
+        id_navbar.style.backgroundColor = "#000000C7"
+        id_navbar.style.borderBottom = "none"
+        opcoes_menu.style.display = "none";
+        desbloqueado = true;
+    }
+
+}
+
+window.addEventListener('resize', resizeHandler);
+
+resizeHandler();
+
+function resizeHandler(){
+    const tela = window.innerWidth;
+    if(tela > 600){
+        desbloqueado = false;
+        abrir_menu();
+    }
+}
+
+function change_screen(n) {
+    switch (n) {
+        case 1:
+            window.location = "#sec_sobre"
+            break;
+        case 2:
+            window.location = "#sec_empresa"
+    }
+}
+
     function cadastrarMaquina() {
         // aguardar();
 

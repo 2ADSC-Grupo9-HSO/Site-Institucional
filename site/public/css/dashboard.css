@@ -6,17 +6,85 @@ body{
     background-color: #4C5158;
     display: flex;
     height: 100vh;
+    font-family: sans-serif;
 }
 
-.temporaria{
-    border: 1px solid red;
-}
+
 
 .navgator{
     height: 99vh;
     width: 20%;
 }
+.logo{
+    height: 120px;
+    width: 100%;
 
+}
+.container_botão{
+    background-color: #00BFFF;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.adicionar{
+    width: 90%;
+    display: flex;
+}
+.adicionar .maquina{
+    text-decoration: none;
+}
+.botao_adicionar{
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.teste{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.menu{
+    width: 100%;
+    height: 530px;
+    background-color: #141625;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-around;
+}
+.div_espacamento{
+    height: 70px;
+}
+.div_hora{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 360px;
+    align-items: center;
+    justify-content: space-around;
+}
+.relogio_icon{
+    width: 30px;
+    height: 30px;
+}
+.user_icon{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.temporaria .barra-principal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 .principal{
     width: 77%;
     height: 98vh;
@@ -26,6 +94,57 @@ body{
 .barra-principal{
     width: 100%;
     height: 45px;
+}
+.search-container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.search-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.search-icon::before {
+    content: '';
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    border: 2px solid #00BFFF;
+}
+
+.search-icon::after {
+    content: '';
+    width: 20%;
+    height: 2px;
+    background-color: #00BFFF;
+}
+
+.search-input {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding-left: 40px;
+    transition: all 0.7s;
+}
+
+.search-input:focus {
+    width: 750px;
+    box-shadow: 2px 2px 5px #777;
+}
+
+.search-input:valid {
+    width: 250px;
 }
 
 .conteudo{
@@ -38,6 +157,91 @@ body{
 .pacientes{
     width: 30%;
 }
+.icone_usuarios{
+    width: 100%;
+    height: 65px;
+    background-color: black;
+    border-radius: 15px;
+}
+.grafico_1{
+    width: 100%;
+    height: 295px;
+    background-color: #141625;
+    border-radius: 15px;
+}
+.calendario{
+    width: 100%;
+    height: 295px;
+    background-color: #141625;
+    border-radius: 15px;
+}
+.temporaria .pacientes{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.temporaria .requests{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.div_naoseiainda{
+    width: 100%;
+    height: 65px;
+    background-color: black;
+    border-radius: 15px;
+}
+.container_graficoDonut{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grafico_Donut{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.grafico_2{
+    width: 100%;
+    height: 295px;
+    background-color: #141625;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+.texto{
+    color: white;
+
+}
+.texto_hover{
+    color: white;
+    cursor: pointer;
+}
+.maquina_selecao{
+    border-radius: 10px;
+    background-color:#4C5158;
+    text-decoration: none;
+}
+.grafico_3{
+    width: 100%;
+    height: 295px;
+    background-color: #141625;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 .requests{
     width: 40%;
@@ -45,4 +249,162 @@ body{
 
 .apontamento{
     width: 25%;
+    height: 100%;
+}
+
+
+.container_grafico{
+    height: 80%;
+    width: 90%;
+}
+
+.apontamentos_atuais{
+    width: 100%;
+    height: 65px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.posicao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div_hoje{
+    background-color: #00BFFF;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px; 
+}
+.memoriaRam{
+    width: 100%;
+    height: 80px;
+    background-color: #141625;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgb(255, 255, 255);
+}
+.espacamento_vermelho{
+    width: 5px;
+    height: 80px;
+    background-color: #FF4343;
+}
+.processador{
+    width: 100%;
+    height: 80px;
+    background-color: #141625;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgb(255, 255, 255);
+}
+.espacamento_amarela{
+    width: 5px;
+    height: 80px;
+    background-color: #EBBE21;
+}
+.disco{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    background-color: #141625;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgb(255, 255, 255);
+}
+.espacamento_azul{
+    width: 5px;
+    height: 80px;
+    background-color: #44DDFF;
+}
+.apontamentos_anteriores{
+    width: 100%;
+    height: 55px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+}
+.div_maquina1{
+    width: 100%;
+    height: 80px;
+    background-color: #141625;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgb(255, 255, 255);
+}
+.div_maquina2{
+    width: 100%;
+    height: 80px;
+    background-color: #141625;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgb(255, 255, 255);
+}
+.div_maquina3{
+    width: 100%;
+    height: 80px;
+    background-color: #141625;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgb(255, 255, 255);
+}
+.div_outras_maquinas{
+    width: 100%;
+    height: 80px;
+    background-color: #141625;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div_hover{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: #00BFFF;
+    cursor: pointer;
+}
+.div_hover:hover{
+    font-size: 20px;
+    color: black;
+
+}
+.dado{
+    display: flex;
+    justify-content: space-evenly;
+}
+.modal{
+    width: 400px;
+    height: 400px;
+    background-color: #CDD1D0;
+    border-radius: 20px;
+    position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        display: none;
+}
+.conteudo_modal{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.sair_modal{
+    width: 160px;
+    height: 60px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #00BFFF;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    align-items: center;
+}
+.sair_botão:hover{
+    font-size: 20px;
+    color: black;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,311 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <title>Document</title>
 </head>
-<body>
-    <section class="navgator temporaria">
 
-    </section>
-    <section class="temporaria principal">
-        <div class="temporaria barra-principal"></div>
-        <div class="temporaria conteudo">
-            <div class="temporaria pacientes">a</div>
-            <div class="temporaria requests">b</div>
-            <div class="temporaria apontamento">c</div>
+<body onload="init_time()">
+    <section class="navgator temporaria teste">
+        <div class="logo">
+            <img class="logo"
+                src="../assets/imgs/logo-removebg-preview.png" alt="">
+        </div>
+        <div class="container_botão"> <div class="teste1">
+            <div class="adicionar maquina"><a class="maquina" href="">Adicionar máquina</a>
+                <div class="iconePlus"><img class="botao_adicionar";
+                    href="";
+                    src="../assets/imgs/botao-adicionar.png">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+        <div class="menu">
+            <span class="texto_hover">Dashboard</span>
+            <span class="texto_hover">Apontamentos</span>
+            <span class="texto_hover">Usuários</span>
+            <span class="texto_hover">Documentos</span>
+            <span class="texto_hover">Menssagem</span>
+            <span class="texto_hover">Configurações</span>
+            <div class="div_espacamento"></div>
+            <span class="texto_hover">Sair</span>
         </div>
     </section>
+    <section class="temporaria principal">
+        <div class="temporaria barra-principal">
+            <div class="search-container">
+                <label for="search-input" class="search-icon"></label>
+                <input type="text" class="search-input" id="search-input" required />
+            </div>
+            <div class="div_hora">
+            <div class="relogio_icon"><img class="relogio_icon"
+                    src="../assets/imgs/relogio.png" alt="">
+                </div>
+                <span id="timer"></span>
+            </div>
+            <div class="div_user">
+                <img class="user_icon" src="../assets/imgs/user.png" alt="">
+            </div>
+        </div>
+        <div class="temporaria conteudo">
+            <div class="temporaria pacientes">
+                <div class="icone_usuarios"></div>
+                <div class="grafico_1">
+                    <span style="color: white;"> Ainda não sei </span>
+                    <div class="container_graficoDonut">
+                        <div class="grafico_Donut">
+                            <canvas id="myChartDonut"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="calendario"></div>
+            </div>
+            <div class="temporaria requests">
+                <div class="div_naoseiainda"></div>
+                <div class="grafico_2">
+                    <span style="color: white;"> Registros </span>
+                    <div class="container_grafico">
+                        <div class="grafico_atividade">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="texto"></div>
+                </div>
+                <div class="grafico_3">
+                    <span style="color: white;"> Usuários </span>
+                    <div class="container_grafico">
+                        <div class="grafico_atividade">
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="temporaria apontamento">
+                <div class="apontamentos_atuais">
+                    <div class="espacamentos"></div>
+                    <div class="texto posicao">Apontamentos atuais</div>
+                    <div class="div_hoje texto">Hoje</div>
+                </div>
+                <div class="memoriaRam">
+                    <div class="espacamento_vermelho"></div>
+                    <div class="texto">Memória ram</div>
+                    <div class="dado"></div>
+
+                </div>
+                <div class="processador">
+                    <div class="espacamento_amarela"></div>
+                    <div class="texto">Processador</div>
+                    <div class="hora"></div>
+                    <div class="dado"></div>
+
+                </div>
+                <div class="disco">
+                    <div class="espacamento_azul"></div>
+                    <div class="texto">Disco Rígido</div>
+                    <div class="dado"></div>
+
+                </div>
+
+                <div class="apontamentos_anteriores">
+                   <div class="texto"> Apontamentos anteriores
+                </div>
+                </div>
+                <div class="div_maquina1">
+                        <div class="nome_maquina texto">
+                            <div class="div_hover">RMT484234842
+                            </div>
+                        </div>
+                        <div class="dado">
+                            <div class="conjunto">
+                           <div class="dado_memoria texto"> Memoria Ram: 86%</div>
+                           <div class="dado_processador texto"> Processador: 54%</div>
+                           <div class="dado_disco texto"> Disco: 70%</div>
+                        </div>
+                        <div class="espacamento"></div>
+                        </div>
+                </div>
+                <div class="div_maquina2">
+                    <div class="nome_maquina texto">
+                        <div class="div_hover">RMT657828343
+                        </div>
+                    </div>
+                    <div class="dado">
+                        <div class="conjunto">
+                       <div class="dado_memoria texto"> Memoria Ram: 81%</div>
+                       <div class="dado_processador texto"> Processador: 62%</div>
+                       <div class="dado_disco texto"> Disco: 88%</div>
+                    </div>
+                    <div class="espacamento"></div>
+                    </div>
+            </div>
+            <div class="div_maquina3">
+                <div class="nome_maquina texto">
+                    <div class="div_hover">RMT923811837
+                    </div>
+                </div>
+                <div class="dado">
+                    <div class="conjunto">
+                   <div class="dado_memoria texto"> Memoria Ram: 92%</div>
+                   <div class="dado_processador texto"> Processador: 74%</div>
+                   <div class="dado_disco texto"> Disco: 66%</div>
+                </div>
+                <div class="espacamento"></div>
+                </div>
+        </div>
+                <div class="div_outras_maquinas">
+                    <div onclick="acao_modal()" class="div_hover">Selecione outra máquina</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal">
+        <div class="conteudo_modal">
+        <div class="maquina">Maquina RMT484234842</div>
+        <div class="maquina">Maquina RMT657828343</div>
+        <div class="maquina">Maquina RMT923811837</div>
+    </div>
+    <div onclick="fechar()" class="sair_modal">Fechar</div>
+</div>
 </body>
+
 </html>
+<script>
+    function acao_modal(){
+        let modal = document.querySelector('.modal')
+        modal.style.display = 'block';
+    }
+    function fechar(){
+        let modal = document.querySelector('.modal')
+        modal.style.display = 'none';
+    }
+    function show_time(){
+        let time = new Date();
+        let hour = time.getHours();
+        let minute = time.getMinutes();
+        let second = time.getSeconds();
+
+        if(hour<10) hour = "0"+hour;
+        if(minute<10) minute = "0"+minute;
+        if(second<10) second = "0"+second;
+
+        var tempo = hour + ":" + minute + ":" + second;
+        document.getElementById("timer").innerHTML = tempo;
+    }
+    function init_time(){
+        setInterval(show_time, 1000);
+
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = [
+        'Jan',
+        'Fev',
+        'Mar',
+        'Abr',
+        'Mai',
+        'Jun',
+    ];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Disco Rígido',
+            backgroundColor: '#44DDFF',
+            borderColor: '#44DDFF',
+            data: [63, 60, 70, 67, 72, 69],
+        },
+        {
+            label: 'Memória ram',
+            backgroundColor: '#FF4343',
+            borderColor: '#FF4343',
+            data: [65, 82, 87, 75, 80, 82],
+        }, {
+            label: 'Processador',
+            backgroundColor: '#EBBE21',
+            borderColor: '#EBBE21',
+            data: [40, 61, 57, 49, 50, 58],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+</script>
+
+<script>
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
+
+<script>
+    const labels2 = [
+      'Homem',
+      'Mulher',
+    ];
+  
+    const data2 = {
+      labels: labels,
+      datasets: [{
+            label: 'Homem',
+            backgroundColor: '#44DDFF',
+            borderColor: '#44DDFF',
+            data: [7, 5, 6, 7, 4, 8],
+        },
+        {
+            label: 'Mulher',
+            backgroundColor: '#FF4343',
+            borderColor: '#FF4343',
+            data: [3, 5, 5, 6, 8, 5],
+        }]
+    };
+  
+    const config2 = {
+      type: 'bar',
+      data: data2,
+      options: {}
+    };
+  </script>
+  <script>
+    const myChart2 = new Chart(
+      document.getElementById('myChart2'),
+      config2
+    );
+  </script>
+
+<script>
+    const labelsDonut = [
+      'Ainda não sei',
+      'Ainda não sei',
+    ];
+  
+    const dataDonut = {
+      labels: labelsDonut,
+      datasets: [{
+        label: ['Ainda não sei','Ainda não sei 2'],
+        backgroundColor:
+        [ '#44DDFF',
+        '#FF4343'],
+        borderColor:
+        [ '#44DDFF',
+          '#FF4343'],
+        data: [10,13],
+      }]
+    };
+  
+    const configDonut = {
+      type: 'doughnut',
+      data: dataDonut,
+      options: {}
+    };
+  </script>
+  <script>
+    const myChartDonut = new Chart(
+      document.getElementById('myChartDonut'),
+      configDonut
+    );
+  </script>
+
+

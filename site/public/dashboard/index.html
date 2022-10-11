@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <script src="main.js"></script>
     <title>Document</title>
 </head>
 
@@ -29,9 +30,6 @@
             <span class="texto_hover">Dashboard</span>
             <span class="texto_hover">Apontamentos</span>
             <span class="texto_hover">Usuários</span>
-            <span class="texto_hover">Documentos</span>
-            <span class="texto_hover">Menssagem</span>
-            <span class="texto_hover">Configurações</span>
             <div class="div_espacamento"></div>
             <span class="texto_hover">Sair</span>
         </div>
@@ -54,9 +52,28 @@
         </div>
         <div class="temporaria conteudo">
             <div class="temporaria pacientes">
-                <div class="icone_usuarios"></div>
+                <div class="icone_usuarios">
+                    <div class="conteudo_icones">
+                        <div class="div_user">
+                            <img class="user_icon" src="../assets/imgs/user.png" alt="">
+                            <span class="texto">Carlos</span>
+                        </div>
+                        <div class="div_user">
+                            <img class="user_icon" src="../assets/imgs/user2.png" alt="">
+                            <span class="texto">Maria</span>
+                        </div>
+                        <div class="div_user">
+                            <img class="user_icon" src="../assets/imgs/user3.png" alt="">
+                            <span class="texto">Arthur</span>
+                        </div>
+                        <div class="div_user">
+                            <img class="user_icon" src="../assets/imgs/user4.png" alt="">
+                            <span class="texto">Angelo</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="grafico_1">
-                    <span style="color: white;"> Ainda não sei </span>
+                    <span style="color: white;">Quantidade de maquinas em funcionamento</span>
                     <div class="container_graficoDonut">
                         <div class="grafico_Donut">
                             <canvas id="myChartDonut"></canvas>
@@ -66,7 +83,15 @@
                 <div class="calendario"></div>
             </div>
             <div class="temporaria requests">
-                <div class="div_naoseiainda"></div>
+                <div class="div_select_andar"> 
+                    <span class="texto">Selecione um andar</span>
+                    <select id="select" class="select_andar">
+                        <option value="andar_1">1º Andar</option>
+                        <option value="andar_1">2º Andar</option>
+                        <option value="andar_1">3º Andar</option>
+                        <option value="andar_1">4º Andar</option>
+                    </select>
+                </div>
                 <div class="grafico_2">
                     <span style="color: white;"> Registros </span>
                     <div class="container_grafico">
@@ -85,10 +110,10 @@
                     </div>
                 </div>
             </div>
-            <div class="temporaria apontamento">
+            <div id="temporaria_apontamento" class="temporaria apontamento">
                 <div class="apontamentos_atuais">
                     <div class="espacamentos"></div>
-                    <div class="texto posicao">Apontamentos atuais</div>
+                    <div class="texto posicao">Apontamento atual</div>
                     <div class="div_hoje texto">Hoje</div>
                 </div>
                 <div class="memoriaRam">
@@ -112,10 +137,11 @@
                 </div>
 
                 <div class="apontamentos_anteriores">
-                   <div class="texto"> Apontamentos anteriores
+                   <div class="texto"> Apontamentos de outras maquinas
                 </div>
                 </div>
-                <div class="div_maquina1">
+                <div class="modal"></div>
+                <!-- <div class="div_maquina">
                         <div class="nome_maquina texto">
                             <div class="div_hover">RMT484234842
                             </div>
@@ -156,8 +182,8 @@
                 </div>
                 <div class="espacamento"></div>
                 </div>
-        </div>
-                <div class="div_outras_maquinas">
+        </div> -->
+                <!-- <div class="div_outras_maquinas">
                     <div onclick="acao_modal()" class="div_hover">Selecione outra máquina</div>
                 </div>
             </div>
@@ -170,7 +196,7 @@
         <div class="maquina">Maquina RMT923811837</div>
     </div>
     <div onclick="fechar()" class="sair_modal">Fechar</div>
-</div>
+</div> -->
 </body>
 
 </html>
@@ -284,8 +310,9 @@
 
 <script>
     const labelsDonut = [
-      'Ainda não sei',
-      'Ainda não sei',
+      'Máquinas em bom funcionamento',
+      'Máquinas debilitadas',
+      
     ];
   
     const dataDonut = {
@@ -298,7 +325,7 @@
         borderColor:
         [ '#44DDFF',
           '#FF4343'],
-        data: [10,13],
+        data: [17,3],
       }]
     };
   

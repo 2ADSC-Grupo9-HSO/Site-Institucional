@@ -7,8 +7,28 @@ function testar(req, res) {
     res.json("ESTAMOS FUNCIONANDO!");
 }
 
-function listar(req, res) {
-    usuarioModel.listar()
+function listar_maquina(req, res) {
+    usuarioModel.listar_maquina()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function mostrar_dash(req, res) {
+    var idMaquina = req.params.idMaquina;
+
+
+    usuarioModel.mostrar_dash(idMaquina)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
@@ -239,6 +259,7 @@ module.exports = {
     cadastrarFilial,
     cadastrarMaquina,
     cadastrarUsuario,
-    listar,
-    testar
+    listar_maquina,
+    testar,
+    mostrar_dash
 }

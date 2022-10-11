@@ -20,6 +20,17 @@ router.post("/cadastrarMaquina", function (req, res) {
     usuarioController.cadastrarMaquina(req, res);
 })
 
+router.get("/listar_maquina", function (req, res) {
+    usuarioController.listar_maquina(req, res);
+});
+
+router.get("/listar_andar", function (req, res) {
+    usuarioController.listar_maquina(req, res);
+});
+router.get("/mostrar_dash/:idMaquina", function (req, res) {
+    usuarioController.mostrar_dash(req, res);
+});
+
 router.post("/cadastrarUsuario", function (req, res) {
     usuarioController.cadastrarUsuario(req, res);
 })

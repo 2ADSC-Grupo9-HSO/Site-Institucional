@@ -118,18 +118,17 @@ function entrarUsuario(req, res) {
 
 function cadastrarFilial(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var rede = req.body.redeServer;
+    
     var cep = req.body.cepServer;
     var numero = req.body.numeroServer;
     var complemento = req.body.complementoServer;
     var telefone = req.body.telefoneServer;
     var cnpj = req.body.cnpjServer;
     var senha = req.body.senhaServer;
-
+   
     // Faça as validações dos valores
-    if (rede == undefined) {
-        res.status(400).send("Sua rede hospitalar está undefined!");
-    } else if (cep == undefined) {
+   
+    if (cep == undefined) {
         res.status(400).send("Seu cep está undefined!");
     } else if (numero == undefined) {
         res.status(400).send("Seu número está undefined!");
@@ -144,7 +143,7 @@ function cadastrarFilial(req, res) {
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarFilial(rede, cep, numero, complemento, telefone, cnpj, senha)
+        usuarioModel.cadastrarFilial( cep, numero, complemento, telefone, cnpj, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -170,7 +169,8 @@ function cadastrarMaquina(req, res) {
     var cnpjFilial = req.body.cnpjFilialServer;
     var ala = req.body.alaServer;
     var andar = req.body.andarServer;
-    var senhaMaquina = req.body.senhaMaquinaServer;
+    var fk_filial = req.body.fk_filialServer
+    
 
     // Faça as validações dos valores
     if (hostName == undefined) {
@@ -185,12 +185,10 @@ function cadastrarMaquina(req, res) {
         res.status(400).send("Sua ala está undefined!");
     } else if (andar == undefined) {
         res.status(400).send("Seu andar está undefined!");
-    } else if (senhaMaquina == undefined) {
-        res.status(400).send("Sua senha está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarMaquina(hostName, marca, so, cnpjFilial , ala, andar, senhaMaquina)
+        usuarioModel.cadastrarMaquina(hostName, marca, so, cnpjFilial , ala, andar, fk_filial)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -210,18 +208,17 @@ function cadastrarMaquina(req, res) {
 
 function cadastrarUsuario(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var rede = req.body.redeServer;
+   
     var nomeUsuario = req.body.nomeUsuarioServer;
     var cpf = req.body.cpfServer;
     var funcao = req.body.funcaoServer;
     var email = req.body.emailServer;
     var senhaUsuario = req.body.senhaUsuarioServer;
+    var fk_filial = req.body.fk_filialServer
     
 
     // Faça as validações dos valores
-    if (rede == undefined) {
-        res.status(400).send("Sua rede hospitalar está undefined!");
-    } else if (nomeUsuario == undefined) {
+     if (nomeUsuario == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (cpf == undefined) {
         res.status(400).send("Seu cpf está undefined!");
@@ -234,7 +231,7 @@ function cadastrarUsuario(req, res) {
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarUsuario(rede, nomeUsuario, cpf, funcao, email, senhaUsuario)
+        usuarioModel.cadastrarUsuario( nomeUsuario, cpf, funcao, email, senhaUsuario, fk_filial)
             .then(
                 function (resultado) {
                     res.json(resultado);

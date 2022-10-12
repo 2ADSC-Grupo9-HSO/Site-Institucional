@@ -105,14 +105,14 @@
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
-        var redeVar = input_rede.value;
+       
         var nomeUsuarioVar = input_nomeUsuario.value;
         var cpfVar = input_cpf.value;
         var funcaoVar = input_funcao.value;
         var emailVar = input_email.value;
         var senhaUsuarioVar = input_senhaUsuario.value;
 
-        if (redeVar == "" || nomeUsuarioVar == "" || cpfVar == "" || funcaoVar == "" || emailVar =="" || senhaUsuarioVar == "") {
+        if (nomeUsuarioVar == "" || cpfVar == "" || funcaoVar == "" || emailVar =="" || senhaUsuarioVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -132,12 +132,14 @@
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                redeServer: redeVar,
+               
                 nomeUsuarioServer: nomeUsuarioVar,
                 cpfServer: cpfVar,
                 funcaoServer: cpfVar,
                 emailServer: emailVar,
-                senhaUsuarioServer: senhaUsuarioVar
+                senhaUsuarioServer: senhaUsuarioVar,
+
+               fk_filialServer : sessionStorage.ID_FILIAL
             })
         }).then(function (resposta) {
 

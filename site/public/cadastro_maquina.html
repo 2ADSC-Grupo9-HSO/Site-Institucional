@@ -110,48 +110,48 @@
 
 </html>
 <script>
-    let desbloqueado = true;
+//     let desbloqueado = true;
 
-function abrir_menu() {
+// function abrir_menu() {
 
-    if (desbloqueado) {
-        opcoes_menu.style.display = "flex";
-        opcoes_menu.style.position = "fixed";
-        opcoes_menu.style.position = "fixed";
-        id_navbar.style.backgroundColor = " white"
-        id_navbar.style.borderBottom = "solid 2px #858585"
-        desbloqueado = false;
+//     if (desbloqueado) {
+//         opcoes_menu.style.display = "flex";
+//         opcoes_menu.style.position = "fixed";
+//         opcoes_menu.style.position = "fixed";
+//         id_navbar.style.backgroundColor = " white"
+//         id_navbar.style.borderBottom = "solid 2px #858585"
+//         desbloqueado = false;
 
-    } else if (!desbloqueado) {
-        id_navbar.style.backgroundColor = "#000000C7"
-        id_navbar.style.borderBottom = "none"
-        opcoes_menu.style.display = "none";
-        desbloqueado = true;
-    }
+//     } else if (!desbloqueado) {
+//         id_navbar.style.backgroundColor = "#000000C7"
+//         id_navbar.style.borderBottom = "none"
+//         opcoes_menu.style.display = "none";
+//         desbloqueado = true;
+//     }
 
-}
+// }
 
-window.addEventListener('resize', resizeHandler);
+// window.addEventListener('resize', resizeHandler);
 
-resizeHandler();
+// resizeHandler();
 
-function resizeHandler(){
-    const tela = window.innerWidth;
-    if(tela > 600){
-        desbloqueado = false;
-        abrir_menu();
-    }
-}
+// function resizeHandler(){
+//     const tela = window.innerWidth;
+//     if(tela > 600){
+//         desbloqueado = false;
+//         abrir_menu();
+//     }
+// }
 
-function change_screen(n) {
-    switch (n) {
-        case 1:
-            window.location = "#sec_sobre"
-            break;
-        case 2:
-            window.location = "#sec_empresa"
-    }
-}
+// function change_screen(n) {
+//     switch (n) {
+//         case 1:
+//             window.location = "#sec_sobre"
+//             break;
+//         case 2:
+//             window.location = "#sec_empresa"
+//     }
+// }
 
     function cadastrarMaquina() {
         // aguardar();
@@ -161,13 +161,12 @@ function change_screen(n) {
         var hostNameVar = input_hostName.value;
         var marcaVar = input_marca.value;
         var soVar = input_so.value;
-        var cnpjFilialVar = input_cnpjFilial.value;
         var alaVar = input_ala.value;
         var andarVar = input_andar.value;
-        var senhaMaquinaVar = input_senhaMaquina.value;
+        
 
 
-        if (hostNameVar == "" || marcaVar == "" || soVar == "" || cnpjFilialVar == "" || alaVar == "" || andarVar == "" || senhaMaquinaVar == "") {
+        if (hostNameVar == "" || marcaVar == "" || soVar == "" || alaVar == "" || andarVar == "" ) {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -190,10 +189,10 @@ function change_screen(n) {
                 hostNameServer: hostNameVar,
                 marcaServer: marcaVar,
                 soServer: soVar,
-                cnpjFilialServer: cnpjFilialVar,
                 alaServer: alaVar,
                 andarServer: andarVar,
-                senhaMaquinaServer: senhaMaquinaVar
+                fk_filialServer : sessionStorage.ID_FILIAL
+                
             })
         }).then(function (resposta) {
 
@@ -202,7 +201,7 @@ function change_screen(n) {
             if (resposta.ok) {
                 cardErro.style.display = "block";
 
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de login...";
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para dashboard...";
 
                 setTimeout(() => {
                     window.location = "./dashboard/index.html";

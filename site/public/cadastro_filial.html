@@ -8,7 +8,7 @@
     <title>HSO | Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="icon" href="../assets/icons/icone_head.ico" />
+    <link rel="icon" href="../public/assets/icons/icone_head.ico" />
 </head>
 
 <body>
@@ -94,7 +94,6 @@
                 
                 <input type="text" placeholder="CEP" id="input_cep">
                 <input type="number" placeholder="Número Endereço" id="input_numero">
-                <input type="text" placeholder="Complemento" id="input_complemento">
                 <input type="text" placeholder="Telefone" id="input_telefone">
                 <input type="text" placeholder="CNPJ" id="input_cnpj">
                 <input type="password" placeholder="Senha" id="input_senha">
@@ -164,7 +163,7 @@ function change_screen(n) {
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
-        var redeVar = input_rede.value;
+        
         var cepVar = input_cep.value;
         var numeroVar = input_numero.value;
         var complementoVar = input_complemento.value;
@@ -173,7 +172,7 @@ function change_screen(n) {
         var senhaVar = input_senha.value;
 
 
-        if (redeVar == "" || cepVar == "" || numeroVar == "" || complementoVar == "" || telefoneVar == "" || cnpjVar == "" || senhaVar == "") {
+        if ( cepVar == "" || numeroVar == "" || complementoVar == "" || telefoneVar == "" || cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -193,7 +192,7 @@ function change_screen(n) {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                redeServer: redeVar,
+                
                 cepServer: cepVar,
                 numeroServer: numeroVar,
                 complementoServer: complementoVar,

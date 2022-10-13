@@ -166,13 +166,12 @@ function change_screen(n) {
         
         var cepVar = input_cep.value;
         var numeroVar = input_numero.value;
-        var complementoVar = input_complemento.value;
         var telefoneVar = input_telefone.value;
         var cnpjVar = input_cnpj.value;
         var senhaVar = input_senha.value;
 
 
-        if ( cepVar == "" || numeroVar == "" || complementoVar == "" || telefoneVar == "" || cnpjVar == "" || senhaVar == "") {
+        if ( cepVar == "" || numeroVar == "" || telefoneVar == "" || cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -195,7 +194,6 @@ function change_screen(n) {
                 
                 cepServer: cepVar,
                 numeroServer: numeroVar,
-                complementoServer: complementoVar,
                 telefoneServer: telefoneVar,
                 cnpjServer: cnpjVar,
                 senhaServer: senhaVar

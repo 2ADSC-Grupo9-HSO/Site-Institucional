@@ -123,6 +123,7 @@ function cadastrarFilial(req, res) {
     var numero = req.body.numeroServer;
     var complemento = req.body.complementoServer;
     var telefone = req.body.telefoneServer;
+    var emailFilial = req.body.complementoServer;
     var cnpj = req.body.cnpjServer;
     var senha = req.body.senhaServer;
    
@@ -143,7 +144,7 @@ function cadastrarFilial(req, res) {
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarFilial( cep, numero, complemento, telefone, cnpj, senha)
+        usuarioModel.cadastrarFilial( cep, numero, complemento, telefone,emailFilial, cnpj, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -167,7 +168,6 @@ function cadastrarMaquina(req, res) {
     var marca = req.body.marcaServer;
     var so = req.body.soServer;
     var cnpjFilial = req.body.cnpjFilialServer;
-    var ala = req.body.alaServer;
     var andar = req.body.andarServer;
     var fk_filial = req.body.fk_filialServer
     
@@ -181,14 +181,12 @@ function cadastrarMaquina(req, res) {
         res.status(400).send("Seu sistema operacional está undefined!");
     } else if (cnpjFilial == undefined) {
         res.status(400).send("Seu cnpj está undefined!");
-    } else if (ala == undefined) {
-        res.status(400).send("Sua ala está undefined!");
-    } else if (andar == undefined) {
+    }  else if (andar == undefined) {
         res.status(400).send("Seu andar está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarMaquina(hostName, marca, so, cnpjFilial , ala, andar, fk_filial)
+        usuarioModel.cadastrarMaquina(hostName, marca, so, cnpjFilial , andar, fk_filial)
             .then(
                 function (resultado) {
                     res.json(resultado);

@@ -95,7 +95,6 @@
                 <input type="text" placeholder="Host Name" id="input_hostName">
                 <input type="text" placeholder="Marca" id="input_marca">
                 <input type="text" placeholder="Sistema Operacional" id="input_so">
-                <input type="text" required placeholder="Ala Hospitalar" id="input_ala">
                 <input type="text" placeholder="Andar" id="input_andar">
 
                 <button onclick="cadastrarMaquina()">Cadastrar</button>
@@ -161,12 +160,11 @@
         var hostNameVar = input_hostName.value;
         var marcaVar = input_marca.value;
         var soVar = input_so.value;
-        var alaVar = input_ala.value;
         var andarVar = input_andar.value;
         
 
 
-        if (hostNameVar == "" || marcaVar == "" || soVar == "" || alaVar == "" || andarVar == "" ) {
+        if (hostNameVar == "" || marcaVar == "" || soVar == "" || andarVar == "" ) {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -189,7 +187,6 @@
                 hostNameServer: hostNameVar,
                 marcaServer: marcaVar,
                 soServer: soVar,
-                alaServer: alaVar,
                 andarServer: andarVar,
                 fk_filialServer : sessionStorage.ID_FILIAL
                 

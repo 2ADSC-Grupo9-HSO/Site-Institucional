@@ -94,7 +94,9 @@
                 
                 <input type="text" placeholder="CEP" id="input_cep">
                 <input type="number" placeholder="Número Endereço" id="input_numero">
+                <input type="text" placeholder="Complemento" id="input_complemento">
                 <input type="text" placeholder="Telefone" id="input_telefone">
+                <input type="email" placeholder="E-mail" id="input_emailFilial">
                 <input type="text" placeholder="CNPJ" id="input_cnpj">
                 <input type="password" placeholder="Senha" id="input_senha">
                 <p>Cadastre uma senha com 8 caracteres</p>
@@ -166,12 +168,14 @@ function change_screen(n) {
         
         var cepVar = input_cep.value;
         var numeroVar = input_numero.value;
+        var complementoVar = input_complemento.value;
         var telefoneVar = input_telefone.value;
+        var emailFilialVar = input_emailFilial.value;
         var cnpjVar = input_cnpj.value;
         var senhaVar = input_senha.value;
 
 
-        if ( cepVar == "" || numeroVar == "" || telefoneVar == "" || cnpjVar == "" || senhaVar == "") {
+        if ( cepVar == "" || numeroVar == "" || complementoVar == "" || telefoneVar == "" || emailFilialVar == "" || cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -194,7 +198,9 @@ function change_screen(n) {
                 
                 cepServer: cepVar,
                 numeroServer: numeroVar,
+                complementoServer: complementoVar,
                 telefoneServer: telefoneVar,
+                emailFilialServer: emailFilialVar,
                 cnpjServer: cnpjVar,
                 senhaServer: senhaVar
             })

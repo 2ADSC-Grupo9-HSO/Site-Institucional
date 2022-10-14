@@ -61,27 +61,27 @@ function entrarUsuario(cpf, senha) {
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrarFilial( cep, numero, complemento, telefone, cnpj, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarFilial():", cep, numero, complemento, telefone, cnpj, senha);
+function cadastrarFilial( cep, numero, complemento, telefone,emailFilial, cnpj, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarFilial():", cep, numero, complemento, telefone,emailFilial, cnpj, senha);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO tbFilialHospital ( cepFilial, numeroEndFilial, complementoEnd, cnpjFilial, senhaFilial) 
-        VALUES ( '${cep}', '${numero}', '${complemento}' '${telefone}', '${cnpj}', '${senha}');
+        INSERT INTO tbFilialHospital ( cepFilial, numeroEndFilial, complementoEnd, cnpjFilial, senhaFilial, emailFilial) 
+        VALUES ( '${cep}', '${numero}', '${complemento}' '${telefone}', '${cnpj}', '${senha}', '${emailFilial}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function cadastrarMaquina(hostName, marca, so, ala, andar, fk_filial) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarMaquina():", cnpjFilial, hostName, marca, so, ala, andar, senhaMaquina, fk_filial);
+function cadastrarMaquina(hostName, marca, so, andar, fk_filial) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarMaquina():", cnpjFilial, hostName, marca, so, andar, senhaMaquina, fk_filial);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
         INSERT INTO tbInfoMaquina (fkFilial, hostName, marcaMaquina,sistemaOperacional, alaMaquina, andarMaquina ) 
-        VALUES ('${fk_filial}''${hostName}', '${marca}', '${so}', '${ala}', '${andar}')
+        VALUES ('${fk_filial}''${hostName}', '${marca}', '${so}', '${andar}')
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

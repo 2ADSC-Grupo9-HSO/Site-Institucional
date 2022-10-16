@@ -65,7 +65,7 @@
             <div class="form">
                 <h1>Bem-vindo!</h1>
 
-                <input type="number" placeholder="CPF/CNPJ" id="input_cpf_cnpj">
+                <input type="text" placeholder="CPF/CNPJ" id="input_cpf_cnpj">
                 <input type="password" placeholder="Senha" id="input_senha">
 
                 <button onclick="entrar()">Entrar</button>
@@ -92,13 +92,13 @@
             id_navbar.style.backgroundColor = " white";
             id_navbar.style.borderBottom = "solid 2px #858585";
             desbloqueado = false;
-            
+
 
         } else if (!desbloqueado) {
             id_navbar.style.backgroundColor = "#000000C7"
             id_navbar.style.borderBottom = "none"
             opcoes_menu.style.display = "none"
-            
+
             desbloqueado = true;
         }
 
@@ -112,7 +112,7 @@
         const tela = window.innerWidth;
         if (tela > 600) {
             desbloqueado = false;
-            
+
             abrir_menu();
         }
     }
@@ -135,12 +135,11 @@
         var cpf_cnpjVar = input_cpf_cnpj.value;
         var senhaVar = input_senha.value;
 
-        if (cpf_cnpjVar == "" || senhaVar == "") {
+ /*        if (cpf_cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            /* finalizarAguardar(); */
             return false;
-        }
+        } */
         /* else {
             setInterval(sumirMensagem, 5000)
         } */
@@ -217,19 +216,29 @@
                     resposta.json().then(json => {
                         console.log(json);
                         console.log(JSON.stringify(json));
+                        
+                        console.log(input_cpf_cnpj.value)
 
-                        //pega os valores que o usuario coloca e guarda 
-                        sessionStorage.FK_FILIAL = json.fkFilial;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        //sessionStorage.ID_FILIAL = json.id;
-                        //sessionStorage.ID_SESSAO= (Math.random() * 10000).toFixed(0);
-                        //math random sorteia numero entre 0 e 1, pode multiplicar por qualquer numero 
+                        if (json.cargo.indexOf("@") < 0) {
+                            sessionStorage.FK_FILIAL = json.fkFilial;
+                            sessionStorage.NOME_USUARIO = json.nome;
 
-                        setTimeout(function () {
-                            window.location = "./dashboard/index.html";
-                            // window.location = "login_filial.html";
-                        }, 1000); // apenas para exibir o loading
+                            setTimeout(function () {
+                                window.location = "./dashboard/index.html";
+                                // window.location = "login_filial.html";
+                            }, 1000);
 
+                        }
+
+                        else{
+                            sessionStorage.FK_REDE = json.fkFilial;
+                            sessionStorage.NOME_REDE = json.nome;
+
+                            setTimeout(function () {
+                                window.location = "cadastro_filial.html";
+                                // window.location = "login_filial.html";
+                            }, 1000);
+                        }
                     });
 
                 } else {

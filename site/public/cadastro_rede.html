@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSO | Cadastro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/icons/icone_head.ico" />
+</head>
+
+<body>
+    <div id="id_navbar"  class="navbar">
+        <div class="nav">
+            <img src="assets/imgs/logo.png">
+            <img onclick="abrir_menu()" class="imagem_menu" src="assets/imgs/icone5.svg">
+            <ul class="menu">
+            </ul>
+        </div>
+        <div class="led"></div>
+
+
+    </div>
+
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    <a href="index.html">Início</a>
+                </p>
+            </div>
+            <div class="espacos last">
+                <a href="https://facebook.com/">
+                    <img src="assets/icons/facebook.png" alt="">
+                </a>
+                <a href="https://instagram.com/">
+                    <img src="assets/icons/instagram.png" alt="">
+                </a>
+                <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
+                    <img src="assets/icons/github.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    <a href="#">Home</a>
+                </p>
+            </div>
+        </div>
+        <div class="espacos last">
+            <a href="https://facebook.com/">
+                <img src="assets/icons/facebook.png" alt="">
+            </a>
+            <a href="https://instagram.com/">
+                <img src="assets/icons/instagram.png" alt="">
+            </a>
+            <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
+                <img src="assets/icons/github.png" alt="">
+            </a>
+        </div>
+    </div>
+    </div>
+    <section class="imagemFundo3" id="sec_inicio">
+
+
+        <div class="pai_cadastro1">
+            <div class="cadastro1">
+                <h1>Cadastre a rede:</h1>
+
+
+                <input type="text" placeholder="Nome da Rede" id="input_nomeRede">
+                <input type="email" placeholder="Email" id="input_email">
+                <input type="password" placeholder="Senha" id="input_senha">
+
+                <button onclick="cadastrarRede()">Cadastrar</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
+<script>
+    let desbloqueado = true;
+
+    function abrir_menu() {
+
+        if (desbloqueado) {
+            opcoes_menu.style.display = "flex";
+            opcoes_menu.style.position = "fixed";
+            opcoes_menu.style.position = "fixed";
+            id_navbar.style.backgroundColor = " white"
+            id_navbar.style.borderBottom = "solid 2px #858585"
+            desbloqueado = false;
+
+        } else if (!desbloqueado) {
+            id_navbar.style.backgroundColor = "#000000C7"
+            id_navbar.style.borderBottom = "none"
+            opcoes_menu.style.display = "none";
+            desbloqueado = true;
+        }
+
+    }
+
+    window.addEventListener('resize', resizeHandler);
+
+    resizeHandler();
+
+    function resizeHandler() {
+        const tela = window.innerWidth;
+        if (tela > 600) {
+            desbloqueado = false;
+            abrir_menu();
+        }
+    }
+
+ /*    function change_screen(n) {
+        switch (n) {
+            case 1:
+                window.location = "#sec_sobre"
+                break;
+        }
+    } */
+
+    function cadastrarRede() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeRedeVar = input_nomeRede.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (nomeRedeVar == "" || emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Preencha todos os campos!";
+            if( emailVar.indexOf("@") < 0){
+                mensagem_erro.innerHTML += '<br> Insira um email válido'
+            }
+
+
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrarRede", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeRedeServer: nomeRedeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para outro cadastro...";
+                input_nomeRede.value = '';
+                input_email.value = '';
+                input_senha.value = '';
+
+                setTimeout(() => {
+                    location.reload()
+                }, "2000")
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

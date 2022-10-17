@@ -14,25 +14,25 @@
 <body onload="init_time()">
     <section class="navgator temporaria teste">
         <div class="logo">
-            <img class="logo"
-                src="../assets/imgs/logo-removebg-preview.png" alt="">
+            <img class="logo" src="../assets/imgs/logo-removebg-preview.png" alt="">
         </div>
-        <div class="container_botão"> <div class="teste1">
-            <div class="adicionar maquina"><a class="maquina" href="">Adicionar máquina</a>
-                <div class="iconePlus"><img class="botao_adicionar";
-                    href="";
-                    src="../assets/imgs/botao-adicionar.png">
-                </div>
-                
+        <div class="container_botão">
+            <div class="teste1">
+                <a class="link" href="../cadastro_maquina.html">
+                    <div class="adicionar maquina">Adicionar máquina
+                        <div class="iconePlus"><img class="botao_adicionar" ; href="" ;
+                                src="../assets/imgs/botao-adicionar.png">
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
         <div class="menu">
             <span class="texto_hover">Dashboard</span>
             <span class="texto_hover">Apontamentos</span>
             <span class="texto_hover">Usuários</span>
             <div class="div_espacamento"></div>
-            <span class="texto_hover">Sair</span>
+            <span class="texto_hover"><a class="link" href="../index.html">Sair</a></span>
         </div>
     </section>
     <section class="temporaria principal">
@@ -42,8 +42,7 @@
                 <input type="text" class="search-input" id="search-input" required />
             </div>
             <div class="div_hora">
-            <div class="relogio_icon"><img class="relogio_icon"
-                    src="../assets/imgs/relogio.png" alt="">
+                <div class="relogio_icon"><img class="relogio_icon" src="../assets/imgs/relogio.png" alt="">
                 </div>
                 <span id="timer"></span>
             </div>
@@ -84,7 +83,7 @@
                 <div class="calendario"></div>
             </div>
             <div class="temporaria requests">
-                <div class="div_select_andar"> 
+                <div class="div_select_andar">
                     <span class="texto">Selecione um andar</span>
                     <select id="select" class="select_andar">
                         <option value="andar_1">1º Andar</option>
@@ -119,27 +118,32 @@
                 </div>
                 <div class="memoriaRam">
                     <div class="espacamento_vermelho"></div>
-                    <div class="texto">Memória ram</div>
-                    <div class="dado"></div>
+                    <div class="texto">Memória ram: </div>
+                    <div class="dado">
+                        <span class="texto">82%</span>
+                    </div>
+
 
                 </div>
                 <div class="processador">
                     <div class="espacamento_amarela"></div>
-                    <div class="texto">Processador</div>
+                    <div class="texto">Processador: </div>
                     <div class="hora"></div>
                     <div class="dado"></div>
+                    <span class="texto">69%</span>
 
                 </div>
                 <div class="disco">
                     <div class="espacamento_azul"></div>
-                    <div class="texto">Disco Rígido</div>
+                    <div class="texto">Disco Rígido: </div>
                     <div class="dado"></div>
+                    <span class="texto">58%</span>
 
                 </div>
 
                 <div class="apontamentos_anteriores">
-                   <div class="texto"> Apontamentos de outras maquinas
-                </div>
+                    <div class="texto"> Apontamentos de outras maquinas
+                    </div>
                 </div>
                 <div class="modal"></div>
                 <!-- <div class="div_maquina">
@@ -202,28 +206,28 @@
 
 </html>
 <script>
-    function acao_modal(){
+    function acao_modal() {
         let modal = document.querySelector('.modal')
         modal.style.display = 'block';
     }
-    function fechar(){
+    function fechar() {
         let modal = document.querySelector('.modal')
         modal.style.display = 'none';
     }
-    function show_time(){
+    function show_time() {
         let time = new Date();
         let hour = time.getHours();
         let minute = time.getMinutes();
         let second = time.getSeconds();
 
-        if(hour<10) hour = "0"+hour;
-        if(minute<10) minute = "0"+minute;
-        if(second<10) second = "0"+second;
+        if (hour < 10) hour = "0" + hour;
+        if (minute < 10) minute = "0" + minute;
+        if (second < 10) second = "0" + second;
 
         var tempo = hour + ":" + minute + ":" + second;
         document.getElementById("timer").innerHTML = tempo;
     }
-    function init_time(){
+    function init_time() {
         setInterval(show_time, 1000);
 
     }
@@ -276,71 +280,76 @@
 
 <script>
     const labels2 = [
-      'Homem',
-      'Mulher',
+        'Recepção',
+        'Máquina de médico',
+        'Totem',
     ];
-  
+
     const data2 = {
-      labels: labels,
-      datasets: [{
-            label: 'Homem',
+        labels: labels,
+        datasets: [{
+            label: 'Recepção',
             backgroundColor: '#44DDFF',
             borderColor: '#44DDFF',
             data: [7, 5, 6, 7, 4, 8],
         },
         {
-            label: 'Mulher',
+            label: 'Máquina de médico',
             backgroundColor: '#FF4343',
             borderColor: '#FF4343',
             data: [3, 5, 5, 6, 8, 5],
+        },
+        {
+            label: 'Totem',
+            backgroundColor: '#EBBE21',
+            borderColor: '#EBBE21',
+            data: [3, 5, 5, 6, 8, 5],
         }]
     };
-  
+
     const config2 = {
-      type: 'bar',
-      data: data2,
-      options: {}
+        type: 'bar',
+        data: data2,
+        options: {}
     };
-  </script>
-  <script>
+</script>
+<script>
     const myChart2 = new Chart(
-      document.getElementById('myChart2'),
-      config2
+        document.getElementById('myChart2'),
+        config2
     );
-  </script>
+</script>
 
 <script>
     const labelsDonut = [
-      'Máquinas em bom funcionamento',
-      'Máquinas debilitadas',
-      
+        'Máquinas em bom funcionamento',
+        'Máquinas debilitadas',
+
     ];
-  
+
     const dataDonut = {
-      labels: labelsDonut,
-      datasets: [{
-        label: ['Ainda não sei','Ainda não sei 2'],
-        backgroundColor:
-        [ '#44DDFF',
-        '#FF4343'],
-        borderColor:
-        [ '#44DDFF',
-          '#FF4343'],
-        data: [17,3],
-      }]
+        labels: labelsDonut,
+        datasets: [{
+            label: ['Ainda não sei', 'Ainda não sei 2'],
+            backgroundColor:
+                ['#44DDFF',
+                    '#FF4343'],
+            borderColor:
+                ['#44DDFF',
+                    '#FF4343'],
+            data: [17, 3],
+        }]
     };
-  
+
     const configDonut = {
-      type: 'doughnut',
-      data: dataDonut,
-      options: {}
+        type: 'doughnut',
+        data: dataDonut,
+        options: {}
     };
-  </script>
-  <script>
+</script>
+<script>
     const myChartDonut = new Chart(
-      document.getElementById('myChartDonut'),
-      configDonut
+        document.getElementById('myChartDonut'),
+        configDonut
     );
-  </script>
-
-
+</script>

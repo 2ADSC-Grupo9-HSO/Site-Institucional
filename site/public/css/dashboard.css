@@ -255,6 +255,10 @@ body{
     color: white;
 
 }
+.link{
+    text-decoration: none;
+    color: white;
+}
 .texto_hover{
     color: white;
     cursor: pointer;
@@ -337,6 +341,11 @@ body{
     width: 5px;
     height: 80px;
     background-color: #EBBE21;
+}
+.dado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .disco{
     width: 100%;

@@ -65,46 +65,46 @@ function criar_card() {
 
 }
 
-function gerar_select(){
-    fetch("/usuarios/listar_andar").then(function (resposta) {
+// function gerar_select(){
+//     fetch("/usuarios/listar_andar").then(function (resposta) {
 
 
 
-    });
+//     });
 
 
 
-}
+// }
 
-function gerar_modal(idMaquina){
+// function gerar_modal(idMaquina){
 
-    let modal = document.querySelector('.modal')
-        modal.style.display = 'block';
+//     let modal = document.querySelector('.modal')
+//         modal.style.display = 'block';
 
     
-        fetch(`/usuarios/mostrar_dash/${idMaquina}`).then(function (resposta) {
-            if (resposta.ok) {
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    var btn_fechar = document.createElement("div");
-                    modal.appendChild(btn_fechar)
-                    btn_fechar.setAttribute('class', `sair_modal texto`)
-                    btn_fechar.innerHTML = `Fechar`
+//         fetch(`/usuarios/mostrar_dash/${idMaquina}`).then(function (resposta) {
+//             if (resposta.ok) {
+//                 resposta.json().then(function (resposta) {
+//                     console.log("Dados recebidos: ", JSON.stringify(resposta));
+//                     var btn_fechar = document.createElement("div");
+//                     modal.appendChild(btn_fechar)
+//                     btn_fechar.setAttribute('class', `sair_modal texto`)
+//                     btn_fechar.innerHTML = `Fechar`
                     
     
                     
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-        });
-    };
-    function fechar_modal(){
+//                 });
+//             } else {
+//                 throw ('Houve um erro na API!');
+//             }
+//         }).catch(function (resposta) {
+//             console.error(resposta);
+//         });
+//     };
+    // function fechar_modal(){
 
-    }
+    // }
 
 
 criar_card();
-gerar_select();
+// gerar_select();

@@ -122,7 +122,7 @@ function cadastrarFilial(req, res) {
     var cep = req.body.cepServer;
     var numero = req.body.numeroServer;
     var complemento = req.body.complementoServer;
-    var emailFilial = req.body.complementoServer;
+    var emailFilial = req.body.emailFilialServer;
     var cnpj = req.body.cnpjServer;
     var senha = req.body.senhaServer;
     var fkRede = req.body.fkRedeServer
@@ -165,9 +165,9 @@ function cadastrarMaquina(req, res) {
     var hostName = req.body.hostNameServer;
     var marca = req.body.marcaServer;
     var so = req.body.soServer;
-    var cnpjFilial = req.body.cnpjFilialServer;
     var andar = req.body.andarServer;
-    var fk_filial = req.body.fk_filialServer
+    var fk_filial = req.body.fk_filialServer;
+    var senha = req.body.senhaServer;
     
 
     // Faça as validações dos valores
@@ -177,14 +177,14 @@ function cadastrarMaquina(req, res) {
         res.status(400).send("Sua marca está undefined!");
     } else if (so == undefined) {
         res.status(400).send("Seu sistema operacional está undefined!");
-    } else if (cnpjFilial == undefined) {
+    } else if (senha == undefined) {
         res.status(400).send("Seu cnpj está undefined!");
     }  else if (andar == undefined) {
         res.status(400).send("Seu andar está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarMaquina(hostName, marca, so, cnpjFilial , andar, fk_filial)
+        usuarioModel.cadastrarMaquina(hostName, marca, so , andar, fk_filial, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);

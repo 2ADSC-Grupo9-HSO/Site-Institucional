@@ -65,7 +65,7 @@
             <div class="form">
                 <h1>Bem-vindo!</h1>
 
-                <input type="text" placeholder="CPF/CNPJ" id="input_cpf_cnpj">
+                <input type="text" placeholder="Email" id="input_cpf_cnpj">
                 <input type="password" placeholder="Senha" id="input_senha">
 
                 <button onclick="entrar()">Entrar</button>
@@ -135,11 +135,11 @@
         var cpf_cnpjVar = input_cpf_cnpj.value;
         var senhaVar = input_senha.value;
 
- /*        if (cpf_cnpjVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            return false;
-        } */
+        /*        if (cpf_cnpjVar == "" || senhaVar == "") {
+                   cardErro.style.display = "block"
+                   mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+                   return false;
+               } */
         /* else {
             setInterval(sumirMensagem, 5000)
         } */
@@ -147,7 +147,7 @@
         console.log("FORM LOGIN: ", cpf_cnpjVar);
         console.log("FORM SENHA: ", senhaVar);
 
-        if (cpf_cnpjVar.length == 14) {
+        /* if (cpf_cnpjVar.length == 14) {
 
             fetch("/usuarios/autenticarFilial", {
                 method: "POST",
@@ -196,69 +196,79 @@
             })
 
             return false;
-        }
-        else {
-            fetch("/usuarios/autenticarUsuario", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    cpf_cnpjServer: cpf_cnpjVar,
-                    senhaServer: senhaVar
-                })
-            }).then(function (resposta) {
-                console.log("ESTOU NO THEN DO entrar()!")
-
-                if (resposta.ok) {
-                    console.log(resposta);
-
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        
-                        console.log(input_cpf_cnpj.value)
-
-                        if (json.cargo.indexOf("@") < 0) {
-                            sessionStorage.FK_FILIAL = json.fkFilial;
-                            sessionStorage.NOME_USUARIO = json.nome;
-
-                            setTimeout(function () {
-                                window.location = "./dashboard/index.html";
-                                // window.location = "login_filial.html";
-                            }, 1000);
-
-                        }
-
-                        else{
-                            sessionStorage.FK_REDE = json.fkFilial;
-                            sessionStorage.NOME_REDE = json.nome;
-
-                            setTimeout(function () {
-                                window.location = "cadastro_filial.html";
-                                // window.location = "login_filial.html";
-                            }, 1000);
-                        }
-                    });
-
-                } else {
-
-                    console.log("Houve um erro ao tentar realizar o login!");
-
-                    resposta.text().then(texto => {
-                        console.error(texto);
-
-                    });
-                }
-
-            }).catch(function (erro) {
-                console.log(erro);
+        } */
+        // else {
+        fetch("/usuarios/autenticarUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                cpf_cnpjServer: cpf_cnpjVar,
+                senhaServer: senhaVar
             })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
 
-            return false;
-        }
+            if (resposta.ok) {
+                console.log(resposta);
 
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    console.log(input_cpf_cnpj.value)
+
+                    if (json.cpf.length == 14  && json.cpf.indexOf("@") < 0) {
+                        sessionStorage.FK_FILIAL = json.fkFilial;
+                        sessionStorage.NOME_USUARIO = json.nomeUsuario;
+
+                        setTimeout(function () {
+                            window.location = "cadastro_usuario.html";
+                            // window.location = "login_filial.html";
+                        }, 1000);
+
+                    }
+
+                    else if (json.cpf.indexOf("@") < 0) {
+                        sessionStorage.ID_FILIAL = json.idFilial;
+                        sessionStorage.NOME_REDE = json.nomeUsuario;
+
+                        setTimeout(function () {
+                            window.location = "./dashboard/index.html";
+                        }, 1000); // apenas para exibir o loading
+                    }
+
+                    else {
+                        sessionStorage.FK_REDE = json.fkFilial;
+                        sessionStorage.NOME_REDE = json.nome;
+
+                        setTimeout(function () {
+                            window.location = "cadastro_filial.html";
+                            // window.location = "login_filial.html";
+                        }, 1000);
+                    }
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+            alert("Senha/email incorretos")
+        })
+
+        return false;
     }
+
+    // }
 
 
     /* function sumirMensagem() {

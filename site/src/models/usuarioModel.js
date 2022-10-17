@@ -53,11 +53,17 @@ function entrarFilial(cnpj, senha) {
 
 function entrarUsuario(cpf, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", cpf, senha)
-    var instrucao = `select fkFilial, nomeUsuario, cargo from tbUsuario
-    WHERE cpf = '${cpf}' AND senha = '${senha}'
+    var instrucao = `select fkFilial, nomeUsuario, cpf from tbUsuario
+    WHERE email = '${cpf}' AND senha = '${senha}'
     union
     select idRede, nomeRede, emailRede from tbRedeHospitalar
-	where emailRede = '${cpf}' and senhaRede = '${senha}';
+	where emailRede = '${cpf}' and senhaRede = '${senha}'
+    union
+    select idFilial, cepFilial, cnpjFilial
+    from tbFilialHospital
+    join tbRedeHospitalar
+    on idRede = fkRede
+    WHERE emailFilial = '${cpf}' AND senhaFilial = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

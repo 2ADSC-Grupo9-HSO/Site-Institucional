@@ -16,11 +16,17 @@ var database = require("../database/config")
 function listar_maquina() {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    select m.idMaquina as 'id',m.nome as 'nome', r.processador as 'processador', r.memoriaRam as 'ram', r.disco as 'disco'
-    from tbMaquina m 
-    inner join tbHistorico r
-        on m.idMaquina = r.fkMaquina
-        where idMaquina = 1;
+    SELECT nomeRede, hostName, nomeComponente, valorRegistro, momentoRegistro FROM [dbo].[tbRedeHospitalar]
+
+JOIN [dbo].[tbFilialHospital] ON idRede = fkRede
+
+JOIN [dbo].[tbInfoMaquina] ON idFilial = fkFilial
+
+JOIN [dbo].[tbMaquina] ON idInfoMaquina = fkInfoMaquina
+
+JOIN [dbo].[tbComponente] ON idComponente = fkComponente
+
+JOIN [dbo].[tbHistorico] ON idMaquina = fkMaquina
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

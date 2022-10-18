@@ -18,7 +18,6 @@
             <ul class="menu">
                 <li class="links"><a href="/site/public/index.html" class="links">Home</a></li>
                 <li class="links"><a href="login_filial.html" class="links">Login</a></li>
-                <li class="links"><a href="cadastro_filial.html" class="links">Cadastro</a></li>
             </ul>
         </div>
         <div class="led"></div>
@@ -96,6 +95,7 @@
                 <input type="text" placeholder="Marca" id="input_marca">
                 <input type="text" placeholder="Sistema Operacional" id="input_so">
                 <input type="text" placeholder="Andar" id="input_andar">
+                <input type="password" placeholder="Senha" id="input_senha">
 
                 <button onclick="cadastrarMaquina()">Cadastrar</button>
 
@@ -161,15 +161,16 @@
         var marcaVar = input_marca.value;
         var soVar = input_so.value;
         var andarVar = input_andar.value;
+        var senhaVar = input_senha.value;
         
 
 
-        if (hostNameVar == "" || marcaVar == "" || soVar == "" || andarVar == "" ) {
+        if (hostNameVar == "" || marcaVar == "" || soVar == "" || andarVar == "" || senhaVar == '') {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
             // finalizarAguardar();
-            // return false;
+            return false;
         }
         else {
             setInterval(sumirMensagem, 5000)
@@ -188,7 +189,8 @@
                 marcaServer: marcaVar,
                 soServer: soVar,
                 andarServer: andarVar,
-                fk_filialServer : sessionStorage.ID_FILIAL
+                fk_filialServer : sessionStorage.FK_FILIAL,
+                senhaServer : senhaVar,
                 
             })
         }).then(function (resposta) {

@@ -330,6 +330,7 @@ body{
     display: flex;
     flex-direction: row;
     border-bottom: 0.5px solid rgb(255, 255, 255);
+    align-items: center;
 }
 .espacamento_vermelho{
     width: 5px;
@@ -343,6 +344,7 @@ body{
     display: flex;
     flex-direction: row;
     border-bottom: 0.5px solid rgb(255, 255, 255);
+    align-items: center;
 }
 .espacamento_amarela{
     width: 5px;
@@ -361,6 +363,7 @@ body{
     background-color: #141625;
     flex-direction: row;
     border-bottom: 0.5px solid rgb(255, 255, 255);
+    align-items: center;
 }
 .espacamento_azul{
     width: 5px;

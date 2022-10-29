@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,8 +22,9 @@
 
     </div>
 </head>
-<body > 
-    
+
+<body>
+
     <!-- <div id="id_navbar" class="navbar">
 
         <div class="nav">
@@ -70,33 +72,34 @@
     </div>
     <section class="imagemFundo2" id="sec_inicio">
 
-        
-                <div class="pai_cadastro1">
-            <div class="cadastro1">
-                <h1>Olá! Cadastre o seu funcionário!</h1> 
-               
-        
-            
-               <input type="text" required placeholder="Nome" id="input_nomeUsuario">
-               <input type="number" placeholder="CPF" id="input_cpf">
-               <input type="text" placeholder="Função" id="input_funcao">
-               <input type="email" placeholder="E-mail" id="input_email">
-               <input type="password" placeholder="Senha" id="input_senhaUsuario">
-               <p>Cadastre uma senha com 8 caracteres</p>
 
-               <button onclick="cadastrarUsuario()">Cadastrar</button>
-                
-                
-               
+        <div class="pai_cadastro1">
+            <div class="cadastro1">
+                <h1>Olá! Cadastre o seu funcionário!</h1>
+
+
+
+                <input type="text" required placeholder="Nome" id="input_nomeUsuario">
+                <input type="number" placeholder="CPF" id="input_cpf">
+                <input type="text" placeholder="Função" id="input_funcao">
+                <input type="email" placeholder="E-mail" id="input_email">
+                <input type="password" placeholder="Senha" id="input_senhaUsuario">
+                <p>Cadastre uma senha com 8 caracteres</p>
+
+                <button onclick="cadastrarUsuario()">Cadastrar</button>
+
+
+
             </div>
 
         </div>
-        
+
 
 
     </section>
 
 </body>
+
 </html>
 <script>
     function cadastrarUsuario() {
@@ -104,23 +107,86 @@
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
-       
+
         var nomeUsuarioVar = input_nomeUsuario.value;
         var cpfVar = input_cpf.value;
         var funcaoVar = input_funcao.value;
         var emailVar = input_email.value;
         var senhaUsuarioVar = input_senhaUsuario.value;
 
-        if (nomeUsuarioVar == "" || cpfVar == "" || funcaoVar == "" || emailVar =="" || senhaUsuarioVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        var temErro = false;
 
-            // finalizarAguardar();
-            // return false;
+        cardErro.style.display = "none"
+        mensagem_erro.innerHTML = "";
+
+        input_nomeUsuario.style.borderColor = "grey";
+        input_cpf.style.borderColor = "grey";
+        input_funcao.style.borderColor = "grey";
+        input_email.style.borderColor = "grey";
+        input_senhaUsuario.style.borderColor = "grey";
+
+        if (nomeUsuarioVar == "" || cpfVar == "" || funcaoVar == "" || emailVar == "" || senhaUsuarioVar == '') {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "Todos os campos devem ser preenchidos!";
+
+            if (nomeUsuarioVar == "") {
+                input_nomeUsuario.style.borderColor = "red";
+            }
+
+            if (cpfVar == "") {
+                input_cpf.style.borderColor = "red";
+            }
+
+            if (funcaoVar == "") {
+                input_funcao.style.borderColor = "red";
+            }
+
+            if (emailVar == "") {
+                input_email.style.borderColor = "red";
+            }
+
+            if (senhaUsuarioVar == "") {
+                input_senhaUsuario.style.borderColor = "red";
+            }
+
+            temErro = true;
         }
-        else {
-            setInterval(sumirMensagem, 5000)
+
+       
+
+        if (cpfVar.length < 11) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
+
+            input_cpf.style.borderColor = "red";
+
+            temErro = true;
         }
+
+        if (emailVar.indexOf("@") < 4 || emailVar.indexOf(" ") > -1 || emailVar.indexOf(".") < 0) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />Digite um email valido.";
+
+            input_email.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (senhaUsuarioVar.length < 8) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
+
+            input_senhaUsuario.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (temErro) {
+            return false;
+        } else {
+            setInterval(sumirMensagem, 10000)
+        }
+
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrarUsuario", {
@@ -131,14 +197,14 @@
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-               
+
                 nomeUsuarioServer: nomeUsuarioVar,
                 cpfServer: cpfVar,
                 funcaoServer: cpfVar,
                 emailServer: emailVar,
                 senhaUsuarioServer: senhaUsuarioVar,
 
-               fk_filialServer : sessionStorage.FK_FILIAL
+                fk_filialServer: sessionStorage.FK_FILIAL
             })
         }).then(function (resposta) {
 
@@ -152,7 +218,7 @@
                 setTimeout(() => {
                     window.location = "cadastro_usuario.html";
                 }, "2000")
-                
+
                 // limparFormulario();
                 // finalizarAguardar();
             } else {

@@ -90,7 +90,7 @@
                 <h1>Cadastre sua filial:</h1>
 
 
-                
+
                 <input type="text" placeholder="CEP" id="input_cep">
                 <input type="number" placeholder="Número Endereço" id="input_numero">
                 <input type="text" placeholder="Complemento" id="input_complemento">
@@ -119,53 +119,53 @@
     let desbloqueado = true;
     input_rede.value = sessionStorage.FK_REDE;
 
-function abrir_menu() {
+    function abrir_menu() {
 
-    if (desbloqueado) {
-        opcoes_menu.style.display = "flex";
-        opcoes_menu.style.position = "fixed";
-        opcoes_menu.style.position = "fixed";
-        id_navbar.style.backgroundColor = " white"
-        id_navbar.style.borderBottom = "solid 2px #858585"
-        desbloqueado = false;
+        if (desbloqueado) {
+            opcoes_menu.style.display = "flex";
+            opcoes_menu.style.position = "fixed";
+            opcoes_menu.style.position = "fixed";
+            id_navbar.style.backgroundColor = " white"
+            id_navbar.style.borderBottom = "solid 2px #858585"
+            desbloqueado = false;
 
-    } else if (!desbloqueado) {
-        id_navbar.style.backgroundColor = "#000000C7"
-        id_navbar.style.borderBottom = "none"
-        opcoes_menu.style.display = "none";
-        desbloqueado = true;
+        } else if (!desbloqueado) {
+            id_navbar.style.backgroundColor = "#000000C7"
+            id_navbar.style.borderBottom = "none"
+            opcoes_menu.style.display = "none";
+            desbloqueado = true;
+        }
+
     }
 
-}
+    window.addEventListener('resize', resizeHandler);
 
-window.addEventListener('resize', resizeHandler);
+    resizeHandler();
 
-resizeHandler();
-
-function resizeHandler(){
-    const tela = window.innerWidth;
-    if(tela > 600){
-        desbloqueado = false;
-        abrir_menu();
+    function resizeHandler() {
+        const tela = window.innerWidth;
+        if (tela > 600) {
+            desbloqueado = false;
+            abrir_menu();
+        }
     }
-}
 
-function change_screen(n) {
-    switch (n) {
-        case 1:
-            window.location = "#sec_sobre"
-            break;
-        case 2:
-            window.location = "#sec_empresa"
+    function change_screen(n) {
+        switch (n) {
+            case 1:
+                window.location = "#sec_sobre"
+                break;
+            case 2:
+                window.location = "#sec_empresa"
+        }
     }
-}
 
     function cadastrarFilial() {
-        aguardar();
+        // aguardar();
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
-        
+
         var cepVar = input_cep.value;
         var numeroVar = input_numero.value;
         var complementoVar = input_complemento.value;
@@ -174,16 +174,77 @@ function change_screen(n) {
         var senhaVar = input_senha.value;
         var fkRedeVar = sessionStorage.FK_REDE;
 
-        if ( cepVar == "" || numeroVar == "" || complementoVar == "" || emailFilialVar == "" || cnpjVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        var temErro = false;
 
-            // finalizarAguardar();
-            // return false;
+        cardErro.style.display = "none"
+        mensagem_erro.innerHTML = "";
+
+        input_cep.style.borderColor = "grey";
+        input_numero.style.borderColor = "grey";
+        input_emailFilial.style.borderColor = "grey";
+        input_cnpj.style.borderColor = "grey";
+        input_senha.style.borderColor = "grey";
+
+        if (cepVar == "" || numeroVar == "" || emailFilialVar == "" || cnpjVar == "" || senhaVar == '') {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "Todos os campos devem ser preenchidos!";
+
+            if (cepVar == "") {
+                input_cep.style.borderColor = "red";
+            }
+
+            if (numeroVar == "") {
+                input_numero.style.borderColor = "red";
+            }
+
+            if (emailFilialVar == "") {
+                input_emailFilial.style.borderColor = "red";
+            }
+
+            if (cnpjVar == "") {
+                input_cnpj.style.borderColor = "red";
+            }
+
+            if (senhaVar == "") {
+                input_senha.style.borderColor = "red";
+            }
+
+            temErro = true;
         }
-        else {
-            setInterval(sumirMensagem, 5000)
+
+        if (emailFilialVar.indexOf("@") < 4 || emailFilialVar.indexOf(" ") > -1 || emailFilialVar.indexOf(".") < 0){
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />Digite um email valido.";
+
+            input_emailFilial.style.borderColor = "red";
+
+            temErro = true;
         }
+
+        if (cnpjVar.length < 14){
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
+
+            input_cnpj.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (senhaVar.length < 8){
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
+
+            input_senha.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (temErro) {
+            return false;
+        } else {
+            setInterval(sumirMensagem, 10000)
+        }
+
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrarFilial", {
@@ -194,7 +255,7 @@ function change_screen(n) {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                
+
                 cepServer: cepVar,
                 numeroServer: numeroVar,
                 complementoServer: complementoVar,

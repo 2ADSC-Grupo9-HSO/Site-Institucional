@@ -13,6 +13,11 @@
 </head>
 
 <body>
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
     <div id="id_navbar" class="navbar">
 
         <div class="nav">
@@ -134,6 +139,46 @@
         var cpf_cnpjVar = input_cpf_cnpj.value;
         var senhaVar = input_senha.value;
 
+
+
+        var temErro = false;
+
+        cardErro.style.display = "none"
+        mensagem_erro.innerHTML = "";
+
+        input_cpf_cnpj.style.borderColor = "grey";
+        input_senha.style.borderColor = "grey";
+
+        if (cpf_cnpjVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "Todos os campos devem ser preenchidos!";
+        
+            if (cpf_cnpjVar == "") {
+                input_cpf_cnpj.style.borderColor = "red";
+            }
+
+            if (senhaVar == "") {
+                input_senha.style.borderColor = "red";
+            }
+
+        }
+
+
+        if (senhaVar.length < 8) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres";
+
+            input_senha.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (temErro) {
+            return false;
+        } else {
+            setInterval(sumirMensagem, 10000)
+        }
+
         /*        if (cpf_cnpjVar == "" || senhaVar == "") {
                    cardErro.style.display = "block"
                    mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
@@ -145,6 +190,9 @@
 
         console.log("FORM LOGIN: ", cpf_cnpjVar);
         console.log("FORM SENHA: ", senhaVar);
+
+        
+
 
         /* if (cpf_cnpjVar.length == 14) {
 
@@ -218,7 +266,7 @@
 
                     console.log(input_cpf_cnpj.value)
 
-                    if (json.cpf.length == 14  && json.cpf.indexOf("@") < 0) {
+                    if (json.cpf.length == 14 && json.cpf.indexOf("@") < 0) {
                         sessionStorage.FK_FILIAL = json.fkFilial;
                         sessionStorage.NOME_USUARIO = json.nomeUsuario;
 
@@ -270,8 +318,8 @@
     // }
 
 
-    /* function sumirMensagem() {
+    function sumirMensagem() {
         cardErro.style.display = "none"
-    } */
+    } 
 
 </script>

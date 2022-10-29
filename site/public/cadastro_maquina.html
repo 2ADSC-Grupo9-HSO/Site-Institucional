@@ -109,51 +109,50 @@
 
 </html>
 <script>
-//     let desbloqueado = true;
+    //     let desbloqueado = true;
 
-// function abrir_menu() {
+    // function abrir_menu() {
 
-//     if (desbloqueado) {
-//         opcoes_menu.style.display = "flex";
-//         opcoes_menu.style.position = "fixed";
-//         opcoes_menu.style.position = "fixed";
-//         id_navbar.style.backgroundColor = " white"
-//         id_navbar.style.borderBottom = "solid 2px #858585"
-//         desbloqueado = false;
+    //     if (desbloqueado) {
+    //         opcoes_menu.style.display = "flex";
+    //         opcoes_menu.style.position = "fixed";
+    //         opcoes_menu.style.position = "fixed";
+    //         id_navbar.style.backgroundColor = " white"
+    //         id_navbar.style.borderBottom = "solid 2px #858585"
+    //         desbloqueado = false;
 
-//     } else if (!desbloqueado) {
-//         id_navbar.style.backgroundColor = "#000000C7"
-//         id_navbar.style.borderBottom = "none"
-//         opcoes_menu.style.display = "none";
-//         desbloqueado = true;
-//     }
+    //     } else if (!desbloqueado) {
+    //         id_navbar.style.backgroundColor = "#000000C7"
+    //         id_navbar.style.borderBottom = "none"
+    //         opcoes_menu.style.display = "none";
+    //         desbloqueado = true;
+    //     }
 
-// }
+    // }
 
-// window.addEventListener('resize', resizeHandler);
+    // window.addEventListener('resize', resizeHandler);
 
-// resizeHandler();
+    // resizeHandler();
 
-// function resizeHandler(){
-//     const tela = window.innerWidth;
-//     if(tela > 600){
-//         desbloqueado = false;
-//         abrir_menu();
-//     }
-// }
+    // function resizeHandler(){
+    //     const tela = window.innerWidth;
+    //     if(tela > 600){
+    //         desbloqueado = false;
+    //         abrir_menu();
+    //     }
+    // }
 
-// function change_screen(n) {
-//     switch (n) {
-//         case 1:
-//             window.location = "#sec_sobre"
-//             break;
-//         case 2:
-//             window.location = "#sec_empresa"
-//     }
-// }
+    // function change_screen(n) {
+    //     switch (n) {
+    //         case 1:
+    //             window.location = "#sec_sobre"
+    //             break;
+    //         case 2:
+    //             window.location = "#sec_empresa"
+    //     }
+    // }
 
     function cadastrarMaquina() {
-        // aguardar();
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
@@ -162,18 +161,87 @@
         var soVar = input_so.value;
         var andarVar = input_andar.value;
         var senhaVar = input_senha.value;
-        
 
+        var temErro = false;
+
+        cardErro.style.display = "none"
+        mensagem_erro.innerHTML = "";
+
+        input_hostName.style.borderColor = "grey";
+        input_marca.style.borderColor = "grey";
+        input_so.style.borderColor = "grey";
+        input_andar.style.borderColor = "grey";
+        input_senha.style.borderColor = "grey";
 
         if (hostNameVar == "" || marcaVar == "" || soVar == "" || andarVar == "" || senhaVar == '') {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML += "Todos os campos devem ser preenchidos!";
 
-            // finalizarAguardar();
-            return false;
+            if (hostNameVar == "") {
+                input_hostName.style.borderColor = "red";
+            }
+
+            if (marcaVar == "") {
+                input_marca.style.borderColor = "red";
+            }
+
+            if (soVar == "") {
+                input_so.style.borderColor = "red";
+            }
+
+            if (andarVar == "") {
+                input_andar.style.borderColor = "red";
+            }
+
+            if (senhaVar == "") {
+                input_senha.style.borderColor = "red";
+            }
+
+            temErro = true;
         }
-        else {
-            setInterval(sumirMensagem, 5000)
+
+        if (hostNameVar.length < 4) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />O Host Name deve ter ao menos 4 letras.";
+
+            input_senha.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (soVar.toUpperCase() != "MINT" && soVar.toUpperCase() != "UBUNTU" && soVar.toUpperCase() != "MANJARO" && soVar.toUpperCase() != "FEDORA" &&
+            soVar.toUpperCase() != "WINDOWS 10" && soVar.toUpperCase() != "WINDOWS 11" && soVar.toUpperCase() != "WINDOWS 7" && soVar.toUpperCase() != "WINDOWS 8") {
+
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />O sistema operacional deve ser alguma distribuição Linux ou windows.";
+
+            input_so.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (!Number(andarVar)) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />O andar deve conter um número.";
+
+            input_andar.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (senhaVar.length < 8) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
+
+            input_senha.style.borderColor = "red";
+
+            temErro = true;
+        }
+
+        if (temErro) {
+            return false;
+        } else {
+            setInterval(sumirMensagem, 10000)
         }
 
         // Enviando o valor da nova input
@@ -189,9 +257,9 @@
                 marcaServer: marcaVar,
                 soServer: soVar,
                 andarServer: andarVar,
-                fk_filialServer : sessionStorage.FK_FILIAL,
-                senhaServer : senhaVar,
-                
+                fk_filialServer: sessionStorage.FK_FILIAL,
+                senhaServer: senhaVar,
+
             })
         }).then(function (resposta) {
 

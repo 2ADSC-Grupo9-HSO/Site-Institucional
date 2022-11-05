@@ -24,7 +24,7 @@ router.post("/cadastrarRede", function (req, res) {
     usuarioController.cadastrarRede(req, res);
 })
 
-router.get("/listar_maquina", function (req, res) {
+router.get("/listar_maquina/:fkFilial", function (req, res) {
     usuarioController.listar_maquina(req, res);
 });
 

@@ -13,20 +13,28 @@ var database = require("../database/config")
     return database.executar(instrucao);
 } */
 
-function listar_maquina() {
+function listar_maquina(fkFilial) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    SELECT nomeRede, hostName, nomeComponente, valorRegistro, momentoRegistro FROM [dbo].[tbRedeHospitalar]
-
-JOIN [dbo].[tbFilialHospital] ON idRede = fkRede
-
-JOIN [dbo].[tbInfoMaquina] ON idFilial = fkFilial
-
-JOIN [dbo].[tbMaquina] ON idInfoMaquina = fkInfoMaquina
-
-JOIN [dbo].[tbComponente] ON idComponente = fkComponente
-
-JOIN [dbo].[tbHistorico] ON idMaquina = fkMaquina
+    WITH select_gerar_maquina AS (
+        SELECT idHistorico, hostName, nomeComponente, valorRegistro , ROW_NUMBER() OVER (PARTITION BY hostName, nomeComponente ORDER BY idHistorico DESC) AS rn
+        FROM tbRedeHospitalar
+      
+      JOIN tbFilialHospital ON idRede = fkRede
+      
+      JOIN tbInfoMaquina ON idFilial = fkFilial
+      
+      JOIN tbMaquina ON idInfoMaquina = fkInfoMaquina
+      
+      JOIN tbComponente ON idComponente = fkComponente
+      
+      JOIN tbHistorico ON idMaquina = fkMaquina
+      
+      where fkFilial = ${fkFilial}
+      
+      order by hostName, nomeComponente
+      )
+      SELECT * FROM select_gerar_maquina WHERE rn = 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

@@ -8,7 +8,9 @@ function testar(req, res) {
 }
 
 function listar_maquina(req, res) {
-    usuarioModel.listar_maquina()
+    var fkFilial = req.params.fkFilial;
+
+    usuarioModel.listar_maquina(fkFilial)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);

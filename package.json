@@ -4,6 +4,15 @@
     "private": true,
     "scripts": {
       "start": "node ./site/app.js",
+      "dev": "nodemon --exec node ./site/app.js",
       "postinstall": "cd site && npm install"
+    },
+    "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "mssql": "^7.1.3",
+      "mysql2": "^2.2.5",
+      "nodemon": "^2.0.7",
+      "path": "^0.12.7"
     }
   }

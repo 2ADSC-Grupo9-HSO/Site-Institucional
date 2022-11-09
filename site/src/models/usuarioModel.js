@@ -158,8 +158,14 @@ function cadastrarMaquina(hostName, marca, so, andar, fk_filial, senha) {
         INSERT INTO tbMaquina (fkFilial, hostName, marcaMaquina,sistemaOperacional, andarMaquina, senhaMaquina ) 
         VALUES ('${fk_filial}', '${hostName}', '${marca}', '${so}', '${andar}' , '${senha}')
     `;
+    var instrucao2 = `
+    insert into tbHardware values
+	    (null, (select idMaquina from tbMaquina order by idMaquina desc limit 1),1,100),
+        (null, (select idMaquina from tbMaquina order by idMaquina desc limit 1),2,100),
+        (null,(select idMaquina from tbMaquina order by idMaquina desc limit 1),3,100);
+    `
     console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    return database.executar(instrucao, instrucao2);
 }
 
 function cadastrarRede(nomeRede, email, senha) {

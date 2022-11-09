@@ -192,9 +192,9 @@ function cadastrarMaquina(hostName, marca, so, andar, fk_filial, senha) {
     `;
     var instrucao2 = `
     insert into tbHardware values
-	    (null, (select idMaquina from tbMaquina order by idMaquina desc limit 1),1,100),
-        (null, (select idMaquina from tbMaquina order by idMaquina desc limit 1),2,100),
-        (null,(select idMaquina from tbMaquina order by idMaquina desc limit 1),3,100);
+	    (null, (select idMaquina from tbMaquina where hostName = '${hostName}'),1,100),
+        (null, (select idMaquina from tbMaquina where hostName = '${hostName}'),2,100),
+        (null,(select idMaquina from tbMaquina where hostName = '${hostName}'),3,100);
     `
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao), database.executar(instrucao2);

@@ -256,42 +256,42 @@ function get_grafico_stacked() {
 
                 for (let c = 0; c < resposta.length; c++) {
 
-                    if(tempLabel[tempLabel.length - 1] != resposta[c].andar){
+                    if (tempLabel[tempLabel.length - 1] != resposta[c].andar) {
                         tempLabel.push(resposta[c].andar);
                         auxLabel.push(resposta[c].andar + '° Andar');
                     }
 
                     /* if(tempAndar != resposta[c].andar) */
 
-                    if (tempAndar != resposta[c].andar){
+                    if (tempAndar != resposta[c].andar) {
 
-                        if(!am){
+                        if (!am) {
                             tempMedic.push(0)
                         }
-                        if(!ar){
+                        if (!ar) {
                             tempRecep.push(0)
                         }
-                        if(!at){
+                        if (!at) {
                             tempTotem.push(0)
                         }
 
                         am = false;
                         ar = false;
-                        at =false;
+                        at = false;
                     }
 
                     if (resposta[c].tipo == 'm') {
-                            tempMedic.push(resposta[c].qtd_total)
-                            am = true;
-                        }
-                        else if (resposta[c].tipo == 'r') {
-                            tempRecep.push(resposta[c].qtd_total)
-                            ar = true;
-                        }
-                        else if (resposta[c].tipo == 't') {
-                            tempTotem.push(resposta[c].qtd_total)
-                            at = true
-                        }
+                        tempMedic.push(resposta[c].qtd_total)
+                        am = true;
+                    }
+                    else if (resposta[c].tipo == 'r') {
+                        tempRecep.push(resposta[c].qtd_total)
+                        ar = true;
+                    }
+                    else if (resposta[c].tipo == 't') {
+                        tempTotem.push(resposta[c].qtd_total)
+                        at = true
+                    }
 
                 }
 

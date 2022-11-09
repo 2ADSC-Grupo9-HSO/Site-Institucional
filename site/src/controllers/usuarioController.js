@@ -93,7 +93,7 @@ function entrarFilial(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        
+
         usuarioModel.entrarFilial(cpf_cnpj, senha)
             .then(
                 function (resultado) {
@@ -129,7 +129,7 @@ function entrarUsuario(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        
+
         usuarioModel.entrarUsuario(cpf_cnpj, senha)
             .then(
                 function (resultado) {
@@ -158,7 +158,7 @@ function entrarUsuario(req, res) {
 
 function cadastrarFilial(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    
+
     var cep = req.body.cepServer;
     var numero = req.body.numeroServer;
     var complemento = req.body.complementoServer;
@@ -166,9 +166,9 @@ function cadastrarFilial(req, res) {
     var cnpj = req.body.cnpjServer;
     var senha = req.body.senhaServer;
     var fkRede = req.body.fkRedeServer
-   
+
     // Faça as validações dos valores
-   
+
     if (cep == undefined) {
         res.status(400).send("Seu cep está undefined!");
     } else if (numero == undefined) {
@@ -180,9 +180,9 @@ function cadastrarFilial(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarFilial( cep, numero, complemento, emailFilial, cnpj, senha, fkRede)
+        usuarioModel.cadastrarFilial(cep, numero, complemento, emailFilial, cnpj, senha, fkRede)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -208,7 +208,7 @@ function cadastrarMaquina(req, res) {
     var andar = req.body.andarServer;
     var fk_filial = req.body.fk_filialServer;
     var senha = req.body.senhaServer;
-    
+
 
     // Faça as validações dos valores
     if (hostName == undefined) {
@@ -219,12 +219,12 @@ function cadastrarMaquina(req, res) {
         res.status(400).send("Seu sistema operacional está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Seu cnpj está undefined!");
-    }  else if (andar == undefined) {
+    } else if (andar == undefined) {
         res.status(400).send("Seu andar está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarMaquina(hostName, marca, so , andar, fk_filial, senha)
+        usuarioModel.cadastrarMaquina(hostName, marca, so, andar, fk_filial, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -242,6 +242,36 @@ function cadastrarMaquina(req, res) {
     }
 }
 
+function cadastrarHardware(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var hostName = req.body.hostNameServer;
+
+    // Faça as validações dos valores
+    if (hostName == undefined) {
+        res.status(400).send("Seu host name está undefined!");
+    }
+    else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrarHardware(hostName)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
 function cadastrarRede(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nomeRede = req.body.nomeRedeServer;
@@ -256,7 +286,7 @@ function cadastrarRede(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Seu sistema operacional está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrarRede(nomeRede, email, senha)
             .then(
@@ -278,17 +308,17 @@ function cadastrarRede(req, res) {
 
 function cadastrarUsuario(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-   
+
     var nomeUsuario = req.body.nomeUsuarioServer;
     var cpf = req.body.cpfServer;
     var funcao = req.body.funcaoServer;
     var email = req.body.emailServer;
     var senhaUsuario = req.body.senhaUsuarioServer;
     var fk_filial = req.body.fk_filialServer
-    
+
 
     // Faça as validações dos valores
-     if (nomeUsuario == undefined) {
+    if (nomeUsuario == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (cpf == undefined) {
         res.status(400).send("Seu cpf está undefined!");
@@ -299,9 +329,9 @@ function cadastrarUsuario(req, res) {
     } else if (senhaUsuario == undefined) {
         res.status(400).send("Seu senha está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarUsuario( nomeUsuario, cpf, funcao, email, senhaUsuario, fk_filial)
+        usuarioModel.cadastrarUsuario(nomeUsuario, cpf, funcao, email, senhaUsuario, fk_filial)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -331,5 +361,6 @@ module.exports = {
     mostrar_dash,
     cadastrarRede,
     get_grafico_donut,
-    get_grafico_stacked
+    get_grafico_stacked,
+    cadastrarHardware
 }

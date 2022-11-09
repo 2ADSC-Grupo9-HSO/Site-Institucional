@@ -270,6 +270,45 @@
 
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para dashboard...";
 
+                cadastrarHardware()
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function cadastrarHardware() {
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var hostNameVar = input_hostName.value;
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrarHardware", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                hostNameServer: hostNameVar,
+
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+
                 setTimeout(() => {
                     window.location = "./dashboard/index.html";
                 }, "2000")
@@ -286,6 +325,7 @@
 
         return false;
     }
+
 
     function sumirMensagem() {
         cardErro.style.display = "none"

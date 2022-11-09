@@ -165,7 +165,7 @@ function cadastrarMaquina(hostName, marca, so, andar, fk_filial, senha) {
         (null,(select idMaquina from tbMaquina order by idMaquina desc limit 1),3,100);
     `
     console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao, instrucao2);
+    return database.executar(instrucao), database.executar(instrucao2);
 }
 
 function cadastrarRede(nomeRede, email, senha) {

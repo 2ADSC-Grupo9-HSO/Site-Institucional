@@ -278,6 +278,9 @@ function get_grafico_stacked() {
                         am = false;
                         ar = false;
                         at = false;
+
+                        tempAndar = resposta[c].andar;
+
                     }
 
                     if (resposta[c].tipo == 'm') {

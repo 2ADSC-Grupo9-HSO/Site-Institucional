@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="grafico_1">
-                    <span style="color: white;">Quantidade de maquinas em funcionamento</span>
+                    <span style="color: white;">Quantidade de maquinas Debilitadas</span>
                     <div class="container_graficoDonut">
                         <div id="grafico_donut" class="grafico_Donut">
                             <!-- <canvas id="myChartDonut"></canvas> -->
@@ -101,11 +101,11 @@
                     <div class="texto"></div>
                 </div> -->
                 <div class="grafico_3">
-                    <span style="color: white;"> Usuários </span>
+                    <span style="color: white;"> Maquinas Totais com Problemas </span>
                     <div class="container_grafico">
-                        <div class="grafico_atividade">
-                            <canvas id="myChart2"></canvas>
-                        </div>
+                        <div id="grafico_atividade" class="grafico_atividade">
+<!--                             <canvas id="myChartAtividade"></canvas>
+ -->                        </div>
                     </div>
                 </div>
             </div>
@@ -220,45 +220,10 @@
 </script>
 
 <script>
-    const labels2 = [
-        'Recepção',
-        'Máquina de médico',
-        'Totem',
-    ];
-
-    const data2 = {
-        labels: labels,
-        datasets: [{
-            label: 'Recepção',
-            backgroundColor: '#44DDFF',
-            borderColor: '#44DDFF',
-            data: [7, 5, 6, 7, 4, 8],
-        },
-        {
-            label: 'Máquina de médico',
-            backgroundColor: '#FF4343',
-            borderColor: '#FF4343',
-            data: [3, 5, 5, 6, 8, 5],
-        },
-        {
-            label: 'Totem',
-            backgroundColor: '#EBBE21',
-            borderColor: '#EBBE21',
-            data: [3, 5, 5, 6, 8, 5],
-        }]
-    };
-
-    const config2 = {
-        type: 'bar',
-        data: data2,
-        options: {}
-    };
+   
 </script>
 <script>
-    const myChart2 = new Chart(
-        document.getElementById('myChart2'),
-        config2
-    );
+    
 </script>
 
 <script>

@@ -64,6 +64,38 @@ function get_grafico_donut(fkFilial) {
     return database.executar(instrucao);
 }
 
+function get_grafico_stacked(fkFilial) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    select count(cont) as "qtd_total", andar, substr(nome,1,1) as 'tipo' from(
+        select count(contagem) as 'cont',  andar, nome from(
+            select count(idHistorico) as 'contagem', m.andarMaquina as 'andar', m.hostName as 'nome'  from tbHistorico as hi
+                join tbHardware as hw on hw.idHardware = hi.fkHardware
+                join tbMaquina as m on m.idMaquina = hw.fkMaquina
+                where valorRegistro >= 99 and hi.momentoRegistro > now() - interval 24 hour and hw.fkComponente = 1
+                and  m.fkFilial  = 1 group by hw.fkMaquina, m.andarMaquina
+        ) as tabela_comp_1 where contagem > 4 group by andar,nome
+        union all
+        select count(contagem) as 'cont',  andar, nome from(
+            select count(idHistorico) as 'contagem', m.andarMaquina as 'andar', m.hostName as 'nome'  from tbHistorico as hi
+                join tbHardware as hw on hw.idHardware = hi.fkHardware
+                join tbMaquina as m on m.idMaquina = hw.fkMaquina
+                where valorRegistro >= 99 and hi.momentoRegistro > now() - interval 24 hour and hw.fkComponente = 2 
+                and  m.fkFilial  = 1 group by hw.fkMaquina, m.andarMaquina
+        ) as tabela_comp_2 where contagem > 10 group by andar,nome
+        union all
+        select count(contagem) as 'cont',  andar, nome from(
+            select count(idHistorico) as 'contagem', m.andarMaquina as 'andar', m.hostName as 'nome'  from tbHistorico as hi
+                join tbHardware as hw on hw.idHardware = hi.fkHardware
+                join tbMaquina as m on m.idMaquina = hw.fkMaquina
+                where valorRegistro >= 99 and hi.momentoRegistro > now() - interval 24 hour and hw.fkComponente = 3 
+                and  m.fkFilial  = 1 group by hw.fkMaquina, m.andarMaquina
+        ) as tabela_comp_3 where contagem > 6 group by andar,nome
+    ) as tabela_final group by andar,tipo order by andar;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 function listar_maquina(fkFilial) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
@@ -205,5 +237,6 @@ module.exports = {
 /*     listar_andar */
     mostrar_dash,
     cadastrarRede,
-    get_grafico_donut
+    get_grafico_donut,
+    get_grafico_stacked
 };

@@ -39,6 +39,10 @@ router.get("/get_grafico_donut/:fkFilial", function (req, res) {
     usuarioController.get_grafico_donut(req, res);
 });
 
+router.get("/get_grafico_stacked/:fkFilial", function (req, res) {
+    usuarioController.get_grafico_stacked(req, res);
+});
+
 router.post("/cadastrarUsuario", function (req, res) {
     usuarioController.cadastrarUsuario(req, res);
 })

@@ -1,12 +1,16 @@
-function gerar_graficos(){
+function gerar_graficos() {
     get_grafico_donut();
+    get_grafico_stacked();
 }
 
 function destruir_graficos() {
-    var div_pai = document.getElementById('grafico_donut')
+    var div_pai1 = document.getElementById('grafico_donut')
+    var div_pai2 = document.getElementById('grafico_atividade')
 
-    var old_canva = document.getElementById('myChartDonut')
-    div_pai.removeChild(old_canva)
+    var old_canva1 = document.getElementById('myChartDonut')
+    var old_canva2 = document.getElementById('myChartAtividade')
+    div_pai1.removeChild(old_canva1)
+    div_pai2.removeChild(old_canva2)
 }
 
 setInterval(() => {
@@ -212,6 +216,127 @@ function get_grafico_donut() {
                 const myChartDonut = new Chart(
                     document.getElementById('myChartDonut'),
                     configDonut
+                );
+
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+
+function get_grafico_stacked() {
+    var fkFilial = sessionStorage.FK_FILIAL;
+
+    var div_pai = document.getElementById('grafico_atividade')
+
+    var new_canva = document.createElement('canvas')
+    new_canva.id = 'myChartAtividade'
+
+    div_pai.append(new_canva)
+
+    fetch(`/usuarios/get_grafico_stacked/${fkFilial}`).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                var tempLabel = [];
+                var auxLabel = [];
+                var tempTotem = [];
+                var tempRecep = [];
+                var tempMedic = [];
+
+                var tempAndar = resposta[0].andar;
+
+                var am = false
+                var ar = false
+                var at = false
+
+                for (let c = 0; c < resposta.length; c++) {
+
+                    if(tempLabel[tempLabel.length - 1] != resposta[c].andar){
+                        tempLabel.push(resposta[c].andar);
+                        auxLabel.push(resposta[c].andar + '° Andar');
+                    }
+
+                    /* if(tempAndar != resposta[c].andar) */
+
+                    if (tempAndar != resposta[c].andar){
+
+                        if(!am){
+                            tempMedic.push(0)
+                        }
+                        if(!ar){
+                            tempRecep.push(0)
+                        }
+                        if(!at){
+                            tempTotem.push(0)
+                        }
+
+                        am = false;
+                        ar = false;
+                        at =false;
+                    }
+
+                    if (resposta[c].tipo == 'm') {
+                            tempMedic.push(resposta[c].qtd_total)
+                            am = true;
+                        }
+                        else if (resposta[c].tipo == 'r') {
+                            tempRecep.push(resposta[c].qtd_total)
+                            ar = true;
+                        }
+                        else if (resposta[c].tipo == 't') {
+                            tempTotem.push(resposta[c].qtd_total)
+                            at = true
+                        }
+
+                }
+
+                const labels = auxLabel;
+
+                const data2 = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Recepção',
+                        backgroundColor: '#44DDFF',
+                        borderColor: '#44DDFF',
+                        data: tempRecep,
+                    }, {
+                        label: 'Médicos',
+                        backgroundColor: '#d303fc',
+                        borderColor: '#d303fc',
+                        data: tempMedic,
+                    }, {
+                        label: 'Totem',
+                        backgroundColor: '#fc9403',
+                        borderColor: '#fc9403',
+                        data: tempTotem,
+                    }
+                    ]
+                };
+
+                const config2 = {
+                    type: 'bar',
+                    data: data2,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                stacked: true,
+                            },
+                            y: {
+                                stacked: true
+                            }
+                        }
+                    }
+                };
+
+                const myChart2 = new Chart(
+                    document.getElementById('myChartAtividade'),
+                    config2
                 );
 
             });

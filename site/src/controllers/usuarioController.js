@@ -45,6 +45,25 @@ function get_grafico_donut(req, res) {
         );
 }
 
+function get_grafico_stacked(req, res) {
+    var fkFilial = req.params.fkFilial;
+
+    usuarioModel.get_grafico_stacked(fkFilial)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 function mostrar_dash(req, res) {
     var idMaquina = req.params.idMaquina;
 
@@ -311,5 +330,6 @@ module.exports = {
     testar,
     mostrar_dash,
     cadastrarRede,
-    get_grafico_donut
+    get_grafico_donut,
+    get_grafico_stacked
 }

@@ -1,3 +1,19 @@
+function gerar_graficos(){
+    get_grafico_donut();
+}
+
+function destruir_graficos() {
+    var div_pai = document.getElementById('grafico_donut')
+
+    var old_canva = document.getElementById('myChartDonut')
+    div_pai.removeChild(old_canva)
+}
+
+setInterval(() => {
+    destruir_graficos();
+    gerar_graficos()
+}, 5000)
+
 function criar_card() {
     var fkFilial = sessionStorage.FK_FILIAL;
     fetch(`/usuarios/listar_maquina/${fkFilial}`).then(function (resposta) {
@@ -32,10 +48,10 @@ function criar_card() {
                 }
 
                 var forTotal = tempTotal[0]
-                var forNome = ''
-                var forDisco = ''
-                var forProcessador = ''
-                var forRam = ''
+                var forNome = tempNome[0]
+                var forDisco = tempDisco[0]
+                var forProcessador = tempProcessador[0]
+                var forRam = tempRam[0]
                 var index = 0
 
                 while (tempNome.length != nome.length) {
@@ -60,34 +76,16 @@ function criar_card() {
 
                     tempTotal[index] = -1
                     forTotal = -1
-
-
                 }
+
                 console.log(nome);
                 console.log(total);
                 console.log(disco);
                 console.log(processador);
                 console.log(ram);
 
-
-
-
-                // var numArray = total;
-                // numArray.sort(function (a, b) {
-                //     return b - a;
-                // });
-
-                // console.log(numArray);
-
-
-
-
-
-
-
-
                 for (let i = 0; i < nome.length; i++) {
-                
+
                     /* var maquina = maquina da vez */
                     // var maquina = resposta[i];
                     var apontamento = document.getElementById("temporaria_apontamento");
@@ -146,17 +144,6 @@ function criar_card() {
 
 }
 
-// function gerar_select(){
-//     fetch("/usuarios/listar_andar").then(function (resposta) {
-
-
-
-//     });
-
-
-
-// }
-
 function gerar_modal(idMaquina) {
 
     let modal = document.querySelector('.modal')
@@ -182,9 +169,56 @@ function gerar_modal(idMaquina) {
         console.error(resposta);
     });
 };
-function fechar_modal() {
 
+function get_grafico_donut() {
+    var fkFilial = sessionStorage.FK_FILIAL;
+
+    var div_pai = document.getElementById('grafico_donut')
+
+    var new_canva = document.createElement('canvas')
+    new_canva.id = 'myChartDonut'
+
+    div_pai.append(new_canva)
+
+    fetch(`/usuarios/get_grafico_donut/${fkFilial}`).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                const labelsDonut = [
+                    'Máquinas Totais',
+                    'Máquinas debilitadas',
+                ];
+
+                var dataDonut = {
+                    labels: labelsDonut,
+                    datasets: [{
+                        backgroundColor:
+                            ['#44DDFF',
+                                '#FF4343'],
+                        borderColor:
+                            ['#44DDFF',
+                                '#FF4343'],
+                        data: [Number(resposta[0].qtd_maquinas_total), Number(resposta[0].qtd_maquinas_debilitadas)],
+                    }]
+                };
+
+                const configDonut = {
+                    type: 'doughnut',
+                    data: dataDonut,
+                    options: {}
+                };
+
+                const myChartDonut = new Chart(
+                    document.getElementById('myChartDonut'),
+                    configDonut
+                );
+
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
 }
-
-
-// gerar_select();

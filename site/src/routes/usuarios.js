@@ -35,6 +35,10 @@ router.get("/mostrar_dash/:idMaquina", function (req, res) {
     usuarioController.mostrar_dash(req, res);
 });
 
+router.get("/get_grafico_donut/:fkFilial", function (req, res) {
+    usuarioController.get_grafico_donut(req, res);
+});
+
 router.post("/cadastrarUsuario", function (req, res) {
     usuarioController.cadastrarUsuario(req, res);
 })

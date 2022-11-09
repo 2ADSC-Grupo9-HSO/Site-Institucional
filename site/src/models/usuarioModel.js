@@ -13,28 +13,80 @@ var database = require("../database/config")
     return database.executar(instrucao);
 } */
 
+function get_grafico_donut(fkFilial) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_donut()");
+    var instrucao = `
+    select sum(cont) as "qtd_maquinas_debilitadas", (select count(idMaquina) from tbMaquina where fkFilial = 1) as "qtd_maquinas_total" from(
+
+        select count(contagem) as 'cont' from(
+          select count(fkMaquina) as 'contagem' from tbHistorico as hi
+           join tbHardware as hw on hw.idHardware = hi.fkHardware
+           join tbMaquina as m on m.idMaquina = hw.fkMaquina
+           where valorRegistro >= 99 
+           and hi.momentoRegistro > now() - interval 24 hour 
+           and hw.fkComponente = 1
+           and m.fkFilial = ${fkFilial} 
+           group by hw.fkMaquina
+        ) as tabela_comp_1 
+           where contagem > 4
+           
+           union all
+           
+        select count(contagem) as 'cont' from(
+          select count(fkMaquina) as 'contagem' from tbHistorico as hi
+           join tbHardware as hw on hw.idHardware = hi.fkHardware
+           join tbMaquina as m on m.idMaquina = hw.fkMaquina
+           where valorRegistro >= 99 
+           and hi.momentoRegistro > now() - interval 24 hour 
+           and hw.fkComponente = 2
+           and m.fkFilial = ${fkFilial}
+           group by hw.fkMaquina
+        ) as tabela_comp_2 
+           where contagem > 10
+           
+           union all
+           
+        select count(contagem) as 'cont' from(
+          select count(fkMaquina) as 'contagem' from tbHistorico as hi
+           join tbHardware as hw on hw.idHardware = hi.fkHardware
+           join tbMaquina as m on m.idMaquina = hw.fkMaquina
+           where valorRegistro >= 99 
+           and hi.momentoRegistro > now() - interval 24 hour 
+           and hw.fkComponente = 3
+           and m.fkFilial = ${fkFilial}
+           group by hw.fkMaquina
+        ) as tabela_comp_3
+           where contagem > 6
+        
+        ) as tabela_final;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
 function listar_maquina(fkFilial) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
     WITH select_gerar_maquina AS (
         SELECT idHistorico, hostName, nomeComponente, valorRegistro , ROW_NUMBER() OVER (PARTITION BY hostName, nomeComponente ORDER BY idHistorico DESC) AS rn
         FROM tbRedeHospitalar
-      
-      JOIN tbFilialHospital ON idRede = fkRede
-      
-      JOIN tbInfoMaquina ON idFilial = fkFilial
-      
-      JOIN tbMaquina ON idInfoMaquina = fkInfoMaquina
-      
-      JOIN tbComponente ON idComponente = fkComponente
-      
-      JOIN tbHistorico ON idMaquina = fkMaquina
-      
-      where fkFilial = ${fkFilial}
-      
-      order by hostName, nomeComponente
-      )
-      SELECT * FROM select_gerar_maquina WHERE rn = 1;
+        
+        JOIN tbFilialHospital ON idRede = fkRede
+        
+        JOIN tbMaquina ON idFilial = fkFilial
+        
+        JOIN tbHardware ON idMaquina = fkMaquina
+        
+        JOIN tbComponente ON idComponente = fkComponente
+        
+        JOIN tbHistorico ON idHardware = fkHardware
+        
+        where fkFilial = ${fkFilial}
+        
+        order by idHistorico
+        )
+        SELECT * FROM select_gerar_maquina WHERE rn = 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -103,7 +155,7 @@ function cadastrarMaquina(hostName, marca, so, andar, fk_filial, senha) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO tbInfoMaquina (fkFilial, hostName, marcaMaquina,sistemaOperacional, andarMaquina, senhaMaquina ) 
+        INSERT INTO tbMaquina (fkFilial, hostName, marcaMaquina,sistemaOperacional, andarMaquina, senhaMaquina ) 
         VALUES ('${fk_filial}', '${hostName}', '${marca}', '${so}', '${andar}' , '${senha}')
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -146,5 +198,6 @@ module.exports = {
     listar_maquina,
 /*     listar_andar */
     mostrar_dash,
-    cadastrarRede
+    cadastrarRede,
+    get_grafico_donut
 };

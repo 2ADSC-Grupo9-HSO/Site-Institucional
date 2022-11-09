@@ -75,8 +75,8 @@
                 <div class="grafico_1">
                     <span style="color: white;">Quantidade de maquinas em funcionamento</span>
                     <div class="container_graficoDonut">
-                        <div class="grafico_Donut">
-                            <canvas id="myChartDonut"></canvas>
+                        <div id="grafico_donut" class="grafico_Donut">
+                            <!-- <canvas id="myChartDonut"></canvas> -->
                         </div>
                     </div>
                 </div>
@@ -146,6 +146,7 @@
 </html>
 <script>
     criar_card();
+
     function acao_modal() {
         let modal = document.querySelector('.modal')
         modal.style.display = 'block';
@@ -169,7 +170,6 @@
     }
     function init_time() {
         setInterval(show_time, 1000);
-
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -261,35 +261,12 @@
 </script>
 
 <script>
-    const labelsDonut = [
-        'Máquinas em bom funcionamento',
-        'Máquinas debilitadas',
 
-    ];
 
-    const dataDonut = {
-        labels: labelsDonut,
-        datasets: [{
-            label: ['Ainda não sei', 'Ainda não sei 2'],
-            backgroundColor:
-                ['#44DDFF',
-                    '#FF4343'],
-            borderColor:
-                ['#44DDFF',
-                    '#FF4343'],
-            data: [17, 3],
-        }]
-    };
 
-    const configDonut = {
-        type: 'doughnut',
-        data: dataDonut,
-        options: {}
-    };
+
+
 </script>
 <script>
-    const myChartDonut = new Chart(
-        document.getElementById('myChartDonut'),
-        configDonut
-    );
+
 </script>

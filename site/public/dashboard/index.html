@@ -82,30 +82,14 @@
                 </div>
             </div>
             <div class="temporaria requests">
-                <div class="div_select_andar">
-                    <span class="texto">Selecione um andar</span>
-                    <select id="select" class="select_andar">
-                        <option value="andar_1">1º Andar</option>
-                        <option value="andar_1">2º Andar</option>
-                        <option value="andar_1">3º Andar</option>
-                        <option value="andar_1">4º Andar</option>
-                    </select>
-                </div>
-                <!-- <div class="grafico_2">
-                    <span style="color: white;"> Registros </span>
-                    <div class="container_grafico">
-                        <div class="grafico_atividade">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="texto"></div>
-                </div> -->
+
                 <div class="grafico_3">
                     <span style="color: white;"> Maquinas Totais com Problemas </span>
                     <div class="container_grafico">
                         <div id="grafico_atividade" class="grafico_atividade">
-<!--                             <canvas id="myChartAtividade"></canvas>
- -->                        </div>
+                            <!--                             <canvas id="myChartAtividade"></canvas>
+ -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,32 +99,24 @@
                     <div class="texto posicao">Apontamento atual</div>
                     <div class="div_hoje texto">Hoje</div>
                 </div>
-                <!-- <div class="memoriaRam">
-                    <div class="espacamento_vermelho"></div>
-                    <div class="texto">Memória ram: </div>
-                    <div class="dado">
-                        <span class="texto">82%</span>
+
+                <div class="modal">
+                    <div class="conteudoModal">
+                        <div class="nomeModal">
+                            <h3 id="nomeModalMaquina"></h3>
+                            <img onclick="fecharModal()" src="xis">
+                        </div>
+                        <div class="graficoModal">
+                            <div class="graficoMaquina"></div>
+                            <div class="execMaquina">
+                                <button>Listar Processos</button>
+                                <button>Reiniciar Maquina</button>
+                                <button>Matar 5 processos</button>
+                            </div>
+                        </div>
+                        <div class="infoModal"></div>
                     </div>
-
-
                 </div>
-                <div class="processador">
-                    <div class="espacamento_amarela"></div>
-                    <div class="texto">Processador: </div>
-                    <div class="hora"></div>
-                    <div class="dado"></div>
-                    <span class="texto">69%</span>
-
-                </div>
-                <div class="disco">
-                    <div class="espacamento_azul"></div>
-                    <div class="texto">Disco Rígido: </div>
-                    <div class="dado"></div>
-                    <span class="texto">58%</span>
-
-                </div> -->
-
-                <div class="modal"></div>
 </body>
 
 </html>
@@ -148,14 +124,8 @@
     criar_card();
     gerar_graficos();
 
-    function acao_modal() {
-        let modal = document.querySelector('.modal')
-        modal.style.display = 'block';
-    }
-    function fechar() {
-        let modal = document.querySelector('.modal')
-        modal.style.display = 'none';
-    }
+
+
     function show_time() {
         let time = new Date();
         let hour = time.getHours();
@@ -220,10 +190,10 @@
 </script>
 
 <script>
-   
+
 </script>
 <script>
-    
+
 </script>
 
 <script>

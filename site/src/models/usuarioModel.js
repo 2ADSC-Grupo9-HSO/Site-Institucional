@@ -22,13 +22,13 @@ function get_grafico_donut(fkFilial) {
           select count(fkMaquina) as 'contagem' from tbHistorico as hi
            join tbHardware as hw on hw.idHardware = hi.fkHardware
            join tbMaquina as m on m.idMaquina = hw.fkMaquina
-           where valorRegistro >= 99 
-           and hi.momentoRegistro > now() - interval 24 hour 
+           where valorRegistro >= 95 
+           and hi.momentoRegistro > now() - interval 10 minute 
            and hw.fkComponente = 1
            and m.fkFilial = ${fkFilial} 
            group by hw.fkMaquina
         ) as tabela_comp_1 
-           where contagem > 4
+           where contagem >= 1
            
            union all
            
@@ -36,13 +36,13 @@ function get_grafico_donut(fkFilial) {
           select count(fkMaquina) as 'contagem' from tbHistorico as hi
            join tbHardware as hw on hw.idHardware = hi.fkHardware
            join tbMaquina as m on m.idMaquina = hw.fkMaquina
-           where valorRegistro >= 99 
-           and hi.momentoRegistro > now() - interval 24 hour 
+           where valorRegistro >= 90 
+           and hi.momentoRegistro > now() - interval 1 minute 
            and hw.fkComponente = 2
            and m.fkFilial = ${fkFilial}
            group by hw.fkMaquina
         ) as tabela_comp_2 
-           where contagem > 10
+           where contagem > 5
            
            union all
            
@@ -51,7 +51,7 @@ function get_grafico_donut(fkFilial) {
            join tbHardware as hw on hw.idHardware = hi.fkHardware
            join tbMaquina as m on m.idMaquina = hw.fkMaquina
            where valorRegistro >= 99 
-           and hi.momentoRegistro > now() - interval 24 hour 
+           and hi.momentoRegistro > now() - interval 3 minute
            and hw.fkComponente = 3
            and m.fkFilial = ${fkFilial}
            group by hw.fkMaquina
@@ -72,26 +72,26 @@ function get_grafico_stacked(fkFilial) {
             select count(idHistorico) as 'contagem', m.andarMaquina as 'andar', m.hostName as 'nome'  from tbHistorico as hi
                 join tbHardware as hw on hw.idHardware = hi.fkHardware
                 join tbMaquina as m on m.idMaquina = hw.fkMaquina
-                where valorRegistro >= 99 and hi.momentoRegistro > now() - interval 24 hour and hw.fkComponente = 1
-                and  m.fkFilial  = 1 group by hw.fkMaquina, m.andarMaquina
-        ) as tabela_comp_1 where contagem > 4 group by andar,nome
+                where valorRegistro >= 95 and hi.momentoRegistro > now() - interval 10 minute and hw.fkComponente = 1
+                and  m.fkFilial  = ${fkFilial} group by hw.fkMaquina, m.andarMaquina
+        ) as tabela_comp_1 where contagem >= 1 group by andar,nome
         union all
         select count(contagem) as 'cont',  andar, nome from(
             select count(idHistorico) as 'contagem', m.andarMaquina as 'andar', m.hostName as 'nome'  from tbHistorico as hi
                 join tbHardware as hw on hw.idHardware = hi.fkHardware
                 join tbMaquina as m on m.idMaquina = hw.fkMaquina
-                where valorRegistro >= 99 and hi.momentoRegistro > now() - interval 24 hour and hw.fkComponente = 2 
-                and  m.fkFilial  = 1 group by hw.fkMaquina, m.andarMaquina
-        ) as tabela_comp_2 where contagem > 10 group by andar,nome
+                where valorRegistro >= 90 and hi.momentoRegistro > now() - interval 1 minute and hw.fkComponente = 2
+                and  m.fkFilial  = ${fkFilial} group by hw.fkMaquina, m.andarMaquina
+        ) as tabela_comp_2 where contagem > 5 group by andar,nome
         union all
         select count(contagem) as 'cont',  andar, nome from(
             select count(idHistorico) as 'contagem', m.andarMaquina as 'andar', m.hostName as 'nome'  from tbHistorico as hi
                 join tbHardware as hw on hw.idHardware = hi.fkHardware
                 join tbMaquina as m on m.idMaquina = hw.fkMaquina
-                where valorRegistro >= 99 and hi.momentoRegistro > now() - interval 24 hour and hw.fkComponente = 3 
-                and  m.fkFilial  = 1 group by hw.fkMaquina, m.andarMaquina
+                where valorRegistro >= 99 and hi.momentoRegistro > now() - interval 3 minute and hw.fkComponente = 3
+                and  m.fkFilial  = ${fkFilial} group by hw.fkMaquina, m.andarMaquina
         ) as tabela_comp_3 where contagem > 6 group by andar,nome
-    ) as tabela_final group by andar,tipo order by andar;
+    ) as tabela_final group by andar, tipo order by andar,tipo;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -101,7 +101,7 @@ function listar_maquina(fkFilial) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
     WITH select_gerar_maquina AS (
-        SELECT idHistorico, hostName, nomeComponente, valorRegistro , ROW_NUMBER() OVER (PARTITION BY hostName, nomeComponente ORDER BY idHistorico DESC) AS rn
+        SELECT idHistorico, idMaquina, hostName, nomeComponente, valorRegistro , ROW_NUMBER() OVER (PARTITION BY hostName, nomeComponente ORDER BY idHistorico DESC) AS rn
         FROM tbRedeHospitalar
         
         JOIN tbFilialHospital ON idRede = fkRede
@@ -124,14 +124,19 @@ function listar_maquina(fkFilial) {
     return database.executar(instrucao);
 }
 
-function mostrar_dash(idMaquina) {
+function mostrar_dash(idMaquina,fkFilial) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    select m.idMaquina as 'id',m.nome as 'nome', r.processador as 'processador', r.memoriaRam as 'ram', r.disco as 'disco'
-    from tbMaquina m 
-    inner join tbHistorico r
-        on m.idMaquina = r.fkMaquina
-        where idMaquina = ${idMaquina};
+    SELECT r.nomeRede, m.hostName as 'nome', m.marcaMaquina as 'marca', m.sistemaOperacional as 'sistema' , m.andarMaquina as 'andar'    
+        FROM tbRedeHospitalar as r
+        
+        JOIN tbFilialHospital as f ON idRede = fkRede
+        
+        JOIN tbMaquina as m ON idFilial = fkFilial
+        
+        where fkFilial = ${fkFilial}
+        
+        and idMaquina = ${idMaquina};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

@@ -36,7 +36,7 @@ router.get("/listar_maquina/:fkFilial", function (req, res) {
 router.get("/listar_andar", function (req, res) {
     usuarioController.listar_maquina(req, res);
 });
-router.get("/mostrar_dash/:idMaquina", function (req, res) {
+router.get("/mostrar_dash/:idMaquina&:fkFilial", function (req, res) {
     usuarioController.mostrar_dash(req, res);
 });
 

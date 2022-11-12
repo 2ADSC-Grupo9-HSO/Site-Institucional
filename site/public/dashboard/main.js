@@ -30,14 +30,14 @@ function criar_card() {
                 var disco = []
                 var processador = []
                 var ram = []
+                var id = []
 
                 var tempNome = []
                 var tempTotal = []
                 var tempDisco = []
                 var tempProcessador = []
                 var tempRam = []
-
-
+                var tempId = []
 
                 for (let i = 0; i < resposta.length; i += 3) {
                     var teste = Number(resposta[i].valorRegistro) + Number(resposta[i + 1].valorRegistro) +
@@ -48,6 +48,7 @@ function criar_card() {
                     tempDisco.push(resposta[i].valorRegistro)
                     tempProcessador.push(resposta[i + 1].valorRegistro)
                     tempRam.push(resposta[i + 2].valorRegistro)
+                    tempId.push(resposta[i].idMaquina)
 
                 }
 
@@ -57,6 +58,7 @@ function criar_card() {
                 var forProcessador = tempProcessador[0]
                 var forRam = tempRam[0]
                 var index = 0
+                var forId = tempId[0]
 
                 while (tempNome.length != nome.length) {
                     for (let i = 0; i < tempNome.length; i++) {
@@ -68,7 +70,9 @@ function criar_card() {
                             forDisco = tempDisco[i]
                             forProcessador = tempProcessador[i]
                             forRam = tempRam[i]
+                            forId = tempId[i]
                             index = i
+                            
                         }
                     }
 
@@ -77,20 +81,15 @@ function criar_card() {
                     disco.push(forDisco)
                     processador.push(forProcessador)
                     ram.push(forRam)
+                    id.push(forId)
 
                     tempTotal[index] = -1
                     forTotal = -1
                 }
 
-                console.log(nome);
-                console.log(total);
-                console.log(disco);
-                console.log(processador);
-                console.log(ram);
-
                 for (let i = 0; i < nome.length; i++) {
 
-                    /* var maquina = maquina da vez */
+
                     // var maquina = resposta[i];
                     var apontamento = document.getElementById("temporaria_apontamento");
                     var cardMaquina = document.createElement("div");
@@ -100,13 +99,13 @@ function criar_card() {
                     var nomeMaquina = document.createElement("div");
                     cardMaquina.appendChild(nomeMaquina)
                     nomeMaquina.setAttribute('class', `nome_maquina texto`)
-                    nomeMaquina.setAttribute('onclick', `gerar_modal(1)`)
+                    nomeMaquina.setAttribute('onclick', `gerar_modal(${id[i]})`)
                     // precisa mudar o gerar_modal(1)!!!!!!!!!
 
                     var hover = document.createElement("div");
                     nomeMaquina.appendChild(hover)
                     hover.className = 'div_hover'
-                    hover.innerHTML = nome[i]
+                    hover.innerHTML = nome[i].toUpperCase()
 
                     var div_dado = document.createElement("div");
                     cardMaquina.appendChild(div_dado)
@@ -148,20 +147,24 @@ function criar_card() {
 
 }
 
+function fecharModal() {
+    let modal = document.querySelector('.modal')
+    modal.style.display = 'none';
+}
+
 function gerar_modal(idMaquina) {
 
     let modal = document.querySelector('.modal')
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
+    
+    var fkFilial = sessionStorage.FK_FILIAL;
 
-
-    fetch(`/usuarios/mostrar_dash/${idMaquina}`).then(function (resposta) {
+    fetch(`/usuarios/mostrar_dash/${idMaquina}&${fkFilial}`).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
-                var btn_fechar = document.createElement("div");
-                modal.appendChild(btn_fechar)
-                btn_fechar.setAttribute('class', `sair_modal texto`)
-                btn_fechar.innerHTML = `Fechar`
+                nomeModalMaquina.innerHTML = resposta[0].nome.toUpperCase()
+                console.log(resposta[0].nome)
 
 
 
@@ -173,6 +176,7 @@ function gerar_modal(idMaquina) {
         console.error(resposta);
     });
 };
+
 
 function get_grafico_donut() {
     var fkFilial = sessionStorage.FK_FILIAL;
@@ -190,7 +194,7 @@ function get_grafico_donut() {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                 const labelsDonut = [
-                    'Máquinas Totais',
+                    'Máquinas saudáveis',
                     'Máquinas debilitadas',
                 ];
 
@@ -203,7 +207,7 @@ function get_grafico_donut() {
                         borderColor:
                             ['#44DDFF',
                                 '#FF4343'],
-                        data: [Number(resposta[0].qtd_maquinas_total), Number(resposta[0].qtd_maquinas_debilitadas)],
+                        data: [Number(resposta[0].qtd_maquinas_total) - Number(resposta[0].qtd_maquinas_debilitadas), Number(resposta[0].qtd_maquinas_debilitadas)],
                     }]
                 };
 
@@ -283,15 +287,15 @@ function get_grafico_stacked() {
 
                     }
 
-                    if (resposta[c].tipo == 'm') {
+                    if (resposta[c].tipo == 'm' || resposta[c].tipo == 'M') {
                         tempMedic.push(resposta[c].qtd_total)
                         am = true;
                     }
-                    else if (resposta[c].tipo == 'r') {
+                    else if (resposta[c].tipo == 'r' || resposta[c].tipo == 'R') {
                         tempRecep.push(resposta[c].qtd_total)
                         ar = true;
                     }
-                    else if (resposta[c].tipo == 't') {
+                    else if (resposta[c].tipo == 't' || resposta[c].tipo == 'T') {
                         tempTotem.push(resposta[c].qtd_total)
                         at = true
                     }

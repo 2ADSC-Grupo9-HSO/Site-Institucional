@@ -66,9 +66,10 @@ function get_grafico_stacked(req, res) {
 
 function mostrar_dash(req, res) {
     var idMaquina = req.params.idMaquina;
+    var fkFilial = req.params.fkFilial;
 
 
-    usuarioModel.mostrar_dash(idMaquina)
+    usuarioModel.mostrar_dash(idMaquina,fkFilial)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);

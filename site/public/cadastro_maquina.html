@@ -11,63 +11,36 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <div class="nav">
-            <img src="assets/imgs/logo.png">
-            <img onclick="abrir_menu()" class="imagem_menu" src="assets/imgs/icone5.svg">
-            <ul class="menu">
-                <li class="links"><a href="/site/public/index.html" class="links">Home</a></li>
-                <li class="links"><a href="login_filial.html" class="links">Login</a></li>
-            </ul>
-        </div>
-        <div class="led"></div>
-
-
-    </div>
-
-    <div id="opcoes_menu" class="container_opcoes_menu">
-        <div class="menu_one">
-            <div class="espacos">
-                <p>
-                    <a href="login_filial.html">Login</a>
-                </p>
-            </div>
-            <div class="espacos">
-                <p>
-                    <a href="cadastro_filial.html">Cadastro</a>
-                </p>
-            </div>
-            <div class="espacos last">
-                <a href="https://facebook.com/">
-                    <img src="assets/icons/facebook.png" alt="">
-                </a>
-                <a href="https://instagram.com/">
-                    <img src="assets/icons/instagram.png" alt="">
-                </a>
-                <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
-                    <img src="assets/icons/github.png" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-
-
+    
     <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
             <span id="mensagem_erro"></span>
         </div>
     </div>
 
+    <div class="bar" id="id_navbar">
+        <nav class="container nav">
+            <h3>Olá, <span id="rede"></span></h3>
+            <img onclick="abrir_menu()" class="imagem_menu" src="./assets/imgs/icone3.svg">
+            <ul class="menu ">
+                <li><a class="links" href="#">Minha organização</a></li>
+                <li><a class="links" href="#">Minhas informações</a></li>
+                <li><a class="links" href="#">Sair</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <div id="opcoes_menu" class="container_opcoes_menu">
         <div class="menu_one">
             <div class="espacos">
                 <p>
-                    <a href="#">Login</a>
+                    <a class="links" href="#">Minha organização</a>
                 </p>
-            </div>
-            <div class="espacos">
                 <p>
-                    <a href="#">Cadastro</a>
+                    <a class="links" href="#">Minhas informações</a>
+                </p>
+                <p>
+                    <a class="links" href="#">Sair</a>
                 </p>
             </div>
             <div class="espacos last">
@@ -83,75 +56,52 @@
             </div>
         </div>
     </div>
-    <section class="imagemFundo3" id="sec_inicio">
 
+    <div class="container-cadastro">
+        <section class="card-cadastro">
+            <h1>Cadastre suas máquinas:</h1>
 
-        <div class="pai_cadastro1">
-            <div class="cadastro1">
-                <h1>Cadastre sua máquina:</h1>
-
-
-                <input type="text" placeholder="Host Name" id="input_hostName">
-                <input type="text" placeholder="Marca" id="input_marca">
-                <input type="text" placeholder="Sistema Operacional" id="input_so">
-                <input type="text" placeholder="Andar" id="input_andar">
-                <input type="password" placeholder="Senha" id="input_senha">
-
-                <button onclick="cadastrarMaquina()">Cadastrar</button>
-
+            <div>
+                <label class="label" for="input_hostName">Host Name:</label>
+                <input type="text" id="input_hostName" style="background-image: url('./assets/icons/computador.png')">
             </div>
 
-        </div>
+            <div class="campos-pequenos">
+                <div>
+                    <label class="label" for="input_marca">Marca:</label>
+                    <input type="text" id="input_marca" style="background-image: url('./assets/icons/marca-de-verificacao.png')">
+                </div>
+                <div>
+                    <label class="label" for="input_so">Sistema Operacional:</label>
+                    <input type="text" id="input_so" style="background-image: url('./assets/icons/atualizacao-do-sistema.png')">
+                </div>
+            </div>
 
-    </section>
+            <div class="campos-pequenos">
+                <div>
+                    <label class="label" for="input_andar">Andar:</label>
+                    <input type="text" id="input_andar" style="background-image: url('./assets/icons/elevador.png')">
+                </div>
+            </div>
+
+            <div>
+                <label class="label" for="input_senha">Senha:</label>
+                <input type="password" id="input_senha" style="background-image: url('./assets/icons/seguranca.png')">
+                <p class="aviso">A senha deve ter ao menos 8 caracteres</p>
+            </div>
+
+            <button class="b1" onclick="cadastrarMaquina()">Cadastrar</button>
+        </section>
+    </div>
 
 </body>
 
 </html>
+
+<script src="./js/navbar.js"></script>
+
 <script>
-    //     let desbloqueado = true;
-
-    // function abrir_menu() {
-
-    //     if (desbloqueado) {
-    //         opcoes_menu.style.display = "flex";
-    //         opcoes_menu.style.position = "fixed";
-    //         opcoes_menu.style.position = "fixed";
-    //         id_navbar.style.backgroundColor = " white"
-    //         id_navbar.style.borderBottom = "solid 2px #858585"
-    //         desbloqueado = false;
-
-    //     } else if (!desbloqueado) {
-    //         id_navbar.style.backgroundColor = "#000000C7"
-    //         id_navbar.style.borderBottom = "none"
-    //         opcoes_menu.style.display = "none";
-    //         desbloqueado = true;
-    //     }
-
-    // }
-
-    // window.addEventListener('resize', resizeHandler);
-
-    // resizeHandler();
-
-    // function resizeHandler(){
-    //     const tela = window.innerWidth;
-    //     if(tela > 600){
-    //         desbloqueado = false;
-    //         abrir_menu();
-    //     }
-    // }
-
-    // function change_screen(n) {
-    //     switch (n) {
-    //         case 1:
-    //             window.location = "#sec_sobre"
-    //             break;
-    //         case 2:
-    //             window.location = "#sec_empresa"
-    //     }
-    // }
-
+    
     function cadastrarMaquina() {
 
         //Recupere o valor da nova input pelo nome do id

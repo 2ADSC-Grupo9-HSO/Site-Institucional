@@ -13,34 +13,29 @@
 </head>
 
 <body>
+
     <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
             <span id="mensagem_erro"></span>
         </div>
     </div>
-    <div id="id_navbar" class="navbar">
 
-        <div class="nav">
-            <img src="assets/imgs/logo.png">
-            <img onclick="abrir_menu()" class="imagem_menu" src="../assets/imgs/icone5.svg">
+    <div class="bar" id="id_navbar">
+        <nav class="container nav">
+            <img src="assets/imgs/logo.png" class="logo">
+            <img onclick="abrir_menu()" class="imagem_menu" src="./assets/imgs/icone3.svg">
             <ul class="menu">
-                <li class="links um"><a href="index.html" class="links">Home</a></li>
-                <li class="links dois"><a href="login_filial.html" class="links">Login</a></li>
+                <li><a class="links" href="./index.html">Home</a></li>
+                <li><a class="links agora" href="#">Login</a></li>
             </ul>
-        </div>
-
+        </nav>
     </div>
 
     <div id="opcoes_menu" class="container_opcoes_menu">
         <div class="menu_one">
             <div class="espacos">
                 <p>
-                    <a href="login_filial.html">Login</a>
-                </p>
-            </div>
-            <div class="espacos">
-                <p>
-                    <a href="cadastro_filial.html">Cadastro</a>
+                    <a href="index.html">Home</a>
                 </p>
             </div>
             <div class="espacos last">
@@ -57,89 +52,37 @@
         </div>
     </div>
 
-
-
-    <div class="cont">
-
-        <div class="imagem" id="div_imagem">
-            <h1>Olá!</h1>
-        </div>
-
-        <div class="formulario" id="div_form">
-            <div class="form">
-                <h1>Bem-vindo!</h1>
-
-                <input type="text" placeholder="Email" id="input_cpf_cnpj">
-                <input type="password" placeholder="Senha" id="input_senha">
-
-                <button onclick="entrar()">Entrar</button>
+    <div class="container-cadastro">
+        <section class="card-cadastro">
+            <h1>olá novamente!</h1>
+            
+            <div>
+                <label class="label" for="input_email">Email:</label>
+                <input type="email" id="input_email" style="background-image: url('./assets/icons/o-email.png')">
             </div>
-        </div>
 
+            <div>
+                <label class="label" for="input_senhaUsuario">Senha:</label>
+                <input type="password" id="input_senhaUsuario"
+                    style="background-image: url('./assets/icons/seguranca.png')">
+            </div>
 
+            <button class="b1" onclick="entrar()">Entrar</button>
+        </section>
     </div>
 
 </body>
 
 </html>
+
+<script src="./js/navbar.js"></script>
+
 <script>
-    let desbloqueado = true;
-
-
-
-    function abrir_menu() {
-
-        if (desbloqueado) {
-            opcoes_menu.style.display = "flex";
-            opcoes_menu.style.position = "fixed";
-            opcoes_menu.style.position = "fixed";
-            id_navbar.style.backgroundColor = " white";
-            id_navbar.style.borderBottom = "solid 2px #858585";
-            desbloqueado = false;
-
-
-        } else if (!desbloqueado) {
-            id_navbar.style.backgroundColor = "#000000C7"
-            id_navbar.style.borderBottom = "none"
-            opcoes_menu.style.display = "none"
-
-            desbloqueado = true;
-        }
-
-    }
-
-    window.addEventListener('resize', resizeHandler);
-
-    resizeHandler();
-
-    function resizeHandler() {
-        const tela = window.innerWidth;
-        if (tela > 600) {
-            desbloqueado = false;
-
-            abrir_menu();
-        }
-    }
-
-    function change_screen(n) {
-        switch (n) {
-            case 1:
-                window.location = "#sec_sobre"
-                break;
-            case 2:
-                window.location = "#sec_empresa"
-        }
-    }
-
-
 
     function entrar() {
 
-
         var cpf_cnpjVar = input_cpf_cnpj.value;
         var senhaVar = input_senha.value;
-
-
 
         var temErro = false;
 
@@ -152,7 +95,7 @@
         if (cpf_cnpjVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "Todos os campos devem ser preenchidos!";
-        
+
             if (cpf_cnpjVar == "") {
                 input_cpf_cnpj.style.borderColor = "red";
             }
@@ -162,7 +105,6 @@
             }
 
         }
-
 
         if (senhaVar.length < 8) {
             cardErro.style.display = "block"
@@ -179,72 +121,9 @@
             setInterval(sumirMensagem, 10000)
         }
 
-        /*        if (cpf_cnpjVar == "" || senhaVar == "") {
-                   cardErro.style.display = "block"
-                   mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-                   return false;
-               } */
-        /* else {
-            setInterval(sumirMensagem, 5000)
-        } */
-
         console.log("FORM LOGIN: ", cpf_cnpjVar);
         console.log("FORM SENHA: ", senhaVar);
 
-        
-
-
-        /* if (cpf_cnpjVar.length == 14) {
-
-            fetch("/usuarios/autenticarFilial", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    cpf_cnpjServer: cpf_cnpjVar,
-                    senhaServer: senhaVar
-                })
-            }).then(function (resposta) {
-                console.log("ESTOU NO THEN DO entrar()!")
-
-                if (resposta.ok) {
-                    console.log(resposta);
-
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-
-                        //pega os valores que o usuario coloca e guarda 
-                        sessionStorage.ID_FILIAL = json.idFilial;
-                        sessionStorage.NOME_REDE = json.nomeRede;
-                        //sessionStorage.ID_FILIAL = json.id;
-                        //sessionStorage.ID_SESSAO= (Math.random() * 10000).toFixed(0);
-                        //math random sorteia numero entre 0 e 1, pode multiplicar por qualquer numero 
-
-                        setTimeout(function () {
-                            window.location = "cadastro_usuario.html";
-                        }, 1000); // apenas para exibir o loading
-
-                    });
-
-                } else {
-
-                    console.log("Houve um erro ao tentar realizar o login!");
-
-                    resposta.text().then(texto => {
-                        console.error(texto);
-
-                    });
-                }
-
-            }).catch(function (erro) {
-                console.log(erro);
-            })
-
-            return false;
-        } */
-        // else {
         fetch("/usuarios/autenticarUsuario", {
             method: "POST",
             headers: {
@@ -320,6 +199,6 @@
 
     function sumirMensagem() {
         cardErro.style.display = "none"
-    } 
+    }
 
 </script>

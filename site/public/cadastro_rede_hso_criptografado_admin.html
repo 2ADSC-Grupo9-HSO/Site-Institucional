@@ -11,23 +11,28 @@
 </head>
 
 <body>
-    <div id="id_navbar"  class="navbar">
-        <div class="nav">
-            <img src="assets/imgs/logo.png">
-            <img onclick="abrir_menu()" class="imagem_menu" src="assets/imgs/icone5.svg">
-            <ul class="menu">
-            </ul>
+
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
         </div>
-        <div class="led"></div>
+    </div>
 
-
+    <div class="bar" id="id_navbar">
+        <nav class="container nav">
+            <h3>Olá, funcionario HSO</h3>
+            <img onclick="abrir_menu()" class="imagem_menu" src="./assets/imgs/icone3.svg">
+            <ul class="menu">
+                <li><a class="links" href="#">Nossos Clientes</a></li>
+            </ul>
+        </nav>
     </div>
 
     <div id="opcoes_menu" class="container_opcoes_menu">
         <div class="menu_one">
             <div class="espacos">
                 <p>
-                    <a href="index.html">Início</a>
+                    <a class="links" href="#">Nossos Clientes</a>
                 </p>
             </div>
             <div class="espacos last">
@@ -44,99 +49,38 @@
         </div>
     </div>
 
+    <div class="container-cadastro">
+        <section class="card-cadastro">
+            <h1>Cadastre a rede:</h1>
 
-    <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
-        </div>
-    </div>
-
-    <div id="opcoes_menu" class="container_opcoes_menu">
-        <div class="menu_one">
-            <div class="espacos">
-                <p>
-                    <a href="#">Home</a>
-                </p>
-            </div>
-        </div>
-        <div class="espacos last">
-            <a href="https://facebook.com/">
-                <img src="assets/icons/facebook.png" alt="">
-            </a>
-            <a href="https://instagram.com/">
-                <img src="assets/icons/instagram.png" alt="">
-            </a>
-            <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
-                <img src="assets/icons/github.png" alt="">
-            </a>
-        </div>
-    </div>
-    </div>
-    <section class="imagemFundo3" id="sec_inicio">
-
-
-        <div class="pai_cadastro1">
-            <div class="cadastro1">
-                <h1>Cadastre a rede:</h1>
-
-
-                <input type="text" placeholder="Nome da Rede" id="input_nomeRede">
-                <input type="email" placeholder="Email" id="input_email">
-                <input type="password" placeholder="Senha" id="input_senha">
-
-                <button onclick="cadastrarRede()">Cadastrar</button>
-
+            <div>
+                <label class="label" for="input_nomeRede">Nome da Rede:</label>
+                <input type="text" id="input_nomeRede" style="background-image: url('./assets/icons/hospital.png')">
             </div>
 
-        </div>
+            <div>
+                <label class="label" for="input_email">Email:</label>
+                <input type="email" id="input_email" style="background-image: url('./assets/icons/o-email.png')">
+            </div>
 
-    </section>
+            <div>
+                <label class="label" for="input_senha">Senha:</label>
+                <input type="password" id="input_senha" style="background-image: url('./assets/icons/seguranca.png')">
+                <p class="aviso">A senha deve ter ao menos 8 caracteres</p>
+            </div>
+
+            <button class="b1" onclick="cadastrarRede()">Cadastrar</button>
+        </section>
+    </div>
 
 </body>
 
 </html>
+
+<script src="./js/navbar.js"></script>
+
 <script>
-    let desbloqueado = true;
-
-    function abrir_menu() {
-
-        if (desbloqueado) {
-            opcoes_menu.style.display = "flex";
-            opcoes_menu.style.position = "fixed";
-            opcoes_menu.style.position = "fixed";
-            id_navbar.style.backgroundColor = " white"
-            id_navbar.style.borderBottom = "solid 2px #858585"
-            desbloqueado = false;
-
-        } else if (!desbloqueado) {
-            id_navbar.style.backgroundColor = "#000000C7"
-            id_navbar.style.borderBottom = "none"
-            opcoes_menu.style.display = "none";
-            desbloqueado = true;
-        }
-
-    }
-
-    window.addEventListener('resize', resizeHandler);
-
-    resizeHandler();
-
-    function resizeHandler() {
-        const tela = window.innerWidth;
-        if (tela > 600) {
-            desbloqueado = false;
-            abrir_menu();
-        }
-    }
-
- /*    function change_screen(n) {
-        switch (n) {
-            case 1:
-                window.location = "#sec_sobre"
-                break;
-        }
-    } */
-
+    
     function cadastrarRede() {
 
         //Recupere o valor da nova input pelo nome do id
@@ -173,7 +117,7 @@
             temErro = true;
         }
 
-        if(nomeRedeVar.length < 4){
+        if (nomeRedeVar.length < 4) {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />O nome da rede deve ter ao menos 4 letras.";
 
@@ -182,7 +126,7 @@
             temErro = true;
         }
 
-        if(emailVar.indexOf("@") < 4 || emailVar.indexOf(" ") > -1 || emailVar.indexOf(".") < 0){
+        if (emailVar.indexOf("@") < 4 || emailVar.indexOf(" ") > -1 || emailVar.indexOf(".") < 0) {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />Digite um email valido.";
 
@@ -191,7 +135,7 @@
             temErro = true;
         }
 
-        if(senhaVar.length < 8){
+        if (senhaVar.length < 8) {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
 
@@ -200,9 +144,9 @@
             temErro = true;
         }
 
-        if(temErro){
+        if (temErro) {
             return false;
-        } else{
+        } else {
             setInterval(sumirMensagem, 10000)
         }
 

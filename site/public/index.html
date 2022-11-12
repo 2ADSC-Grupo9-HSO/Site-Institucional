@@ -14,17 +14,15 @@
 
 
 
-    <div id="id_navbar" class="navbar">
-
-        <div class="nav">
-            <img src="assets/imgs/logo.png">
-            <img onclick="abrir_menu()" class="imagem_menu" src="../assets/imgs/icone5.svg">
-            <ul class="menu">
-                <li class="links um"><a href="index.html" class="links">Home</a></li>
-                <li class="links dois"><a href="login_filial.html" class="links">Login</a></li>
+    <div class="bar" id="id_navbar">
+        <nav class="container nav">
+            <img src="assets/imgs/logo.png" class="logo">
+            <img onclick="abrir_menu()" class="imagem_menu" src="./assets/imgs/icone3.svg">
+            <ul class="menu cadastro">
+                <li><a id="id_link" class="links agora" href="#">Home</a></li>
+                <li><a id="id_link" class="links" href="./login_filial.html">Login</a></li>
             </ul>
-        </div>
-
+        </nav>
     </div>
 
     <div id="opcoes_menu" class="container_opcoes_menu">
@@ -47,6 +45,7 @@
             </div>
         </div>
     </div>
+    
     <section class="imagemFundo" id="sec_inicio">
 
         <div class="container informaçao">
@@ -255,4 +254,5 @@
 
 </html>
 
+<script src="./js/navbar.js"></script>
 <script src="./js/main.js"></script>

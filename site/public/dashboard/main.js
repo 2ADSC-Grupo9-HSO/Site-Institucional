@@ -72,7 +72,7 @@ function criar_card() {
                             forRam = tempRam[i]
                             forId = tempId[i]
                             index = i
-                            
+
                         }
                     }
 
@@ -150,13 +150,18 @@ function criar_card() {
 function fecharModal() {
     let modal = document.querySelector('.modal')
     modal.style.display = 'none';
+    clearTimeout(proximaAtualizacao)
+
+    var varGraficoModal = document.getElementById("graficoModal")
+    var divGraficoModal = document.getElementById("graficoMaquina")
+    divGraficoModal.removeChild(varGraficoModal)
 }
 
 function gerar_modal(idMaquina) {
 
     let modal = document.querySelector('.modal')
     modal.style.display = 'flex';
-    
+
     var fkFilial = sessionStorage.FK_FILIAL;
 
     fetch(`/usuarios/mostrar_dash/${idMaquina}&${fkFilial}`).then(function (resposta) {
@@ -164,10 +169,12 @@ function gerar_modal(idMaquina) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 nomeModalMaquina.innerHTML = resposta[0].nome.toUpperCase()
-                console.log(resposta[0].nome)
+                infoRede.innerHTML = "Rede: " + resposta[0].nomeRede.toUpperCase()
+                infoAndar.innerHTML = "Andar: " + resposta[0].andar + "º"
+                infoMarca.innerHTML = "Marca: " + resposta[0].marca.toUpperCase()
+                infoSistema.innerHTML = "SO: " + resposta[0].sistema.toUpperCase()
 
-
-
+                setInterval(obterDadosGrafico(idMaquina), 5000)
             });
         } else {
             throw ('Houve um erro na API!');

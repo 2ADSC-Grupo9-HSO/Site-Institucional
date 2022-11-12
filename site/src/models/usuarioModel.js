@@ -1,22 +1,9 @@
 var database = require("../database/config")
 
-/* function mostrar_dash() {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucao = `
-    select m.idMaquina as 'id', m.nome as 'hostname', r.valorCPU as 'processador', r.valorMemoria as 'ram', r.valorDisco as 'disco'
-    from tbMaquina m 
-    inner join tbRegistros r
-        on m.idMaquina = r.fkMaquina
-        where andarMaquina = 1;
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-} */
-
 function get_grafico_donut(fkFilial) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_donut()");
     var instrucao = `
-    select sum(cont) as "qtd_maquinas_debilitadas", (select count(idMaquina) from tbMaquina where fkFilial = 1) as "qtd_maquinas_total" from(
+    select sum(cont) as "qtd_maquinas_debilitadas", (select count(idMaquina) from tbMaquina where fkFilial = ${fkFilial}) as "qtd_maquinas_total" from(
 
         select count(contagem) as 'cont' from(
           select count(fkMaquina) as 'contagem' from tbHistorico as hi

@@ -81,27 +81,27 @@
 
     function entrar() {
 
-        var cpf_cnpjVar = input_cpf_cnpj.value;
-        var senhaVar = input_senha.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senhaUsuario.value;
 
         var temErro = false;
 
         cardErro.style.display = "none"
         mensagem_erro.innerHTML = "";
 
-        input_cpf_cnpj.style.borderColor = "grey";
-        input_senha.style.borderColor = "grey";
+        input_email.style.borderColor = "grey";
+        input_senhaUsuario.style.borderColor = "grey";
 
-        if (cpf_cnpjVar == "" || senhaVar == "") {
+        if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "Todos os campos devem ser preenchidos!";
 
-            if (cpf_cnpjVar == "") {
-                input_cpf_cnpj.style.borderColor = "red";
+            if (emailVar == "") {
+                input_email.style.borderColor = "red";
             }
 
             if (senhaVar == "") {
-                input_senha.style.borderColor = "red";
+                input_senhaUsuario.style.borderColor = "red";
             }
 
         }
@@ -110,7 +110,7 @@
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres";
 
-            input_senha.style.borderColor = "red";
+            input_senhaUsuario.style.borderColor = "red";
 
             temErro = true;
         }
@@ -121,7 +121,7 @@
             setInterval(sumirMensagem, 10000)
         }
 
-        console.log("FORM LOGIN: ", cpf_cnpjVar);
+        console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
         fetch("/usuarios/autenticarUsuario", {
@@ -130,7 +130,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                cpf_cnpjServer: cpf_cnpjVar,
+                cpf_cnpjServer: emailVar,
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {
@@ -143,7 +143,7 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    console.log(input_cpf_cnpj.value)
+                    console.log(input_email.value)
 
                     if (json.cpf.length == 14 && json.cpf.indexOf("@") < 0) {
                         sessionStorage.FK_FILIAL = json.fkFilial;

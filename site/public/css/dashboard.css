@@ -469,6 +469,15 @@ body{
     align-items: center;
     border: #4400ff solid 2px;
 }
+.infoMaquina{
+    width: 15%;
+    height: 40%;
+    border: #FF4343 solid 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
 .graficoMaquina{
     width: 60%;
     height: 100%;

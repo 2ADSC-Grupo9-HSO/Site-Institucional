@@ -78,7 +78,7 @@
                 </div>
                 <div>
                     <label class="label" for="input_cpf">CPF:</label>
-                    <input type="number" id="input_cpf" style="background-image: url('./assets/icons/id-card.png')">
+                    <input type="text" id="input_cpf" style="background-image: url('./assets/icons/id-card.png')">
                 </div>
             </div>
 
@@ -97,6 +97,7 @@
 </html>
 
 <script src="./js/navbar.js"></script>
+<script src="./js/mascaras.js"></script>
 
 <script>
     
@@ -106,8 +107,11 @@
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
 
+        let cpfSemPontos = input_cpf.value.replaceAll('.', '');
+        let cpfFormatado = cpfSemPontos.replaceAll('-', '');
+
         var nomeUsuarioVar = input_nomeUsuario.value;
-        var cpfVar = input_cpf.value;
+        var cpfVar = cpfFormatado;
         var funcaoVar = input_funcao.value;
         var emailVar = input_email.value;
         var senhaUsuarioVar = input_senhaUsuario.value;

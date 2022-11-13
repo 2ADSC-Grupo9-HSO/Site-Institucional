@@ -851,13 +851,13 @@ input:focus {
   }
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.inp_num::-webkit-outer-spin-button,
+.inp_num::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type=number] {
+.inp_num[type=number] {
   -moz-appearance: textfield;
 }
 

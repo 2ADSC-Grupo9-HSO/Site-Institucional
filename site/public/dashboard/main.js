@@ -20,6 +20,7 @@ setInterval(() => {
 
 function criar_card() {
     var fkFilial = sessionStorage.FK_FILIAL;
+    temporaria_apontamento.innerHTML = ''
     fetch(`/usuarios/listar_maquina/${fkFilial}`).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
@@ -40,14 +41,13 @@ function criar_card() {
                 var tempId = []
 
                 for (let i = 0; i < resposta.length; i += 3) {
-                    var teste = Number(resposta[i].valorRegistro) + Number(resposta[i + 1].valorRegistro) +
-                        Number(resposta[i + 2].valorRegistro);
+                    var teste = Number(resposta[i].valorRegistro) + Number(resposta[i + 1].valorRegistro) + Number(resposta[i + 2].valorRegistro);
 
                     tempNome.push(resposta[i].hostName)
                     tempTotal.push(teste)
-                    tempDisco.push(resposta[i].valorRegistro)
-                    tempProcessador.push(resposta[i + 1].valorRegistro)
-                    tempRam.push(resposta[i + 2].valorRegistro)
+                    tempProcessador.push(resposta[i].valorRegistro)
+                    tempRam.push(resposta[i + 1].valorRegistro)
+                    tempDisco.push(resposta[i + 2].valorRegistro)
                     tempId.push(resposta[i].idMaquina)
 
                 }

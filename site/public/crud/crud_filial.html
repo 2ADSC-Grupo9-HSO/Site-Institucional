@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSO | Maquinas</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="icon" href="../assets/icons/icone_head.ico" />
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HSO | Filiais</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="icon" href="../assets/icons/icone_head.ico" />
+    </head>
 
-<body onload="criar_card_maquina()">
+<body onload="criar_card_filial()">
     <div class="bar" id="id_navbar">
         <nav class="container nav">
             <h3>Olá, <span id="rede"></span></h3>
@@ -59,32 +59,3 @@
 <script src="./js/crud.js"></script>
 <script src="../js/navbar.js"></script>
 <script src="../js/login.js"></script>
-
-<script>
-    function gerar_modal(idMaquina) {
-
-        let modal = document.querySelector('.modal')
-        modal.style.display = 'flex';
-
-        var fkFilial = sessionStorage.FK_FILIAL;
-
-        fetch(`/usuarios/mostrar_dash/${idMaquina}&${fkFilial}`).then(function (resposta) {
-            if (resposta.ok) {
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    nomeModalMaquina.innerHTML = resposta[0].nome.toUpperCase()
-                    infoRede.innerHTML = "Rede: " + resposta[0].nomeRede.toUpperCase()
-                    infoAndar.innerHTML = "Andar: " + resposta[0].andar + "º"
-                    infoMarca.innerHTML = "Marca: " + resposta[0].marca.toUpperCase()
-                    infoSistema.innerHTML = "SO: " + resposta[0].sistema.toUpperCase()
-
-                    setInterval(obterDadosGrafico(idMaquina), 5000)
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-        });
-    };
-</script>

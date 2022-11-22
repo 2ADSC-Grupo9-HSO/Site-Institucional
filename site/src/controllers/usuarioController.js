@@ -161,6 +161,9 @@ function cadastrarFilial(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 
     var cep = req.body.cepServer;
+    var rua = req.body.ruaServer;
+    var bairro = req.body.bairroServer;
+    var cidade = req.body.cidadeServer;
     var numero = req.body.numeroServer;
     var complemento = req.body.complementoServer;
     var emailFilial = req.body.emailFilialServer;
@@ -183,7 +186,7 @@ function cadastrarFilial(req, res) {
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarFilial(cep, numero, complemento, emailFilial, cnpj, senha, fkRede)
+        usuarioModel.cadastrarFilial(cep, rua, bairro, cidade, numero, complemento, emailFilial, cnpj, senha, fkRede)
             .then(
                 function (resultado) {
                     res.json(resultado);

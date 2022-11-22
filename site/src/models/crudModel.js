@@ -46,7 +46,7 @@ function listar_filial(idRede) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
     WITH select_gerar_funcionario AS (
-        SELECT idFilial, cepFilial, numeroEndFilial, complementoEnd, cnpjFilial, emailFilial, senhaFilial, ROW_NUMBER() OVER (PARTITION BY cepFilial ORDER BY idFilial DESC) AS rn
+        SELECT idFilial, cepFilial, ruaFilial, bairroFilial, cidadeFilial, numeroEndFilial, complementoEnd, cnpjFilial, emailFilial, senhaFilial, ROW_NUMBER() OVER (PARTITION BY ruaFilial ORDER BY idFilial DESC) AS rn
         FROM tbRedeHospitalar
         
         JOIN tbFilialHospital ON idRede = fkRede

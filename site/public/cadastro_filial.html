@@ -74,7 +74,23 @@
                 </div>
                 <div>
                     <label class="label" for="input_cep">CEP:</label>
-                    <input type="text" id="input_cep" style="background-image: url('./assets/icons/cep.png')">
+                    <input type="text" id="input_cep" onblur="pesquisacep(this.value)" style="background-image: url('./assets/icons/cep.png')">
+                </div>
+            </div>
+
+            <div>
+                <label class="label" for="input_rua">Rua:</label>
+                <input type="text" id="input_rua" style="background-image: url('./assets/icons/seguranca.png')">
+            </div>
+
+            <div class="campos-pequenos">
+                <div>
+                    <label class="label" for="input_bairro">Bairro:</label>
+                    <input type="text" id="input_bairro" style="background-image: url('./assets/icons/localizador-de-mapa.png')">
+                </div>
+                <div>
+                    <label class="label" for="input_cidade">Cidade:</label>
+                    <input type="text" id="input_cidade" style="background-image: url('./assets/icons/localizador-de-mapa.png')">
                 </div>
             </div>
 
@@ -107,6 +123,7 @@
 <script src="./js/mascaras.js"></script>
 <script src="./js/navbar.js"></script>
 <script src="./js/login.js"></script>
+<script src="./js/cep.js"></script>
 
 <script>
     
@@ -121,6 +138,9 @@
         let cepFormatado = input_cep.value.replaceAll('-', '');
 
         var cepVar = cepFormatado;
+        var ruaVar = input_rua.value;
+        var bairroVar = input_bairro.value;
+        var cidadeVar = input_cidade.value;
         var numeroVar = input_numero.value;
         var complementoVar = input_complemento.value;
         var emailFilialVar = input_emailFilial.value;
@@ -211,6 +231,9 @@
                 // Agora vá para o arquivo routes/usuario.js
 
                 cepServer: cepVar,
+                ruaServer: ruaVar,
+                bairroServer: bairroVar,
+                cidadeServer: cidadeVar,
                 numeroServer: numeroVar,
                 complementoServer: complementoVar,
                 emailFilialServer: emailFilialVar,

@@ -108,6 +108,9 @@ function criar_card_filial() {
 
                 let id = [];
                 let cep = [];
+                let rua = [];
+                let bairro = [];
+                let cidade = [];
                 let numEnd = [];
                 let comple = [];
                 let email = [];
@@ -118,19 +121,25 @@ function criar_card_filial() {
 
                     id.push(resposta[i].idFilial);
                     cep.push(resposta[i].cepFilial);
+                    rua.push(resposta[i].ruaFilial);
+                    bairro.push(resposta[i].bairroFilial);
+                    cidade.push(resposta[i].cidadeFilial);
                     numEnd.push(resposta[i].numeroEndFilial);
                     comple.push(resposta[i].complementoEnd);
                     email.push(resposta[i].emailFilial);
                     cnpj.push(resposta[i].cnpjFilial);
                     senha.push(resposta[i].senhaFilial);
 
-                }
+                } //ruaFilial, bairroFilial, cidadeFilial
 
                 for (let i = 0; i < cep.length; i++) {
                     divCrud.innerHTML += `
                         <div class="card" onclick="mostrarModal(${id[i]})">
                             ${id[i]}
                             ${cep[i]}
+                            ${rua[i]}
+                            ${bairro[i]}
+                            ${cidade[i]}
                             ${numEnd[i]}
                             ${comple[i]}
                             ${email[i]}
@@ -151,13 +160,13 @@ function criar_card_filial() {
 
 }
 
-function mostrarModal(id) {
+function mostrar_modal(id) {
     fetch(``).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-
+                console.log(id);
 
             });
         } else {

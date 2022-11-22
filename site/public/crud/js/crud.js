@@ -1,3 +1,5 @@
+const { json } = require("express");
+
 function criar_card_maquina() {
     var fkFilial = sessionStorage.FK_FILIAL;
     fetch(`/crud/listar_maquina/${fkFilial}`).then(function (resposta) {
@@ -26,7 +28,7 @@ function criar_card_maquina() {
 
                 for (let i = 0; i < nome.length; i++) {
                     divCrud.innerHTML += `
-                        <div class="cardMaquinaWww">
+                        <div class="card" onclick="mostrarModal(${id[i]})">
                             ${id[i]}
                             ${nome[i]}
                             ${marca[i]}
@@ -75,7 +77,7 @@ function criar_card_funcionario() {
 
                 for (let i = 0; i < nome.length; i++) {
                     divCrud.innerHTML += `
-                        <div class="cardMaquinaWww">
+                        <div class="card" onclick="mostrarModal(${id[i]})">
                             ${id[i]}
                             ${nome[i]}
                             ${cargo[i]}
@@ -126,7 +128,7 @@ function criar_card_filial() {
 
                 for (let i = 0; i < cep.length; i++) {
                     divCrud.innerHTML += `
-                        <div class="cardMaquinaWww">
+                        <div class="card" onclick="mostrarModal(${id[i]})">
                             ${id[i]}
                             ${cep[i]}
                             ${numEnd[i]}
@@ -148,3 +150,22 @@ function criar_card_filial() {
     });
 
 }
+
+function mostrarModal(id) {
+    fetch(``).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+
+
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+
+// AVISAR O NAKA QUE A MARIA JÁ FOI E QUE ELA TÁ COM O CORRETIVO DELE

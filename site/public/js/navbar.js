@@ -6,11 +6,11 @@ function abrir_menu() {
         opcoes_menu.style.display = "flex";
         opcoes_menu.style.position = "fixed";
         opcoes_menu.style.position = "fixed";
-        id_navbar.style.backgroundColor = "#FFFFFF"
+        id_navbar.style.backgroundColor = "#F0F8FF"
         desbloqueado = false;
 
     } else if (!desbloqueado) {
-        id_navbar.style.backgroundColor = "#FFFFFF"
+        id_navbar.style.backgroundColor = "#F0F8FF"
         opcoes_menu.style.display = "none";
         desbloqueado = true;
     }

@@ -15,7 +15,8 @@ function destruir_graficos() {
 
 setInterval(() => {
     destruir_graficos();
-    gerar_graficos()
+    gerar_graficos();
+    criar_card();
 }, 5000)
 
 function criar_card() {
@@ -169,10 +170,10 @@ function gerar_modal(idMaquina) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
                 nomeModalMaquina.innerHTML = resposta[0].nome.toUpperCase()
-                infoRede.innerHTML = "Rede: " + resposta[0].nomeRede.toUpperCase()
-                infoAndar.innerHTML = "Andar: " + resposta[0].andar + "º"
-                infoMarca.innerHTML = "Marca: " + resposta[0].marca.toUpperCase()
-                infoSistema.innerHTML = "SO: " + resposta[0].sistema.toUpperCase()
+                infoRede.innerHTML = "Rede: <br>" + resposta[0].nomeRede.toUpperCase()
+                infoAndar.innerHTML = "Andar: <br>" + resposta[0].andar + "º"
+                infoMarca.innerHTML = "Marca: <br>" + resposta[0].marca.toUpperCase()
+                infoSistema.innerHTML = "SO: <br>" + resposta[0].sistema.toUpperCase()
 
                 setInterval(obterDadosGrafico(idMaquina), 5000)
             });
@@ -241,17 +242,19 @@ function get_grafico_donut() {
 function get_grafico_stacked() {
     var fkFilial = sessionStorage.FK_FILIAL;
 
-    var div_pai = document.getElementById('grafico_atividade')
-
-    var new_canva = document.createElement('canvas')
-    new_canva.id = 'myChartAtividade'
-
-    div_pai.append(new_canva)
 
     fetch(`/usuarios/get_grafico_stacked/${fkFilial}`).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+
+                var div_pai = document.getElementById('grafico_atividade')
+
+                var new_canva = document.createElement('canvas')
+                new_canva.id = 'myChartAtividade'
+
+                div_pai.append(new_canva)
 
                 var tempLabel = [];
                 var auxLabel = [];
@@ -354,6 +357,17 @@ function get_grafico_stacked() {
                 );
 
             });
+        }
+        if (resposta.status == 204) {
+            var div_pai = document.getElementById('grafico_atividade')
+            var div_filho = document.createElement('div')
+
+            div_pai.appendChild(div_filho)
+
+            div_filho.innerHTML = '<img class="foto_graf" src="../assets/icons/ok.png">'
+            div_filho.id = 'myChartAtividade'
+            div_filho.className = 'maquina_tot_pro'
+            maquina_tot_problema.innerHTML = 'Sem Máquinas com Problemas'
         } else {
             throw ('Houve um erro na API!');
         }

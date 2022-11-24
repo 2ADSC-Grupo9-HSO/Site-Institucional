@@ -1,103 +1,139 @@
-body{
+body {
     margin: 0;
+    margin-left: 1%;
     padding: 0;
     top: 0;
     left: 0;
     background-color: #4C5158;
     display: flex;
+    justify-content: space-between;
     height: 100vh;
     font-family: sans-serif;
 }
 
 
 
-.navgator{
+.navgator {
     height: 99vh;
-    width: 20%;
+    width: 20vw;
 }
-.logo{
+
+.logo {
     height: 120px;
     width: 100%;
 
 }
-.container_botão{
+
+.container_botão {
     background-color: #00BFFF;
     width: 100%;
-    height: 100px;
+    height: 20%;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
+    color: #000000 !important;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+
 }
 
-.adicionar{
+.menu {
+    width: 100%;
+    height: 40%;
+    background-color: #141625;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sair {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container_menu {
+    width: 100%;
+    height: 60%;
+}
+
+.img_log {
+    height: 16%;
+}
+
+.adicionar {
     width: 90%;
     display: flex;
+    color: #000000;
 }
-.adicionar .maquina{
+
+.adicionar .maquina {
     text-decoration: none;
+    color: #000000;
 }
-.botao_adicionar{
+
+.botao_adicionar {
     height: 35px;
     width: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.teste{
+
+.teste {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
 }
-.menu{
-    width: 100%;
-    height: 530px;
-    background-color: #141625;
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: space-around;
-}
-.div_espacamento{
+
+.div_espacamento {
     height: 70px;
 }
-.div_hora{
+
+.div_hora {
     display: flex;
     flex-direction: row;
     position: relative;
-    left: 360px;
     align-items: center;
     justify-content: space-around;
 }
-.relogio_icon{
+
+.relogio_icon {
     width: 30px;
     height: 30px;
 }
-.user_icon{
+
+.user_icon {
     width: 30px;
     height: 30px;
     cursor: pointer;
 }
-.temporaria .apontamento{
+
+.temporaria .apontamento {
     overflow: auto;
 }
 
-.temporaria .barra-principal{
+.temporaria .barra-principal {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-}
-.principal{
-    width: 77%;
-    height: 98vh;
-    margin: auto;
+    justify-content: end;
+    width: 100%;
+    height: 6%;
 }
 
-.barra-principal{
-    width: 100%;
-    height: 45px;
+.principal {
+    width: 80vw;
+    height: 98vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
+
 .search-container {
     position: relative;
     width: 40px;
@@ -150,17 +186,18 @@ body{
     width: 250px;
 }
 
-.conteudo{
+.conteudo {
     display: flex;
     justify-content: space-between;
     height: 93%;
     width: 100%;
 }
 
-.pacientes{
-    width: 30%;
+.pacientes {
+    width: 40%;
 }
-.icone_usuarios{
+
+.icone_usuarios {
     width: 100%;
     height: 65px;
     background-color: black;
@@ -169,20 +206,29 @@ body{
     align-items: center;
     justify-content: space-around;
 }
-.conteudo_icones{
+
+.conteudo_icones {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
     width: 100%;
 }
-.div_user{
+
+.div_user {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    margin-left: 1%;
 }
-.grafico_1{
+
+.kpi {
+    height: 30%;
+    width: 100%;
+}
+
+.grafico_1 {
     width: 100%;
     height: 295px;
     background-color: #141625;
@@ -190,12 +236,14 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
-.selecao_dia{
+
+.selecao_dia {
     color: #141625;
 }
-.calendario{
+
+.calendario {
     width: 100%;
     height: 295px;
     background-color: #141625;
@@ -205,19 +253,22 @@ body{
     flex-direction: column;
     align-items: center;
 }
-.temporaria .pacientes{
+
+.temporaria .pacientes {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
 }
-.temporaria .requests{
+
+.temporaria .requests {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
 }
-.div_select_andar{
+
+.div_select_andar {
     width: 100%;
     height: 65px;
     background-color: black;
@@ -226,7 +277,8 @@ body{
     align-items: center;
     justify-content: space-around;
 }
-.select_andar{
+
+.select_andar {
     width: 100px;
     height: 25px;
     background-color: #00BFFF;
@@ -234,14 +286,15 @@ body{
     text-decoration: none;
 }
 
-.container_graficoDonut{
+.container_graficoDonut {
     width: 80%;
-    height: 90%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.grafico_Donut{
+
+.grafico_Donut {
     width: 80%;
     height: 80%;
     display: flex;
@@ -249,7 +302,8 @@ body{
     align-items: center;
     flex-direction: column;
 }
-.grafico_2{
+
+.grafico_2 {
     width: 100%;
     height: 295px;
     background-color: #141625;
@@ -260,24 +314,29 @@ body{
     align-items: center;
 
 }
-.texto{
+
+.texto {
     color: white;
 
 }
-.link{
+
+.link {
     text-decoration: none;
     color: white;
 }
-.texto_hover{
+
+.texto_hover {
     color: white;
     cursor: pointer;
 }
-.maquina_selecao{
+
+.maquina_selecao {
     border-radius: 10px;
-    background-color:#4C5158;
+    background-color: #4C5158;
     text-decoration: none;
 }
-.grafico_3{
+
+.grafico_3 {
     width: 100%;
     height: 295px;
     background-color: #141625;
@@ -288,22 +347,86 @@ body{
     flex-direction: column;
 }
 
-.requests{
+.requests {
     width: 40%;
 }
 
-.apontamento{
-    width: 25%;
+.apontamento {
+    width: 100%;
+    height: 80%;
+    background-color: #141625;
+    border: 0.5px solid rgb(255, 255, 255);
+}
+
+.maquinas_gerais {
     height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.div_graficos {
+    display: flex;
+    justify-content: space-around;
+}
+
+.div_graficos_metricas {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.div_hoje {
+    background-color: #00BFFF;
+    width: 100%;
+    color: #000000;
+    height: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
 }
 
 
-.container_grafico{
+.container_grafico {
     height: 80%;
     width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.apontamentos_atuais{
+.grafico_atividade {
+    height: 80%;
+    width: 80%;
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto_graf {
+    width: 50%;
+}
+
+#maquina_tot_problema {
+    width: 80%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#myChartAtividade {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.apontamentos_atuais {
     width: 100%;
     height: 65px;
     background-color: black;
@@ -311,21 +434,14 @@ body{
     flex-direction: row;
     justify-content: space-between;
 }
-.posicao{
+
+.posicao {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.div_hoje{
-    background-color: #00BFFF;
-    width: 45%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px; 
-}
-.memoriaRam{
+
+.memoriaRam {
     width: 100%;
     height: 80px;
     background-color: #141625;
@@ -334,12 +450,14 @@ body{
     border-bottom: 0.5px solid rgb(255, 255, 255);
     align-items: center;
 }
-.espacamento_vermelho{
+
+.espacamento_vermelho {
     width: 5px;
     height: 80px;
     background-color: #FF4343;
 }
-.processador{
+
+.processador {
     width: 100%;
     height: 80px;
     background-color: #141625;
@@ -348,17 +466,20 @@ body{
     border-bottom: 0.5px solid rgb(255, 255, 255);
     align-items: center;
 }
-.espacamento_amarela{
+
+.espacamento_amarela {
     width: 5px;
     height: 80px;
     background-color: #EBBE21;
 }
-.dado{
+
+.dado {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.disco{
+
+.disco {
     width: 100%;
     height: 80px;
     display: flex;
@@ -367,12 +488,14 @@ body{
     border-bottom: 0.5px solid rgb(255, 255, 255);
     align-items: center;
 }
-.espacamento_azul{
+
+.espacamento_azul {
     width: 5px;
     height: 80px;
     background-color: #44DDFF;
 }
-.apontamentos_anteriores{
+
+.apontamentos_anteriores {
     width: 100%;
     height: 55px;
     background-color: black;
@@ -382,28 +505,32 @@ body{
     justify-content: center;
     align-items: center;
 }
-.div_maquina{
+
+.div_maquina {
     width: 100%;
     height: 80px;
     background-color: #141625;
     flex-direction: row;
     border-bottom: 0.5px solid rgb(255, 255, 255);
 }
-.div_maquina2{
+
+.div_maquina2 {
     width: 100%;
     height: 80px;
     background-color: #141625;
     flex-direction: row;
     border-bottom: 0.5px solid rgb(255, 255, 255);
 }
-.div_maquina3{
+
+.div_maquina3 {
     width: 100%;
     height: 80px;
     background-color: #141625;
     flex-direction: row;
     border-bottom: 0.5px solid rgb(255, 255, 255);
 }
-.div_outras_maquinas{
+
+.div_outras_maquinas {
     width: 100%;
     height: 80px;
     background-color: #141625;
@@ -413,23 +540,27 @@ body{
     align-items: center;
     justify-content: center;
 }
-.div_hover{
+
+.div_hover {
     display: flex;
     justify-content: center;
     font-size: 20px;
     color: #00BFFF;
     cursor: pointer;
 }
-.div_hover:hover{
+
+.div_hover:hover {
     font-size: 20px;
     color: black;
 
 }
-.dado{
+
+.dado {
     display: flex;
     justify-content: space-evenly;
 }
-.modal{
+
+.modal {
     width: 50%;
     height: 70%;
     background-color: #CDD1D0;
@@ -437,75 +568,79 @@ body{
     justify-content: center;
     align-items: center;
     position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
 }
-.nomeModal{
+
+.nomeModal {
     width: 100%;
     height: 15%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: #FF4343 solid 2px;
     color: #000000;
 
 }
-.graficoModal{
+
+.graficoModal {
     width: 100%;
     height: 55%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: #000000 solid 2px;
-    
+    border-bottom: #000000 2px solid;
+    border-top: #000000 2px solid;
+
 }
-.infoModal{
+
+.infoModal {
     width: 100%;
     height: 25%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: #4400ff solid 2px;
 }
-.infoMaquina{
+
+.infoMaquina {
     width: 15%;
     height: 40%;
-    border: #FF4343 solid 2px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    border-left: #000000 2px solid;
 }
-.graficoMaquina{
+
+.graficoMaquina {
     width: 60%;
     height: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: #000000 solid 2px;
+    border-right: #000000 2px solid;
 }
-.execMaquina{
+
+.execMaquina {
     width: 30%;
     height: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    border: #000000 solid 2px;
 }
 
-.conteudoModal{
+.conteudoModal {
     width: 95%;
     height: 95%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    border: #FF4343 solid 2px;
 }
-.sair_modal{
+
+.sair_modal {
     width: 160px;
     height: 60px;
     border-radius: 20px;
@@ -516,7 +651,24 @@ body{
     font-size: 20px;
     align-items: center;
 }
-.sair_botão:hover{
+
+.nomeModal img {
+    height: 30%;
+}
+
+.modal button {
+    background-color: #141625;
+    color: white;
+    border-radius: 20px;
+    height: 20%;
+    cursor: pointer;
+}
+
+.sair_botão:hover {
     font-size: 20px;
     color: black;
+}
+
+#timer {
+    color: white;
 }

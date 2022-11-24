@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/dashboard.css">
     <script src="main.js"></script>
+    <script src="../js/funcoes.js"></script>
     <link rel="icon" href="../assets/icons/icone_head.ico" />
-    <title>Document</title>
+    <title>HSO - Dashboard</title>
 </head>
 
 <body onload="init_time()">
@@ -16,31 +17,38 @@
         <div class="logo">
             <img class="logo" src="../assets/imgs/logo-removebg-preview.png" alt="">
         </div>
-        <div class="container_botão">
-            <div class="teste1">
-                <a class="link" href="../cadastro_maquina.html">
-                    <div class="adicionar maquina">Adicionar máquina
-                        <div class="iconePlus"><img class="botao_adicionar" ; href="" ;
-                                src="../assets/imgs/botao-adicionar.png">
+        <div class="container_menu">
+            <div class="container_botão">
+                <div class="teste1">
+                    <a class="link" href="../cadastro_maquina.html">
+                        <div class="adicionar maquina">
+                            Adicionar máquina
+                            <div class="iconePlus"><img class="botao_adicionar" ; href="" ;
+                                    src="../assets/imgs/botao-adicionar.png">
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+            </div>
+            <div class="menu">
+                <!-- <span class="texto_hover">Dashboard</span>
+                <span class="texto_hover">Apontamentos</span>
+                <span class="texto_hover">Usuários</span>
+                <div class="div_espacamento"></div> -->
+                <div class="sair texto_hover" onclick="limparSessao()">
+                    <img src="../assets/icons/logout.png" class="img_log">
+                    <span>Sair</span>
+                </div>
             </div>
         </div>
-        <div class="menu">
-            <span class="texto_hover">Dashboard</span>
-            <span class="texto_hover">Apontamentos</span>
-            <span class="texto_hover">Usuários</span>
-            <div class="div_espacamento"></div>
-            <span class="texto_hover"><a class="link" href="../index.html">Sair</a></span>
-        </div>
+
     </section>
     <section class="temporaria principal">
         <div class="temporaria barra-principal">
-            <div class="search-container">
+            <!-- <div class="search-container">
                 <label for="search-input" class="search-icon"></label>
                 <input type="text" class="search-input" id="search-input" required />
-            </div>
+            </div> -->
             <div class="div_hora">
                 <div class="relogio_icon"><img class="relogio_icon" src="../assets/imgs/relogio.png" alt="">
                 </div>
@@ -51,60 +59,44 @@
             </div>
         </div>
         <div class="temporaria conteudo">
-            <div class="temporaria pacientes">
-                <div class="icone_usuarios">
-                    <div class="conteudo_icones">
-                        <div class="div_user">
-                            <img class="user_icon" src="../assets/imgs/user.png" alt="">
-                            <span class="texto">Carlos</span>
+            <div class="div_graficos_metricas">
+                <div class="kpi"></div>
+                <div class="div_graficos">
+                    <div class="temporaria pacientes">
+                        <div class="grafico_1">
+                            <span style="color: white;">Quantidade de maquinas Debilitadas</span>
+                            <div class="container_graficoDonut">
+                                <div id="grafico_donut" class="grafico_Donut">
+                                    <!-- <canvas id="myChartDonut"></canvas> -->
+                                </div>
+                            </div>
                         </div>
-                        <div class="div_user">
-                            <img class="user_icon" src="../assets/imgs/user2.png" alt="">
-                            <span class="texto">Maria</span>
-                        </div>
-                        <div class="div_user">
-                            <img class="user_icon" src="../assets/imgs/user3.png" alt="">
-                            <span class="texto">Arthur</span>
-                        </div>
-                        <div class="div_user">
-                            <img class="user_icon" src="../assets/imgs/user4.png" alt="">
-                            <span class="texto">Angelo</span>
+                    </div>
+                    <div class="temporaria requests">
+        
+                        <div class="grafico_3">
+                            <span style="color: white;" id="maquina_tot_problema"> Maquinas Totais com Problemas </span>
+                            <div class="container_grafico">
+                                <div id="grafico_atividade" class="grafico_atividade">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="grafico_1">
-                    <span style="color: white;">Quantidade de maquinas Debilitadas</span>
-                    <div class="container_graficoDonut">
-                        <div id="grafico_donut" class="grafico_Donut">
-                            <!-- <canvas id="myChartDonut"></canvas> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="temporaria requests">
-
-                <div class="grafico_3">
-                    <span style="color: white;"> Maquinas Totais com Problemas </span>
-                    <div class="container_grafico">
-                        <div id="grafico_atividade" class="grafico_atividade">
-                            <!--                             <canvas id="myChartAtividade"></canvas>
- -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="divTeste">
-            <div class="div_hoje texto">Maquinas</div>  
-            <div id="temporaria_apontamento" class="temporaria apontamento">
-                <div class="apontamentos_atuais"></div>
-            </div>
-        </div>
-            <div class="modal">
                 
+            </div>
+            <div class="maquinas_gerais">
+                <div class="div_hoje texto">Máquinas</div>
+                <div id="temporaria_apontamento" class="temporaria apontamento">
+                    <div class="apontamentos_atuais"></div>
+                </div>
+            </div>
+            <div class="modal">
+
                 <div class="conteudoModal">
                     <div class="nomeModal">
                         <h3 id="nomeModalMaquina"></h3>
-                        <img onclick="fecharModal()" src="xis">
+                        <img onclick="fecharModal()" src="../assets/icons/exit.png">
                     </div>
                     <div class="graficoModal">
                         <div class="graficoMaquina" id="graficoMaquina">
@@ -124,14 +116,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+    </section>
 </body>
 
 </html>
 <script>
     criar_card();
     gerar_graficos();
-
-
 
     function show_time() {
         let time = new Date();
@@ -207,21 +200,21 @@
                 label: 'Disco',
                 data: [],
                 fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: '#2952d9',
                 tension: 0.1
             },
             {
                 label: 'Processador',
                 data: [],
                 fill: false,
-                borderColor: 'rgb(199, 52, 52)',
+                borderColor: '#d833de',
                 tension: 0.1
             },
             {
                 label: 'Memoria RAM',
                 data: [],
                 fill: false,
-                borderColor: 'rgb(255, 72, 92)',
+                borderColor: '#e8954d',
                 tension: 0.1
             }]
         };

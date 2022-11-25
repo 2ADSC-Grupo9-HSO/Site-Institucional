@@ -141,7 +141,6 @@ body {
   font-size: max(1.2vw, 15px);
   font-weight: 600;
   cursor: pointer;
-  /* border: solid 2px #00BFFF; */
   background-color: #000000;
   color: #F0F8FF;
   display: flex;
@@ -474,7 +473,7 @@ body {
 }
 
 .card-cadastro{
-  height: 65vh;
+  height: 75vh;
   width: 40%;
   display: flex;
   flex-direction: column;

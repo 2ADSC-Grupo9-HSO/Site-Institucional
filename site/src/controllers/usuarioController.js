@@ -96,6 +96,20 @@ function matar_processo(req, res) {
         );
 }
 
+function reiniciar_maquina(req, res) {
+    var fkMaquina = req.body.fkMaquinaServer;
+    usuarioModel.reiniciar_maquina(fkMaquina)
+        .then(function (resultado) {
+            res.json(resultado)
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 function mostrar_dash(req, res) {
     var idMaquina = req.params.idMaquina;
     var fkFilial = req.params.fkFilial;
@@ -396,5 +410,6 @@ module.exports = {
     get_grafico_stacked,
     cadastrarHardware,
     get_processos,
-    matar_processo
+    matar_processo,
+    reiniciar_maquina
 }

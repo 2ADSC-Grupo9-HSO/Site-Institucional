@@ -8,47 +8,20 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <script src="main.js"></script>
     <script src="../js/funcoes.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" href="../assets/icons/icone_head.ico" />
     <title>HSO - Dashboard</title>
 </head>
 
 <body onload="init_time()">
-    <section class="navgator temporaria teste">
+    <section class="navgator">
         <div class="logo">
             <img class="logo" src="../assets/imgs/logo-removebg-preview.png" alt="">
-        </div>
-        <div class="container_menu">
-            <div class="container_botão">
-                <div class="teste1">
-                    <a class="link" href="../cadastro_maquina.html">
-                        <div class="adicionar maquina">
-                            Adicionar máquina
-                            <div class="iconePlus"><img class="botao_adicionar" ; href="" ;
-                                    src="../assets/imgs/botao-adicionar.png">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="menu">
-                <!-- <span class="texto_hover">Dashboard</span>
-                <span class="texto_hover">Apontamentos</span>
-                <span class="texto_hover">Usuários</span>
-                <div class="div_espacamento"></div> -->
-                <div class="sair texto_hover" onclick="limparSessao()">
-                    <img src="../assets/icons/logout.png" class="img_log">
-                    <span>Sair</span>
-                </div>
-            </div>
         </div>
 
     </section>
     <section class="temporaria principal">
         <div class="temporaria barra-principal">
-            <!-- <div class="search-container">
-                <label for="search-input" class="search-icon"></label>
-                <input type="text" class="search-input" id="search-input" required />
-            </div> -->
             <div class="div_hora">
                 <div class="relogio_icon"><img class="relogio_icon" src="../assets/imgs/relogio.png" alt="">
                 </div>
@@ -57,6 +30,7 @@
             <div class="div_user">
                 <img class="user_icon" src="../assets/imgs/user.png" alt="">
             </div>
+            <img src="../assets/icons/logout.png" class="img_log" onclick="limparSessao()">
         </div>
         <div class="temporaria conteudo">
             <div class="div_graficos_metricas">
@@ -104,7 +78,8 @@
                     <div class="temporaria requests">
 
                         <div class="grafico_3">
-                            <span style="color: white;" id="maquina_tot_problema"> Maquinas Totais com Problemas </span>
+                            <span style="color: white;" id="maquina_tot_problema"> Maquinas Totais com Incidentes
+                            </span>
                             <div class="container_grafico">
                                 <div id="grafico_atividade" class="grafico_atividade">
                                 </div>
@@ -115,7 +90,13 @@
 
             </div>
             <div class="maquinas_gerais">
-                <div class="div_hoje texto">Máquinas</div>
+                <div class="div_hoje texto">
+                    Máquinas
+                    <a href="../cadastro_maquina.html">
+                        <img class="botao_adicionar"; src="../assets/imgs/botao-adicionar.png">
+                    </a>
+                </div>
+
                 <div id="temporaria_apontamento" class="temporaria apontamento">
                     <div class="apontamentos_atuais"></div>
                 </div>
@@ -125,14 +106,39 @@
                 <div class="conteudoModal">
                     <div class="nomeModal">
                         <h3 id="nomeModalMaquina"></h3>
+                        <div class="divMetricaModal">
+                            <div class="metricaModal">
+                                <span>Disco</span>
+                                <div class="divPorcentagemModal">
+                                    <div class="criticoModal">95% 1x</div>
+                                    <div class="alertaModal">85% 1x</div>
+                                    <div class="bomModal"> <=75%</div>
+                                </div>
+                            </div>
+                            <div class="metricaModal">
+                                <span>Processador</span>
+                                <div class="divPorcentagemModal">
+                                    <div class="criticoModal">90% 5x</div>
+                                    <div class="alertaModal">80% 5x</div>
+                                    <div class="bomModal"> <=70%</div>
+                                </div>
+                            </div>
+                            <div class="metricaModal">
+                                <span>Ram</span>
+                                <div class="divPorcentagemModal">
+                                    <div class="criticoModal">99% 6x</div>
+                                    <div class="alertaModal">85% 6x</div>
+                                    <div class="bomModal"> <=75%</div>
+                                </div>
+                            </div>
+                        </div>
                         <img onclick="fecharModal()" src="../assets/icons/exit.png">
                     </div>
                     <div class="graficoModal">
                         <div class="graficoMaquina" id="graficoMaquina">
                         </div>
                         <div class="execMaquina">
-                            <div class="divBotaoMaquina">
-                                <button>Reiniciar Maquina</button>
+                            <div id="divBotaoMaquina" class="divBotaoMaquina">
                             </div>
                             <div id="divListaProcesso" class="divListaProcesso"></div>
                         </div>
@@ -155,6 +161,12 @@
 <script>
     criar_card();
     gerar_graficos();
+
+    setInterval(() => {
+        destruir_graficos();
+        gerar_graficos();
+        criar_card();
+    }, 5000)
 
     function show_time() {
         let time = new Date();

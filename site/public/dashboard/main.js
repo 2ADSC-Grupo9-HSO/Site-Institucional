@@ -15,12 +15,6 @@ function destruir_graficos() {
     div_pai2.removeChild(old_canva2)
 }
 
-setInterval(() => {
-    destruir_graficos();
-    gerar_graficos();
-    criar_card();
-}, 5000)
-
 function criar_card() {
     var fkFilial = sessionStorage.FK_FILIAL;
     temporaria_apontamento.innerHTML = ''
@@ -155,6 +149,8 @@ function fecharModal() {
     modal.style.display = 'none';
     clearTimeout(proximaAtualizacao)
 
+    divBotaoMaquina.removeChild(botaoReiniciarMaquina)
+
     var varGraficoModal = document.getElementById("graficoModal")
     var divGraficoModal = document.getElementById("graficoMaquina")
     divGraficoModal.removeChild(varGraficoModal)
@@ -168,6 +164,13 @@ function gerar_modal(idMaquina) {
     var fkFilial = sessionStorage.FK_FILIAL;
 
     fetch(`/usuarios/mostrar_dash/${idMaquina}&${fkFilial}`).then(function (resposta) {
+        var isCreated = document.getElementById("botaoReiniciarMaquina")
+        var divBotaoMaquina = document.getElementById("divBotaoMaquina")
+
+        if (isCreated != null) {
+            divBotaoMaquina.removeChild(isCreated)
+        }
+
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
@@ -176,6 +179,12 @@ function gerar_modal(idMaquina) {
                 infoAndar.innerHTML = "Andar: <br>" + resposta[0].andar + "º"
                 infoMarca.innerHTML = "Marca: <br>" + resposta[0].marca.toUpperCase()
                 infoSistema.innerHTML = "SO: <br>" + resposta[0].sistema.toUpperCase()
+
+                var criarBotao = document.createElement("button")
+                divBotaoMaquina.appendChild(criarBotao)
+                criarBotao.id = "botaoReiniciarMaquina"
+                criarBotao.innerHTML = "Reiniciar Máquina"
+                criarBotao.setAttribute("onclick", `confirma_reinicio(${idMaquina})`)
 
                 get_processos(idMaquina);
 
@@ -222,17 +231,17 @@ function get_grafico_donut() {
                         data: [Number(resposta[0].qtd_maquinas_total) - Number(resposta[0].qtd_maquinas_debilitadas), Number(resposta[0].qtd_maquinas_debilitadas)],
                     }]
                 };
-                
-                var porcentagem = (Number(resposta[0].qtd_maquinas_debilitadas)*100)/Number(resposta[0].qtd_maquinas_total)
-                spanKpiAtual.innerHTML=porcentagem.toFixed(0)+"%"
-                if(porcentagem>=20){
-                    kpiAtual.style.borderColor="#eb1e1e"
-                }else if(porcentagem>=10){
-                    kpiAtual.style.borderColor="#eba31e"
-                }else if(porcentagem>=5){
-                    kpiAtual.style.borderColor="#ebe81e"
-                }else{
-                    kpiAtual.style.borderColor="#5feb1e"
+
+                var porcentagem = (Number(resposta[0].qtd_maquinas_debilitadas) * 100) / Number(resposta[0].qtd_maquinas_total)
+                spanKpiAtual.innerHTML = porcentagem.toFixed(0) + "%"
+                if (porcentagem >= 20) {
+                    kpiAtual.style.borderColor = "#eb1e1e"
+                } else if (porcentagem >= 10) {
+                    kpiAtual.style.borderColor = "#eba31e"
+                } else if (porcentagem >= 5) {
+                    kpiAtual.style.borderColor = "#ebe81e"
+                } else {
+                    kpiAtual.style.borderColor = "#5feb1e"
                 }
 
                 const configDonut = {
@@ -261,6 +270,8 @@ function get_grafico_stacked() {
 
     fetch(`/usuarios/get_grafico_stacked/${fkFilial}`).then(function (resposta) {
         if (resposta.ok) {
+            maquina_tot_problema.innerHTML = 'Maquinas Totais com Incidentes'
+            
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
@@ -383,7 +394,7 @@ function get_grafico_stacked() {
             div_filho.innerHTML = '<img class="foto_graf" src="../assets/icons/ok.png">'
             div_filho.id = 'myChartAtividade'
             div_filho.className = 'maquina_tot_pro'
-            maquina_tot_problema.innerHTML = 'Sem Máquinas com Problemas'
+            maquina_tot_problema.innerHTML = 'Sem Máquinas com Incidentes'
         } else {
             throw ('Houve um erro na API!');
         }
@@ -395,14 +406,14 @@ function get_grafico_stacked() {
 function get_processos(fkMaquina) {
 
     var div_pai = document.getElementById("divListaProcesso")
-    div_pai.innerHTML=""
+    div_pai.innerHTML = ""
 
     fetch(`/usuarios/get_processos/${fkMaquina}`).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                
+
                 for (let i = 0; i < resposta.length; i++) {
                     var div_processo = document.createElement("div")
                     var span_processo = document.createElement("div")
@@ -412,7 +423,7 @@ function get_processos(fkMaquina) {
                     div_processo.appendChild(span_processo)
                     div_processo.appendChild(image_processo)
 
-                    image_processo.setAttribute("onclick",`matar_processo(${fkMaquina},${resposta[i].idProcesso})`)
+                    image_processo.setAttribute("onclick", `matar_processo(${fkMaquina},${resposta[i].idProcesso})`)
 
                     div_processo.className = "processo_unitario"
                     span_processo.className = "span_processo_unitario"
@@ -420,7 +431,7 @@ function get_processos(fkMaquina) {
 
                     span_processo.innerHTML = resposta[i].nomeProcesso
                     image_processo.src = "../assets/icons/exit.png"
-                    
+
 
                 }
             });
@@ -433,20 +444,58 @@ function get_processos(fkMaquina) {
 }
 
 function matar_processo(fkMaquina, idProcesso) {
-    console.log("832718937129AHBAKJSHDJKAHSDJKHAK")
     fetch(`/usuarios/matar_processo`, {
         method: "POST",
         headers: {
-            "Content-Type":"application/json"
+            "Content-Type": "application/json"
         },
-        body:JSON.stringify({
-            idProcessoServer:idProcesso, 
+        body: JSON.stringify({
+            idProcessoServer: idProcesso,
         })
     }).then(function (resposta) {
 
         if (resposta.ok) {
-                get_processos(fkMaquina)
-                console.log("asjdiuashjduisahduisahduisa")
+            get_processos(fkMaquina)
+
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+
+function confirma_reinicio(fkMaquina) {
+    Swal.fire({
+        title: 'Você quer mesmo reiniciar esta máquina?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Reiniciar Maquina',
+        denyButtonText: `Cancelar`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire('Reiniciando Máquina!', '', 'Concluido')
+            reiniciar_maquina(fkMaquina)
+        } else if (result.isDenied) {
+            Swal.fire('Operação cancelada', '', '')
+        }
+    })
+}
+
+function reiniciar_maquina(fkMaquina) {
+    fetch(`/usuarios/reiniciar_maquina`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkMaquinaServer: fkMaquina,
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+            get_processos(fkMaquina)
 
         } else {
             throw ('Houve um erro na API!');

@@ -52,6 +52,10 @@ router.post("/matar_processo", function (req, res) {
     usuarioController.matar_processo(req, res);
 });
 
+router.post("/reiniciar_maquina", function (req, res) {
+    usuarioController.reiniciar_maquina(req, res);
+});
+
 router.get("/get_grafico_stacked/:fkFilial", function (req, res) {
     usuarioController.get_grafico_stacked(req, res);
 });

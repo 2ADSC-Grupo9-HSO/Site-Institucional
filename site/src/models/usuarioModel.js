@@ -59,7 +59,7 @@ function get_grafico_stacked(fkFilial) {
             select count(idHistorico) as 'contagem', m.andarMaquina as 'andar', m.hostName as 'nome'  from tbHistorico as hi
                 join tbHardware as hw on hw.idHardware = hi.fkHardware
                 join tbMaquina as m on m.idMaquina = hw.fkMaquina
-                where valorRegistro >= 95 and hi.momentoRegistro > now() - interval 10 minute and hw.fkComponente = 1
+                where valorRegistro >= 95 and hi.momentoRegistro > now() - interval 1 minute and hw.fkComponente = 1
                 and  m.fkFilial  = ${fkFilial} group by hw.fkMaquina, m.andarMaquina
         ) as tabela_comp_1 where contagem >= 1 group by andar,nome
         union all
@@ -97,6 +97,15 @@ function matar_processo(idProcesso) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
     var instrucao = `
     update tbProcessos set chaveAtivacao = 1 where idProcesso = ${idProcesso};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function reiniciar_maquina(fkMaquina) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    update tbMaquina set chaveAtivacao = 1 where idMaquina = ${fkMaquina};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -259,5 +268,6 @@ module.exports = {
     get_grafico_stacked,
     cadastrarHardware,
     get_processos,
-    matar_processo
+    matar_processo,
+    reiniciar_maquina
 };

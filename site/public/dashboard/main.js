@@ -1,3 +1,5 @@
+const { application } = require("express");
+
 function gerar_graficos() {
     get_grafico_donut();
     get_grafico_stacked();
@@ -175,6 +177,8 @@ function gerar_modal(idMaquina) {
                 infoMarca.innerHTML = "Marca: <br>" + resposta[0].marca.toUpperCase()
                 infoSistema.innerHTML = "SO: <br>" + resposta[0].sistema.toUpperCase()
 
+                get_processos(idMaquina);
+
                 setInterval(obterDadosGrafico(idMaquina), 5000)
             });
         } else {
@@ -218,6 +222,18 @@ function get_grafico_donut() {
                         data: [Number(resposta[0].qtd_maquinas_total) - Number(resposta[0].qtd_maquinas_debilitadas), Number(resposta[0].qtd_maquinas_debilitadas)],
                     }]
                 };
+                
+                var porcentagem = (Number(resposta[0].qtd_maquinas_debilitadas)*100)/Number(resposta[0].qtd_maquinas_total)
+                spanKpiAtual.innerHTML=porcentagem.toFixed(0)+"%"
+                if(porcentagem>=20){
+                    kpiAtual.style.borderColor="#eb1e1e"
+                }else if(porcentagem>=10){
+                    kpiAtual.style.borderColor="#eba31e"
+                }else if(porcentagem>=5){
+                    kpiAtual.style.borderColor="#ebe81e"
+                }else{
+                    kpiAtual.style.borderColor="#5feb1e"
+                }
 
                 const configDonut = {
                     type: 'doughnut',
@@ -368,6 +384,70 @@ function get_grafico_stacked() {
             div_filho.id = 'myChartAtividade'
             div_filho.className = 'maquina_tot_pro'
             maquina_tot_problema.innerHTML = 'Sem Máquinas com Problemas'
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+
+function get_processos(fkMaquina) {
+
+    var div_pai = document.getElementById("divListaProcesso")
+    div_pai.innerHTML=""
+
+    fetch(`/usuarios/get_processos/${fkMaquina}`).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                
+                for (let i = 0; i < resposta.length; i++) {
+                    var div_processo = document.createElement("div")
+                    var span_processo = document.createElement("div")
+                    var image_processo = document.createElement("img")
+
+                    div_pai.appendChild(div_processo)
+                    div_processo.appendChild(span_processo)
+                    div_processo.appendChild(image_processo)
+
+                    image_processo.setAttribute("onclick",`matar_processo(${fkMaquina},${resposta[i].idProcesso})`)
+
+                    div_processo.className = "processo_unitario"
+                    span_processo.className = "span_processo_unitario"
+                    image_processo.className = "image_processo_unitario"
+
+                    span_processo.innerHTML = resposta[i].nomeProcesso
+                    image_processo.src = "../assets/icons/exit.png"
+                    
+
+                }
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+
+function matar_processo(fkMaquina, idProcesso) {
+    console.log("832718937129AHBAKJSHDJKAHSDJKHAK")
+    fetch(`/usuarios/matar_processo`, {
+        method: "POST",
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            idProcessoServer:idProcesso, 
+        })
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+                get_processos(fkMaquina)
+                console.log("asjdiuashjduisahduisahduisa")
+
         } else {
             throw ('Houve um erro na API!');
         }

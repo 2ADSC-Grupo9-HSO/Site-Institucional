@@ -31,7 +31,7 @@ function limparSessao() {
     // aguardar();
     sessionStorage.clear();
     // finalizarAguardar();
-    window.location = "../login.html";
+    window.location = "../login_filial.html";
 }
 
 // carregamento (loading)

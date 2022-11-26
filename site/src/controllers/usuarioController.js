@@ -64,6 +64,38 @@ function get_grafico_stacked(req, res) {
         );
 }
 
+function get_processos(req, res) {
+    var fkMaquina = req.params.fkMaquina;
+    usuarioModel.get_processos(fkMaquina)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function matar_processo(req, res) {
+    var idProcesso = req.body.idProcessoServer;
+    usuarioModel.matar_processo(idProcesso)
+        .then(function (resultado) {
+            res.json(resultado)
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 function mostrar_dash(req, res) {
     var idMaquina = req.params.idMaquina;
     var fkFilial = req.params.fkFilial;
@@ -272,7 +304,6 @@ function cadastrarHardware(req, res) {
     }
 }
 
-
 function cadastrarRede(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nomeRede = req.body.nomeRedeServer;
@@ -363,5 +394,7 @@ module.exports = {
     cadastrarRede,
     get_grafico_donut,
     get_grafico_stacked,
-    cadastrarHardware
+    cadastrarHardware,
+    get_processos,
+    matar_processo
 }

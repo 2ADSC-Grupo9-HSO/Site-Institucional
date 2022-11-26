@@ -60,7 +60,36 @@
         </div>
         <div class="temporaria conteudo">
             <div class="div_graficos_metricas">
-                <div class="kpi"></div>
+                <div class="kpi">
+                    <h2 class="h2KpiTitulo">Métricas máquinas</h2>
+                    <div class="container_kpi">
+                        <div class="containerKpiAtual">
+                            <div id="kpiAtual" class="divKpi atual">
+                                <span class="spanKpiAtual">Atual</span>
+                                <span id="spanKpiAtual" class="spanKpiAtual"></span>
+                            </div>
+                        </div>
+                        <div class="divMetricas">
+                            <div class="divKpi critico">
+                                <span class="spanKpiCritico">Critico</span>
+                                <span class="spanKpiCritico">20%</span>
+                            </div>
+                            <div class="divKpi alerta">
+                                <span class="spanKpiAlerta">Alerta</span>
+                                <span class="spanKpiAlerta">10%</span>
+                            </div>
+                            <div class="divKpi bom">
+                                <span class="spanKpiBom">Bom</span>
+                                <span class="spanKpiBom">5%</span>
+                            </div>
+                            <div class="divKpi otimo">
+                                <span class="spanKpiOtimo">Ótimo</span>
+                                <span class="spanKpiOtimo">2%</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="div_graficos">
                     <div class="temporaria pacientes">
                         <div class="grafico_1">
@@ -73,7 +102,7 @@
                         </div>
                     </div>
                     <div class="temporaria requests">
-        
+
                         <div class="grafico_3">
                             <span style="color: white;" id="maquina_tot_problema"> Maquinas Totais com Problemas </span>
                             <div class="container_grafico">
@@ -83,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="maquinas_gerais">
                 <div class="div_hoje texto">Máquinas</div>
@@ -102,9 +131,10 @@
                         <div class="graficoMaquina" id="graficoMaquina">
                         </div>
                         <div class="execMaquina">
-                            <button>Listar Processos</button>
-                            <button>Reiniciar Maquina</button>
-                            <button>Matar 5 processos</button>
+                            <div class="divBotaoMaquina">
+                                <button>Reiniciar Maquina</button>
+                            </div>
+                            <div id="divListaProcesso" class="divListaProcesso"></div>
                         </div>
                     </div>
                     <div class="infoModal">
@@ -298,3 +328,7 @@
 
 
 </script>
+<!-- Start of hso6476 Zendesk Widget script -->
+<script id="ze-snippet"
+    src="https://static.zdassets.com/ekr/snippet.js?key=35b3b877-3e1f-4105-aa55-dba1cafd43d7"> </script>
+<!-- End of hso6476 Zendesk Widget script -->

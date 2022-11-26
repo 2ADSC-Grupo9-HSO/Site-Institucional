@@ -44,6 +44,14 @@ router.get("/get_grafico_donut/:fkFilial", function (req, res) {
     usuarioController.get_grafico_donut(req, res);
 });
 
+router.get("/get_processos/:fkMaquina", function (req, res) {
+    usuarioController.get_processos(req, res);
+});
+
+router.post("/matar_processo", function (req, res) {
+    usuarioController.matar_processo(req, res);
+});
+
 router.get("/get_grafico_stacked/:fkFilial", function (req, res) {
     usuarioController.get_grafico_stacked(req, res);
 });

@@ -10,7 +10,7 @@ function get_grafico_donut(fkFilial) {
            join tbHardware as hw on hw.idHardware = hi.fkHardware
            join tbMaquina as m on m.idMaquina = hw.fkMaquina
            where valorRegistro >= 95 
-           and hi.momentoRegistro > now() - interval 10 minute 
+           and hi.momentoRegistro > now() - interval 1 minute 
            and hw.fkComponente = 1
            and m.fkFilial = ${fkFilial} 
            group by hw.fkMaquina
@@ -79,6 +79,24 @@ function get_grafico_stacked(fkFilial) {
                 and  m.fkFilial  = ${fkFilial} group by hw.fkMaquina, m.andarMaquina
         ) as tabela_comp_3 where contagem > 6 group by andar,nome
     ) as tabela_final group by andar, tipo order by andar,tipo;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function get_processos(fkMaquina) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    select nomeProcesso, idProcesso from tbProcessos where fkMaquina = ${fkMaquina} and chaveAtivacao = 0;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function matar_processo(idProcesso) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    update tbProcessos set chaveAtivacao = 1 where idProcesso = ${idProcesso};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -235,10 +253,11 @@ module.exports = {
     cadastrarMaquina,
     cadastrarUsuario,
     listar_maquina,
-/*     listar_andar */
     mostrar_dash,
     cadastrarRede,
     get_grafico_donut,
     get_grafico_stacked,
-    cadastrarHardware
+    cadastrarHardware,
+    get_processos,
+    matar_processo
 };

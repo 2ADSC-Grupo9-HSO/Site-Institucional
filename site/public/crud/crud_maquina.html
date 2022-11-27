@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSO | Maquinas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/crud.css">
+    <link rel="icon" href="../assets/icons/icone_head.ico" />
+</head>
+
+<body onload="criar_card_maquina()">
+    <div class="bar" id="id_navbar">
+        <nav class="container nav">
+            <h3>Olá, <span id="rede"></span></h3>
+            <img onclick="abrir_menu()" class="imagem_menu" src="../assets/imgs/icone3.svg">
+            <ul class="menu ">
+                <li><a class="links" href="#">Minha organização</a></li>
+                <li><a class="links" href="#">Minhas informações</a></li>
+                <li><a class="links" onclick="sair()">Sair</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="opcoes_menu" class="container_opcoes_menu">
+        <div class="menu_one">
+            <div class="espacos">
+                <p>
+                    <a class="links" href="#">Minha organização</a>
+                </p>
+                <p>
+                    <a class="links" href="#">Minhas informações</a>
+                </p>
+                <p>
+                    <a class="links" onclick="sair()">Sair</a>
+                </p>
+            </div>
+            <div class="espacos last">
+                <a href="https://facebook.com/">
+                    <img src="../assets/icons/facebook.png" alt="">
+                </a>
+                <a href="https://instagram.com/">
+                    <img src="../assets/icons/instagram.png" alt="">
+                </a>
+                <a href="https://github.com/orgs/2ADSC-Grupo9-HSO/repositories">
+                    <img src="../assets/icons/github.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 90px;">
+        <div id="divCrud"></div>
+    </div>
+
+    <div class="modal">
+        <section class="card-cadastro" style="width: 100%; height: 100%;">
+
+            <div>
+                <label class="label" for="input_hostName">Host Name:</label>
+                <input type="text" id="input_hostName" style="background-image: url('../../assets/icons/computador.png')">
+            </div>
+
+            <div class="campos-pequenos">
+                <div>
+                    <label class="label" for="input_marca">Marca:</label>
+                    <input type="text" id="input_marca"
+                        style="background-image: url('../../assets/icons/marca-de-verificacao.png')">
+                </div>
+                <div>
+                    <label class="label" for="input_so">Sistema Operacional:</label>
+                    <input type="text" id="input_so"
+                        style="background-image: url('../../assets/icons/atualizacao-do-sistema.png')">
+                </div>
+            </div>
+
+            <div>
+                <label class="label" for="input_andar">Andar:</label>
+                <input type="text" id="input_andar" style="background-image: url('../../assets/icons/elevador.png')">
+            </div>
+
+            <div class="alterar-senha">
+                Você deseja alterar a senha?
+                <span><input type="radio" name="webmaster" id="sim" value="sim" onclick="mostrar_input_senha(true)" /> <label for="sim">Sim</label></span>
+                <span><input type="radio" name="webmaster" id="nao" value="nao" onclick="mostrar_input_senha(false)" /> <label for="nao">Não</label></span>
+            </div>
+
+            <div class="senhas">
+                <label class="label" for="input_senhaUsuario">Senha atual:</label>
+                <input type="password" id="input_senha"
+                    style="background-image: url('../../assets/icons/seguranca.png')">
+            </div>
+
+            <div class="senhas">
+                <label class="label" for="input_senhaUsuario">Nova senha:</label>
+                <input type="password" id="input_novaSenha"
+                    style="background-image: url('../../assets/icons/seguranca.png')">
+                <p class="aviso">A senha deve ter ao menos 8 caracteres</p>
+            </div>
+
+            <button class="b1" id="botao_alterar">Salvar alterações</button>
+        </section>
+    </div>
+</body>
+
+</html>
+
+<script src="./js/crud.js"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/login.js"></script>

@@ -65,8 +65,6 @@ function validarSessao() {
 }
 
 function sair() {
-    aguardar();
     sessionStorage.clear();
-    finalizarAguardar();
-    window.location = "login.html";
+    window.location = "login_filial.html";
 }

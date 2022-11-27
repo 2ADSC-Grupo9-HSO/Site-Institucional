@@ -9,35 +9,45 @@ function criar_card_maquina() {
                 let id = [];
                 let nome = [];
                 let marca = [];
-                let sistema = [];
                 let andar = [];
-                let senha = [];
 
                 for (let i = 0; i < resposta.length; i++) {
 
                     id.push(resposta[i].idMaquina);
                     nome.push(resposta[i].hostName);
                     marca.push(resposta[i].marcaMaquina);
-                    sistema.push(resposta[i].sistemaOperacional);
                     andar.push(resposta[i].andarMaquina);
-                    senha.push(resposta[i].senhaMaquina);
 
                 }
 
-                for (let i = 0; i < nome.length; i++) {
-                    divCrud.innerHTML +=
-                        `
-                            <div class="card">
-                                <div class="infos" onclick="mostrar_modal_maquina(${id[i + k]})">
-                                    <text>${nome[i + k]}</text>
-                                    <text>${marca[i + k]}</text>
-                                    <text>${andar[i + k]}° andar</text>
-                                </div>
-                                <div>
-                                    <button class="botao-deletar" onclick="deletar_maquina(${id[i + k]})">Deletar<button/>
-                                </div>
-                            </div>
-                        `
+                for (let i = 0; i < nome.length; i += 4) {
+                    for (let k = 0; k < 5; k++) {
+
+                        if (k == 4) {
+                            divCrud.innerHTML +=
+                                `
+                                    <div class="break">
+                                    </div>
+                                `
+                        } else {
+                            if (id[i + k] != undefined) {
+                                divCrud.innerHTML +=
+                                    `
+                                        <div class="card">
+                                            <div class="infos" onclick="mostrar_modal_maquina(${id[i + k]})">
+                                                <text>${nome[i + k]}</text>
+                                                <text>${marca[i + k]}</text>
+                                                <text>${andar[i + k]}° andar</text>
+                                            </div>
+                                            <div>
+                                                <button class="botao-deletar" onclick="deletar_maquina(${id[i + k]})">Deletar<button/>
+                                            </div>
+                                        </div>
+                                    `
+                            }
+                        }
+
+                    }
                 }
 
 
@@ -84,12 +94,12 @@ function criar_card_funcionario() {
                                 divCrud.innerHTML +=
                                     `
                                         <div class="card">
-                                            <div class="infos" onclick="mostrar_modal_funcionario(${id[i + k]})">
+                                            <div class="infos" onclick="mostrar_modal_maquina(${id[i + k]})">
                                                 <text>${nome[i + k]}</text>
                                                 <text>${cargo[i + k]}</text>
                                             </div>
                                             <div>
-                                                <button class="botao-deletar" onclick="deletar_funcionario(${id[i + k]})">Deletar<button/>
+                                                <button class="botao-deletar" onclick="deletar_maquina(${id[i + k]})">Deletar<button/>
                                             </div>
                                         </div>
                                     `
@@ -185,7 +195,6 @@ function deletar_maquina(id) {
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        // finalizarAguardar();
     });
 }
 
@@ -203,17 +212,26 @@ function deletar_funcionario(id) {
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        // finalizarAguardar();
     });
 }
 
 function mostrar_modal_maquina(id) {
+
+    let inputs = document.getElementsByName(`input`);
+    inputs.disabled = true;
+
+    let modal = document.querySelector('.modal')
+    modal.style.display = 'flex';
+
     fetch(``).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-
+                input_hostName.value = resposta[0].hostName;
+                input_marca.value = resposta[0].marcaMaquina;
+                input_so.value = resposta[0].sistemaOperacional;
+                input_andar.value = resposta[0].andarMaquina;
 
             });
         } else {

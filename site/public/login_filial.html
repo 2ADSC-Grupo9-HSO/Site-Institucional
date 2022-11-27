@@ -106,15 +106,6 @@
 
         }
 
-        if (senhaVar.length < 8) {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres";
-
-            input_senhaUsuario.style.borderColor = "red";
-
-            temErro = true;
-        }
-
         if (temErro) {
             return false;
         } else {
@@ -147,7 +138,6 @@
 
                     if (json.cpf.length == 14 && json.cpf.indexOf("@") < 0) {
                         sessionStorage.FK_FILIAL = json.fkFilial;
-                        sessionStorage.NOME_USUARIO = json.nomeUsuario;
 
                         setTimeout(function () {
                             window.location = "cadastro_usuario.html";
@@ -158,7 +148,6 @@
 
                     else if (json.cpf.indexOf("@") < 0) {
                         sessionStorage.FK_FILIAL = json.fkFilial;
-                        sessionStorage.NOME_REDE = json.nomeUsuario;
 
                         setTimeout(function () {
                             window.location = "./dashboard/index.html";
@@ -167,7 +156,6 @@
 
                     else {
                         sessionStorage.FK_REDE = json.fkFilial;
-                        sessionStorage.NOME_REDE = json.nome;
 
                         setTimeout(function () {
                             window.location = "cadastro_filial.html";

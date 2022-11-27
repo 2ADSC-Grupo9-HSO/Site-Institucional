@@ -217,12 +217,16 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
-
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para dashboard...";
-
                 cadastrarHardware()
 
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+
+                setTimeout(function () {
+                    window.location.reload();
+                    // window.location = "login_filial.html";
+                }, 1000);
                 // limparFormulario();
                 // finalizarAguardar();
             } else {

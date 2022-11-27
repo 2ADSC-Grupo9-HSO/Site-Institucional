@@ -246,14 +246,14 @@
                 tension: 0.1
             },
             {
-                label: 'Processador',
+                label: 'Memoria RAM',
                 data: [],
                 fill: false,
                 borderColor: '#d833de',
                 tension: 0.1
             },
             {
-                label: 'Memoria RAM',
+                label: 'Processador',
                 data: [],
                 fill: false,
                 borderColor: '#e8954d',
@@ -266,12 +266,12 @@
             if ((i + 1) % 3 == 0) {
                 labels.push(registro.momento);
             }
-            if (registro.nomeComponente == "Memória Ram") {
-                dados.datasets[0].data.push(registro.registro);
-            } else if (registro.nomeComponente == "Processador") {
+            if (registro.nomeComponente == "Memória RAM") {
                 dados.datasets[1].data.push(registro.registro);
-            } else if (registro.nomeComponente == "Disco") {
+            } else if (registro.nomeComponente == "Processador") {
                 dados.datasets[2].data.push(registro.registro);
+            } else if (registro.nomeComponente == "Disco") {
+                dados.datasets[0].data.push(registro.registro);
             }
         }
         const config = {

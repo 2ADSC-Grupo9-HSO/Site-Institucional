@@ -207,7 +207,7 @@ function get_grafico_donut() {
     var new_canva = document.createElement('canvas')
     new_canva.id = 'myChartDonut'
 
-    div_pai.append(new_canva)
+    div_pai.appendChild(new_canva)
 
     fetch(`/usuarios/get_grafico_donut/${fkFilial}`).then(function (resposta) {
         if (resposta.ok) {
@@ -281,7 +281,7 @@ function get_grafico_stacked() {
                 var new_canva = document.createElement('canvas')
                 new_canva.id = 'myChartAtividade'
 
-                div_pai.append(new_canva)
+                div_pai.appendChild(new_canva)
 
                 var tempLabel = [];
                 var auxLabel = [];
@@ -464,7 +464,7 @@ function matar_processo(fkMaquina, idProcesso) {
     }).then(function (resposta) {
 
         if (resposta.ok) {
-            get_processos(fkMaquina)
+                get_processos(fkMaquina)
 
         } else {
             throw ('Houve um erro na API!');

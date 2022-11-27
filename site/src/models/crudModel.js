@@ -3,23 +3,16 @@ var database = require("../database/config");
 function listar_maquina(fkFilial) {
     console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    WITH select_gerar_maquina AS (
-        SELECT idMaquina, hostName, marcaMaquina, andarMaquina, sistemaOperacional, senhaMaquina, ROW_NUMBER() OVER (PARTITION BY hostName) AS rn
+        SELECT idMaquina, hostName, marcaMaquina, andarMaquina, sistemaOperacional, senhaMaquina
         FROM tbRedeHospitalar
         
         JOIN tbFilialHospital ON idRede = fkRede
         
         JOIN tbMaquina ON idFilial = fkFilial
         
-        JOIN tbHardware ON idMaquina = fkMaquina
-        
-        JOIN tbComponente ON idComponente = fkComponente
-        
         where fkFilial = ${fkFilial}
 
         ORDER BY idMaquina
-        )
-        SELECT * FROM select_gerar_maquina WHERE rn = 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -46,8 +39,7 @@ function listar_funcionario(idFilial) {
 function listar_filial(idRede) {
     console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    WITH select_gerar_funcionario AS (
-        SELECT idFilial, cepFilial, ruaFilial, bairroFilial, cidadeFilial, numeroEndFilial, complementoEnd, cnpjFilial, emailFilial, senhaFilial, ROW_NUMBER() OVER (PARTITION BY ruaFilial) AS rn
+        SELECT idFilial, cepFilial, cnpjFilial
         FROM tbRedeHospitalar
         
         JOIN tbFilialHospital ON idRede = fkRede
@@ -55,8 +47,20 @@ function listar_filial(idRede) {
         where fkRede = ${idRede}
 
         ORDER BY idFilial
-        )
-        SELECT * FROM select_gerar_funcionario WHERE rn = 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function deletar_maquina(id) {
+    console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+        DELETE FROM tbHistorico WHERE 
+        fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina WHERE idMaquina = ${id} AND fkComponente = 1)
+        OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina WHERE idMaquina = ${id} AND fkComponente = 2)
+        OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina WHERE idMaquina = ${id} AND fkComponente = 3);
+        DELETE FROM tbHardware WHERE fkMaquina = ${id};
+        DELETE FROM tbMaquina WHERE idMaquina = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -71,10 +75,28 @@ function deletar_funcionario(id) {
     return database.executar(instrucao);
 }
 
-function deletar_funcionario(id) {
+function deletar_filial(id) {
     console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-        DELETE FROM tbUsuario WHERE idUsuario = ${id}
+        DELETE FROM tbHistorico WHERE 
+        fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id} AND fkComponente = 1)
+        OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id} AND fkComponente = 2)
+        OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id} AND fkComponente = 3);
+        DELETE FROM tbHardware WHERE fkMaquina = (SELECT idMaquina FROM tbMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id});
+        DELETE FROM tbMaquina WHERE fkFilial = ${id};
+        DELETE FROM tbUsuario WHERE fkFilial = ${id};
+        DELETE FROM tbFilialHospital WHERE idFilial = ${id};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function informacoes_maquina(id) {
+    console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+        SELECT idMaquina, hostName, marcaMaquina, sistemaOperacional, andarMaquina, senhaMaquina
+        FROM tbMaquina
+        where idMaquina = ${id}
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -86,6 +108,31 @@ function informacoes_funcionario(id) {
         SELECT idUsuario, fkFilial, nomeUsuario, cargo, email, cpf, senha
         FROM tbUsuario
         where idUsuario = ${id}
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function informacoes_filial(id) {
+    console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+        SELECT idFilial, cepFilial, numeroEndFilial, complementoEnd, cnpjFilial, senhaFilial, emailFilial
+        FROM tbFilialHospital
+        where idFilial = ${id}
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function alterar_dados_maquina(id, hostName, marca, so, andar, senha) {
+    console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarUsuario():", hostName, marca, so, andar, senha);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        UPDATE tbMaquina SET 
+        hostName = '${hostName}', marcaMaquina = '${marca}', sistemaOperacional = '${so}', andarMaquina = ${andar}, senhaMaquina = '${senha}'
+        WHERE idMaquina = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -105,11 +152,31 @@ function alterar_dados_funcionario(id, nomeUsuario, cpf, funcao, email, senhaUsu
     return database.executar(instrucao);
 }
 
+function alterar_dados_filial(id, cep, numero, complemento, emailFilial, cnpj, senha) {
+    console.log("ACESSEI O CRUD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarUsuario():", cep, numero, complemento, emailFilial, cnpj, senha);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        UPDATE tbFilialHospital SET
+            cepFilial = '${cep}', numeroEndFilial = ${numero}, complementoEnd = '${complemento}', cnpjFilial = '${cnpj}', senhaFilial = '${senha}', emailFilial = '${emailFilial}'
+            WHERE idFilial = ${id};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     listar_maquina,
     listar_funcionario,
     listar_filial,
+    deletar_maquina,
     deletar_funcionario,
+    deletar_filial,
+    informacoes_maquina,
     informacoes_funcionario,
-    alterar_dados_funcionario
+    informacoes_filial,
+    alterar_dados_maquina,
+    alterar_dados_funcionario,
+    alterar_dados_filial
 }

@@ -348,16 +348,25 @@ function get_grafico_stacked() {
                         backgroundColor: '#44DDFF',
                         borderColor: '#44DDFF',
                         data: tempRecep,
+                        barThickness: 'flex',
+                        maxBarThickness: 50,
+                        minBarThickness: 50,
                     }, {
                         label: 'Médicos',
                         backgroundColor: '#d303fc',
                         borderColor: '#d303fc',
                         data: tempMedic,
+                        barThickness: 'flex',
+                        maxBarThickness: 50,
+                        minBarThickness: 50,
                     }, {
                         label: 'Totem',
                         backgroundColor: '#fc9403',
                         borderColor: '#fc9403',
                         data: tempTotem,
+                        barThickness: 'flex',
+                        maxBarThickness: 50,
+                        minBarThickness: 50,
                     }
                     ]
                 };

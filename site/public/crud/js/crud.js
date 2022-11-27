@@ -1,5 +1,3 @@
-const { json } = require("express");
-
 function criar_card_maquina() {
     var fkFilial = sessionStorage.FK_FILIAL;
     fetch(`/crud/listar_maquina/${fkFilial}`).then(function (resposta) {
@@ -27,16 +25,19 @@ function criar_card_maquina() {
                 }
 
                 for (let i = 0; i < nome.length; i++) {
-                    divCrud.innerHTML += `
-                        <div class="card" onclick="mostrarModal(${id[i]})">
-                            ${id[i]}
-                            ${nome[i]}
-                            ${marca[i]}
-                            ${sistema[i]}
-                            ${andar[i]}
-                            ${senha[i]}
-                        </div>
-                    `
+                    divCrud.innerHTML +=
+                        `
+                            <div class="card">
+                                <div class="infos" onclick="mostrar_modal_maquina(${id[i + k]})">
+                                    <text>${nome[i + k]}</text>
+                                    <text>${marca[i + k]}</text>
+                                    <text>${andar[i + k]}° andar</text>
+                                </div>
+                                <div>
+                                    <button class="botao-deletar" onclick="deletar_maquina(${id[i + k]})">Deletar<button/>
+                                </div>
+                            </div>
+                        `
                 }
 
 
@@ -60,32 +61,42 @@ function criar_card_funcionario() {
                 let id = [];
                 let nome = [];
                 let cargo = [];
-                let email = [];
-                let cpf = [];
-                let senha = [];
 
                 for (let i = 0; i < resposta.length; i++) {
 
                     id.push(resposta[i].idUsuario);
                     nome.push(resposta[i].nomeUsuario);
                     cargo.push(resposta[i].cargo);
-                    email.push(resposta[i].email);
-                    cpf.push(resposta[i].cpf);
-                    senha.push(resposta[i].senha);
 
                 }
 
-                for (let i = 0; i < nome.length; i++) {
-                    divCrud.innerHTML += `
-                        <div class="card" onclick="mostrarModal(${id[i]})">
-                            ${id[i]}
-                            ${nome[i]}
-                            ${cargo[i]}
-                            ${email[i]}
-                            ${cpf[i]}
-                            ${senha[i]}
-                        </div>
-                    `
+                for (let i = 0; i < nome.length; i += 4) {
+                    for (let k = 0; k < 5; k++) {
+
+                        if (k == 4) {
+                            divCrud.innerHTML +=
+                                `
+                                    <div class="break">
+                                    </div>
+                                `
+                        } else {
+                            if (id[i + k] != undefined) {
+                                divCrud.innerHTML +=
+                                    `
+                                        <div class="card">
+                                            <div class="infos" onclick="mostrar_modal_funcionario(${id[i + k]})">
+                                                <text>${nome[i + k]}</text>
+                                                <text>${cargo[i + k]}</text>
+                                            </div>
+                                            <div>
+                                                <button class="botao-deletar" onclick="deletar_funcionario(${id[i + k]})">Deletar<button/>
+                                            </div>
+                                        </div>
+                                    `
+                            }
+                        }
+
+                    }
                 }
 
 
@@ -130,11 +141,11 @@ function criar_card_filial() {
                     cnpj.push(resposta[i].cnpjFilial);
                     senha.push(resposta[i].senhaFilial);
 
-                } //ruaFilial, bairroFilial, cidadeFilial
+                }
 
                 for (let i = 0; i < cep.length; i++) {
                     divCrud.innerHTML += `
-                        <div class="card" onclick="mostrarModal(${id[i]})">
+                        <div class="card" onclick="mostrar_modal_filial(${id[i]})">
                             ${id[i]}
                             ${cep[i]}
                             ${rua[i]}
@@ -160,13 +171,49 @@ function criar_card_filial() {
 
 }
 
-function mostrar_modal(id) {
+function deletar_maquina(id) {
+    fetch(`/crud/deletar_maquina/${id}`, {
+        method: 'DELETE'
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            window.location.reload(false);
+        } else {
+            throw ("Houve um erro ao tentar realizar o update!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+    });
+}
+
+function deletar_funcionario(id) {
+    fetch(`/crud/deletar_funcionario/${id}`, {
+        method: 'DELETE'
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            window.location.reload(false);
+        } else {
+            throw ("Houve um erro ao tentar realizar o update!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+    });
+}
+
+function mostrar_modal_maquina(id) {
     fetch(``).then(function (resposta) {
         if (resposta.ok) {
             resposta.json().then(function (resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                console.log(id);
+
 
             });
         } else {
@@ -177,4 +224,116 @@ function mostrar_modal(id) {
     });
 }
 
-// AVISAR O NAKA QUE A MARIA JÁ FOI E QUE ELA TÁ COM O CORRETIVO DELE
+function mostrar_modal_funcionario(id) {
+
+    let inputs = document.getElementsByName(`input`);
+    inputs.disabled = true;
+
+    let modal = document.querySelector('.modal')
+    modal.style.display = 'flex';
+
+
+    fetch(`/crud/informacoes_funcionario/${id}`).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                input_nomeUsuario.value = resposta[0].nomeUsuario;
+                input_email.value = resposta[0].email;
+                input_funcao.value = resposta[0].cargo;
+                input_cpf.value = resposta[0].cpf;
+                botao_alterar.setAttribute('onclick', `alterar_dados_funcionario(${id}, ${resposta[0].senha})`)
+
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+
+function mostrar_modal_filial(id) {
+    fetch(``).then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+
+
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+
+function alterar_dados_funcionario(id, senha) {
+
+    let senhas = document.getElementsByClassName('senhas');
+    console.log(senhas[0].style.display == 'flex')
+    if (senhas[0].style.display == 'flex') {
+        if (input_senhaUsuario.value != senha) {
+            return false;
+        }
+    }
+
+    var nomeUsuarioVar = input_nomeUsuario.value;
+    var cpfVar = input_cpf.value;
+    var funcaoVar = input_funcao.value;
+    var emailVar = input_email.value;
+    var senhaUsuarioVar = senha;
+    if (input_novaSenha.value != "") {
+        senhaUsuarioVar = input_novaSenha.value;
+    }
+
+    // Enviando o valor da nova input
+    fetch(`/crud/alterar_dados_funcionario`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+
+            idServer: id,
+            nomeUsuarioServer: nomeUsuarioVar,
+            cpfServer: cpfVar,
+            funcaoServer: funcaoVar,
+            emailServer: emailVar,
+            senhaUsuarioServer: senhaUsuarioVar,
+
+        })
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            window.location.reload(false);
+        } else {
+            throw ("Houve um erro ao tentar realizar o update!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+    });
+}
+
+function mostrar_input_senha(resposta) {
+    let senhas = document.getElementsByClassName('senhas');
+    let modal = document.querySelector('.modal')
+
+    if (resposta) {
+        for (let i = 0; i < senhas.length; i++) {
+            senhas[i].style.display = 'flex';
+        }
+        modal.style.height = 550 + "px"
+    } else {
+        for (let i = 0; i < senhas.length; i++) {
+            senhas[i].style.display = 'none';
+        }
+    }
+}

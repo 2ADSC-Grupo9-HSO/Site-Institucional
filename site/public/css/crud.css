@@ -1,3 +1,7 @@
+body{
+background-color: #141625;
+}
+
 #divCrud {
     padding-top: 60px;
     width: 100vw;
@@ -24,6 +28,7 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    transition: 1s;
     width: 20%;
     border: 1px solid #000000;
     border-radius: 8px;
@@ -34,6 +39,7 @@
 
 .card:hover {
     border: 1px solid #999999;
+    transition: 1s;
     box-shadow: 4px 4px 4px 1px #888888;
 }
 
@@ -48,6 +54,9 @@
     height: 110px;
     align-items: center;
     justify-content: space-evenly;
+    background-color: #f1f1f1;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .alterar-senha span {
@@ -67,6 +76,7 @@
 .botao-deletar {
     border: 0;
     border-top: 1px solid #F21100;
+    transition: 1s;
     color: #F21100;
     background-color: transparent;
     width: 100%;
@@ -74,12 +84,13 @@
     position: absolute;
     bottom: 0px;
     cursor: pointer;
-    background-color: #F0F8FF;
+    background-color: #f1f1f1;
     border-radius: 0 0 8px 8px;
 }
 
 .botao-deletar:hover{
     background-color: #F21100;
+    transition: 1s;
     border-top: 1px solid #000000;
     color: #000000;
     border-radius: 0 0 8px 8px;

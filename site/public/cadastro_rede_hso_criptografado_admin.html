@@ -69,7 +69,7 @@
                 <p class="aviso">A senha deve ter ao menos 8 caracteres</p>
             </div>
 
-            <button class="b1" onclick="cadastrarRede()">Cadastrar</button>
+            <button class="b1" onclick="validar_rede_existente()">Cadastrar</button>
         </section>
     </div>
 
@@ -80,7 +80,27 @@
 <script src="./js/navbar.js"></script>
 
 <script>
-    
+
+    function validar_rede_existente() {
+
+        var email = input_email.value;
+
+        fetch(`/usuarios/validar_rede_existente/${email}`).then(function (resposta) {
+            if (resposta.status == 204) {
+                cadastrarRede();
+            } else if (resposta.ok) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML += "<br />Rede já existente.";
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+    }
+
+
     function cadastrarRede() {
 
         //Recupere o valor da nova input pelo nome do id

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    
+
     <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
             <span id="mensagem_erro"></span>
@@ -70,11 +70,13 @@
             <div class="campos-pequenos">
                 <div>
                     <label class="label" for="input_cnpj">CNPJ:</label>
-                    <input type="text" id="input_cnpj" style="background-image: url('./assets/icons/carteira-de-identidade.png')">
+                    <input type="text" id="input_cnpj"
+                        style="background-image: url('./assets/icons/carteira-de-identidade.png')">
                 </div>
                 <div>
                     <label class="label" for="input_cep">CEP:</label>
-                    <input type="text" id="input_cep" onblur="pesquisacep(this.value)" style="background-image: url('./assets/icons/cep.png')">
+                    <input type="text" id="input_cep" onblur="pesquisacep(this.value)"
+                        style="background-image: url('./assets/icons/cep.png')">
                 </div>
             </div>
 
@@ -86,22 +88,26 @@
             <div class="campos-pequenos">
                 <div>
                     <label class="label" for="input_bairro">Bairro:</label>
-                    <input type="text" id="input_bairro" style="background-image: url('./assets/icons/localizador-de-mapa.png')">
+                    <input type="text" id="input_bairro"
+                        style="background-image: url('./assets/icons/localizador-de-mapa.png')">
                 </div>
                 <div>
                     <label class="label" for="input_cidade">Cidade:</label>
-                    <input type="text" id="input_cidade" style="background-image: url('./assets/icons/localizador-de-mapa.png')">
+                    <input type="text" id="input_cidade"
+                        style="background-image: url('./assets/icons/localizador-de-mapa.png')">
                 </div>
             </div>
 
             <div class="campos-pequenos">
                 <div>
                     <label class="label" for="input_numero">Número endereço:</label>
-                    <input type="number" class="inp_num" id="input_numero" style="background-image: url('./assets/icons/localizador-de-mapa.png')">
+                    <input type="number" class="inp_num" id="input_numero"
+                        style="background-image: url('./assets/icons/localizador-de-mapa.png')">
                 </div>
                 <div>
                     <label class="label" for="input_complemento">Complemento:</label>
-                    <input type="text" id="input_complemento" style="background-image: url('./assets/icons/localizador-de-mapa.png')">
+                    <input type="text" id="input_complemento"
+                        style="background-image: url('./assets/icons/localizador-de-mapa.png')">
                 </div>
             </div>
 
@@ -111,7 +117,7 @@
                 <p class="aviso">A senha deve ter ao menos 8 caracteres</p>
             </div>
 
-            <button class="b1" onclick="cadastrarFilial()">Cadastrar</button>
+            <button class="b1" onclick="validar_filial_existente()">Cadastrar</button>
         </section>
     </div>
 
@@ -126,8 +132,28 @@
 <script src="./js/cep.js"></script>
 
 <script>
-    
+
     input_rede.value = sessionStorage.FK_REDE;
+
+    function validar_filial_existente() {
+
+        var email = input_emailFilial.value;
+
+        fetch(`/usuarios/validar_filial_existente/${email}`).then(function (resposta) {
+            if (resposta.status == 204) {
+                cadastrarFilial();
+            } else if (resposta.ok) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML += "<br />Filial já existente.";
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+    }
+
 
     function cadastrarFilial() {
 

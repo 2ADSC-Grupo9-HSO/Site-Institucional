@@ -84,11 +84,12 @@
 
             <div>
                 <label class="label" for="input_senhaUsuario">Senha:</label>
-                <input type="password" id="input_senhaUsuario" style="background-image: url('./assets/icons/seguranca.png')">
+                <input type="password" id="input_senhaUsuario"
+                    style="background-image: url('./assets/icons/seguranca.png')">
                 <p class="aviso">A senha deve ter ao menos 8 caracteres</p>
             </div>
 
-            <button class="b1" onclick="cadastrarUsuario()">Cadastrar</button>
+            <button class="b1" onclick="validar_usuario_existente()">Cadastrar</button>
         </section>
     </div>
 
@@ -102,7 +103,30 @@
 <script src="./js/login.js"></script>
 
 <script>
-    
+
+    function validar_usuario_existente() {
+
+        var email = input_email.value;
+        let cpfSemPontos = input_cpf.value.replaceAll('.', '');
+        let cpfFormatado = cpfSemPontos.replaceAll('-', '');
+        var cpf = cpfFormatado;
+
+        fetch(`/usuarios/validar_usuario_existente/${email}&${cpf}`).then(function (resposta) {
+            if (resposta.status == 204) {
+                cadastrarUsuario();
+            } else if (resposta.ok) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML += "<br />CPF ou Email já existente.";
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+    }
+
+
     function cadastrarUsuario() {
         // aguardar();
 

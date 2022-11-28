@@ -331,6 +331,43 @@ function cadastrarUsuario(nomeUsuario, cpf, funcao, email, senhaUsuario, fk_fili
     return database.executar(instrucao);
 }
 
+function validar_maquina_existente(hostName) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    select * from tbMaquina where hostName = '${hostName}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function validar_rede_existente(email) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    select * from tbRedeHospitalar where emailRede = '${email}'
+
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function validar_filial_existente(email) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    select * from tbFilialHospital where emailFilial = '${email}'
+
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function validar_usuario_existente(email, cpf) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function get_grafico_stacked()");
+    var instrucao = `
+    select * from tbUsuario where email = '${email}' or cpf = '${cpf}'
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 module.exports = {
     entrarFilial,
     entrarUsuario,
@@ -345,5 +382,9 @@ module.exports = {
     cadastrarHardware,
     get_processos,
     matar_processo,
-    reiniciar_maquina
+    reiniciar_maquina,
+    validar_maquina_existente,
+    validar_rede_existente,
+    validar_filial_existente,
+    validar_usuario_existente
 };

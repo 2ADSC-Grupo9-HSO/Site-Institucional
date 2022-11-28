@@ -72,4 +72,21 @@ router.post("/autenticarFilial", function (req, res) {
     usuarioController.entrarFilial(req, res);
 });
 
+router.get("/validar_maquina_existente/:hostName", function (req, res) {
+    usuarioController.validar_maquina_existente(req, res);
+});
+
+router.get("/validar_rede_existente/:email", function (req, res) {
+    usuarioController.validar_rede_existente(req, res);
+});
+
+router.get("/validar_filial_existente/:email", function (req, res) {
+    usuarioController.validar_filial_existente(req, res);
+});
+
+router.get("/validar_usuario_existente/:email&:cpf", function (req, res) {
+    usuarioController.validar_usuario_existente(req, res);
+});
+
+
 module.exports = router;

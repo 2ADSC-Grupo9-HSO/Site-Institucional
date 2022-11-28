@@ -90,7 +90,7 @@
                 <p class="aviso">A senha deve ter ao menos 8 caracteres</p>
             </div>
 
-            <button class="b1" onclick="cadastrarMaquina()">Cadastrar</button>
+            <button class="b1" onclick="validar_maquina_existente()">Cadastrar</button>
         </section>
     </div>
 
@@ -102,6 +102,25 @@
 <script src="./js/login.js"></script>
 
 <script>
+
+    function validar_maquina_existente() {
+
+        var hostName = input_hostName.value;
+
+    fetch(`/usuarios/validar_maquina_existente/${hostName}`).then(function (resposta) {
+        if (resposta.status == 204) {
+            cadastrarMaquina();
+        } else if(resposta.ok){
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />Máquina já existente.";
+        }else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+
+}
 
     function cadastrarMaquina() {
 
@@ -193,6 +212,11 @@
             return false;
         } else {
             setInterval(sumirMensagem, 10000)
+        }
+
+        if(hostNameVar[0].toUpperCase()!='R' && hostNameVar[0].toUpperCase()!='M' && hostNameVar[0].toUpperCase()!='T'){
+            alert('alo')
+            return false;
         }
 
         // Enviando o valor da nova input

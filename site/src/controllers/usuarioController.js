@@ -395,6 +395,79 @@ function cadastrarUsuario(req, res) {
     }
 }
 
+function validar_maquina_existente(req, res) {
+    var hostName = req.params.hostName;
+    usuarioModel.validar_maquina_existente(hostName)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function validar_rede_existente(req, res) {
+    var email = req.params.email;
+    usuarioModel.validar_rede_existente(email)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function validar_filial_existente(req, res) {
+    var email = req.params.email;
+    usuarioModel.validar_filial_existente(email)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function validar_usuario_existente(req, res) {
+    var email = req.params.email;
+    var cpf = req.params.cpf;
+    usuarioModel.validar_usuario_existente(email, cpf)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 module.exports = {
     entrarFilial,
@@ -411,5 +484,9 @@ module.exports = {
     cadastrarHardware,
     get_processos,
     matar_processo,
-    reiniciar_maquina
+    reiniciar_maquina,
+    validar_maquina_existente,
+    validar_rede_existente,
+    validar_filial_existente,
+    validar_usuario_existente
 }

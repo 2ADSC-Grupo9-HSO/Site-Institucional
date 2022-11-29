@@ -284,7 +284,7 @@
             config
         );
 
-        setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 500);
+        setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 30000);
     }
 
     function atualizarGrafico(idMaquina, dados, myChart) {
@@ -321,12 +321,12 @@
                         myChart.update();
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 500);
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 30000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 500);
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 30000);
             }
         })
             .catch(function (error) {

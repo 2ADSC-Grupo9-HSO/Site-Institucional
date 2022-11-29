@@ -20,12 +20,12 @@
 
     <div class="bar" id="id_navbar">
         <nav class="container nav">
-            <h3>Olá <span id="rede"></span></h3>
+            <img src="assets/imgs/logo.png" class="logo">
             <img onclick="abrir_menu()" class="imagem_menu" src="./assets/imgs/icone2.webp">
             <ul class="menu ">
                 <li><a class="links" href="crud/crud_maquina.html">Minha organização</a></li>
-                <li><a class="links" href="#">Minhas informações</a></li>
-                <li><a class="links" onclick="sair()">Sair</a></li>
+                <li><a class="links" href="./dashboard/index.html">Dashboard</a></li>
+                <li><a class="links" onclick="limparSessao()">Sair</a></li>
             </ul>
         </nav>
     </div>
@@ -37,10 +37,10 @@
                     <a class="links" href="crud/crud_maquina.html">Minha organização</a>
                 </p>
                 <p>
-                    <a class="links" href="#">Minhas informações</a>
+                    <a class="links" href="./dashboard/index.html">Dashboard</a>
                 </p>
                 <p>
-                    <a class="links" onclick="sair()">Sair</a>
+                    <a class="links" onclick="limparSessao()">Sair</a>
                 </p>
             </div>
             <div class="espacos last">
@@ -99,7 +99,7 @@
 </html>
 
 <script src="./js/navbar.js"></script>
-<script src="./js/login.js"></script>
+<script src="./js/funcoes.js"></script>
 
 <script>
 
@@ -174,7 +174,7 @@
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />O Host Name deve ter ao menos 4 letras.";
 
-            input_senha.style.borderColor = "red";
+            input_hostName.style.borderColor = "red";
 
             temErro = true;
         }
@@ -203,7 +203,7 @@
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
 
-            input_senha.style.borderColor = "red";
+            input_hostName.style.borderColor = "red";
 
             temErro = true;
         }
@@ -215,7 +215,10 @@
         }
 
         if(hostNameVar[0].toUpperCase()!='R' && hostNameVar[0].toUpperCase()!='M' && hostNameVar[0].toUpperCase()!='T'){
-            alert('alo')
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />O Host Name deve começar com R, M ou T";
+
+            input_senha.style.borderColor = "red";
             return false;
         }
 

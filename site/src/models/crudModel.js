@@ -59,6 +59,7 @@ function deletar_maquina(id) {
         fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina WHERE idMaquina = ${id} AND fkComponente = 1)
         OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina WHERE idMaquina = ${id} AND fkComponente = 2)
         OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina WHERE idMaquina = ${id} AND fkComponente = 3);
+        DELETE FROM tbProcessos WHERE fkMaquina = ${id};
         DELETE FROM tbHardware WHERE fkMaquina = ${id};
         DELETE FROM tbMaquina WHERE idMaquina = ${id};
     `;
@@ -83,6 +84,7 @@ function deletar_filial(id) {
         OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id} AND fkComponente = 2)
         OR fkHardware = (SELECT idHardware FROM tbMaquina JOIN tbHardware ON idMaquina = fkMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id} AND fkComponente = 3);
         DELETE FROM tbHardware WHERE fkMaquina = (SELECT idMaquina FROM tbMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id});
+        DELETE FROM tbProcessos WHERE fkMaquina = (SELECT idMaquina FROM tbMaquina JOIN tbFilialHospital ON idFilial = fkFilial WHERE idFilial = ${id});
         DELETE FROM tbMaquina WHERE fkFilial = ${id};
         DELETE FROM tbUsuario WHERE fkFilial = ${id};
         DELETE FROM tbFilialHospital WHERE idFilial = ${id};

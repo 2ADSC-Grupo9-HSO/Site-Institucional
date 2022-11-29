@@ -18,8 +18,7 @@
             <img onclick="abrir_menu()" class="imagem_menu" src="../assets/imgs/icone3.svg">
             <ul class="menu ">
                 <li><a class="links" href="../cadastro_usuario.html">Cadastro de funcionarios</a></li>
-                <li><a class="links" href="#">Minhas informações</a></li>
-                <li><a class="links" onclick="sair()">Sair</a></li>
+                <li><a class="links" onclick="limparSessao()">Sair</a></li>
             </ul>
         </nav>
     </div>
@@ -31,10 +30,7 @@
                     <a class="links" href="../cadastro_usuario.html">Cadastro de funcionarios</a>
                 </p>
                 <p>
-                    <a class="links" href="#">Minhas informações</a>
-                </p>
-                <p>
-                    <a class="links" onclick="sair()">Sair</a>
+                    <a class="links" onclick="limparSessao()">Sair</a>
                 </p>
             </div>
             <div class="espacos last">
@@ -54,7 +50,7 @@
 
     <div class="modal">
         <section class="card-cadastro" style="width: 100%; height: 100%;">
-
+            <img onclick="fecharModal()" style="height: 20px; align-self: flex-end; margin-right: 15px;" src="../assets/icons/exit.png">
             <div>
                 <label class="label" for="input_nomeUsuario">Nome:</label>
                 <input type="text" id="input_nomeUsuario" style="background-image: url('../../assets/icons/user.png')">
@@ -105,4 +101,5 @@
 
 <script src="./js/crud.js"></script>
 <script src="../js/navbar.js"></script>
-<script src="../js/login.js"></script>
+<script src="../js/funcoes.js"></script>
+<script src="../dashboard/main.js"></script>

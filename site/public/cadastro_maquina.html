@@ -174,7 +174,7 @@
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />O Host Name deve ter ao menos 4 letras.";
 
-            input_senha.style.borderColor = "red";
+            input_hostName.style.borderColor = "red";
 
             temErro = true;
         }
@@ -203,7 +203,7 @@
             cardErro.style.display = "block"
             mensagem_erro.innerHTML += "<br />A senha deve conter pelo menos 8 caracteres.";
 
-            input_senha.style.borderColor = "red";
+            input_hostName.style.borderColor = "red";
 
             temErro = true;
         }
@@ -215,7 +215,10 @@
         }
 
         if(hostNameVar[0].toUpperCase()!='R' && hostNameVar[0].toUpperCase()!='M' && hostNameVar[0].toUpperCase()!='T'){
-            alert('alo')
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML += "<br />O Host Name deve ter ao menos 4 letras.";
+
+            input_senha.style.borderColor = "red";
             return false;
         }
 

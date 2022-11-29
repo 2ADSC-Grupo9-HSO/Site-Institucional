@@ -90,7 +90,7 @@
                 <div class="div_hoje texto">
                     Máquinas
                     <a href="../cadastro_maquina.html">
-                        <img class="botao_adicionar"; src="../assets/imgs/botao-adicionar.png">
+                        <img class="botao_adicionar" ; src="../assets/imgs/botao-adicionar.png">
                     </a>
                 </div>
 
@@ -109,47 +109,50 @@
                                 <div class="divPorcentagemModal">
                                     <div class="criticoModal">95% 1x</div>
                                     <div class="alertaModal">85% 1x</div>
-                                    <div class="bomModal"> <=75%</div>
+                                    <div class="bomModal">
+                                        <=75%< /div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="metricaModal">
-                                <span>Processador</span>
-                                <div class="divPorcentagemModal">
-                                    <div class="criticoModal">90% 5x</div>
-                                    <div class="alertaModal">80% 5x</div>
-                                    <div class="bomModal"> <=70%</div>
+                                <div class="metricaModal">
+                                    <span>Processador</span>
+                                    <div class="divPorcentagemModal">
+                                        <div class="criticoModal">90% 5x</div>
+                                        <div class="alertaModal">80% 5x</div>
+                                        <div class="bomModal">
+                                            <=70%< /div>
+                                        </div>
+                                    </div>
+                                    <div class="metricaModal">
+                                        <span>Ram</span>
+                                        <div class="divPorcentagemModal">
+                                            <div class="criticoModal">99% 6x</div>
+                                            <div class="alertaModal">85% 6x</div>
+                                            <div class="bomModal">
+                                                <=75%< /div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img onclick="fecharModal()" src="../assets/icons/exit.png">
                                 </div>
-                            </div>
-                            <div class="metricaModal">
-                                <span>Ram</span>
-                                <div class="divPorcentagemModal">
-                                    <div class="criticoModal">99% 6x</div>
-                                    <div class="alertaModal">85% 6x</div>
-                                    <div class="bomModal"> <=75%</div>
+                                <div class="graficoModal">
+                                    <div class="graficoMaquina" id="graficoMaquina">
+                                    </div>
+                                    <div class="execMaquina">
+                                        <div id="divBotaoMaquina" class="divBotaoMaquina">
+                                        </div>
+                                        <div id="divListaProcesso" class="divListaProcesso"></div>
+                                    </div>
+                                </div>
+                                <div class="infoModal">
+                                    <div class="infoMaquina" id="infoRede"></div>
+                                    <div class="infoMaquina" id="infoAndar"></div>
+                                    <div class="infoMaquina" id="infoMarca"></div>
+                                    <div class="infoMaquina" id="infoSistema"></div>
+                                    <div class="infoMaquina" id="infoQtdProblema"></div>
                                 </div>
                             </div>
                         </div>
-                        <img onclick="fecharModal()" src="../assets/icons/exit.png">
                     </div>
-                    <div class="graficoModal">
-                        <div class="graficoMaquina" id="graficoMaquina">
-                        </div>
-                        <div class="execMaquina">
-                            <div id="divBotaoMaquina" class="divBotaoMaquina">
-                            </div>
-                            <div id="divListaProcesso" class="divListaProcesso"></div>
-                        </div>
-                    </div>
-                    <div class="infoModal">
-                        <div class="infoMaquina" id="infoRede"></div>
-                        <div class="infoMaquina" id="infoAndar"></div>
-                        <div class="infoMaquina" id="infoMarca"></div>
-                        <div class="infoMaquina" id="infoSistema"></div>
-                        <div class="infoMaquina" id="infoQtdProblema"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </section>
 </body>
@@ -294,30 +297,20 @@
                     console.log(`Dados atuais do gráfico:`);
                     console.log(dados);
 
-                    if (novoRegistro[0].momento == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push(novoRegistro[0].momento); // incluir um novo momento
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push(novoRegistro[0].momento); // incluir um novo momento
 
-                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].registro);
+                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[0].data.push(novoRegistro[0].registro);
 
-                        dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[1].data.push(novoRegistro[1].registro); // incluir uma nova medida de umidade
+                    dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[1].data.push(novoRegistro[1].registro); // incluir uma nova medida de umidade
 
-                        dados.datasets[2].data.shift();  // apagar o primeiro de temperatura
-                        dados.datasets[2].data.push(novoRegistro[2].registro); // incluir uma nova medida de temperatura
+                    dados.datasets[2].data.shift();  // apagar o primeiro de temperatura
+                    dados.datasets[2].data.push(novoRegistro[2].registro); // incluir uma nova medida de temperatura
 
-                        myChart.update();
-                    }
+                    myChart.update();
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, myChart), 500);
